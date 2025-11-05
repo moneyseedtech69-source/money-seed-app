@@ -1,0 +1,453 @@
+/* == PART 1: HEADER (Logged-In Version) == */
+
+/* Adjust spacing for the logged-in nav items */
+.desktop-nav.logged-in-nav {
+    margin-left: auto;
+}
+
+.mobile-nav {
+    display: none;
+}
+
+.desktop-nav.logged-in-nav ul {
+    gap: 0.5rem;
+    align-items: center;
+}
+
+/* Style for icon buttons (Bell, Profile) */
+.icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-btn svg {
+    stroke: var(--color-primary);
+    transition: stroke 0.3s ease;
+    width: 28px;
+    height: 28px;
+}
+
+.icon-btn:hover svg {
+    stroke: var(--color-text-light);
+}
+
+/* Style for the logout button */
+.btn-logout {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    border: 2px solid var(--color-primary);
+    padding: 0.5rem 1.25rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    margin-left: 0.5rem;
+    cursor: pointer;
+    font-family: var(--font-primary);
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-logout:hover {
+    background-color: var(--color-bg-light);
+    color: var(--color-primary);
+}
+
+/* == HEADER - Notification Dropdown == */
+
+.desktop-nav.logged-in-nav ul li {
+    position: relative;
+}
+
+.notification-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 10px;
+    width: 320px;
+    background-color: var(--color-bg-light);
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    z-index: 110;
+    border: 1px solid #eee;
+}
+
+.dropdown-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #eee;
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+.noti-count {
+    background-color: var(--color-highlight);
+    color: var(--color-text-light);
+    font-size: 0.75rem;
+    padding: 2px 6px;
+    border-radius: 10px;
+    margin-left: 0.5rem;
+}
+
+.close-noti {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #aaa;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.close-noti:hover {
+    color: var(--color-primary);
+}
+
+.noti-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.noti-list li {
+    display: flex;
+    align-items: flex-start;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #f0f0f0;
+    gap: 0.8rem;
+    overflow: hidden;
+}
+
+.noti-list li:last-child {
+    border-bottom: none;
+}
+
+.noti-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    margin-top: 2px;
+    flex-shrink: 0;
+    background-color: #eee;
+}
+
+.noti-list p {
+    font-size: 0.85rem;
+    color: #444;
+    line-height: 1.5;
+    margin: 0;
+    flex-grow: 1;
+    min-width: 0;
+    overflow-wrap: break-word;
+}
+
+.noti-list p strong {
+    font-weight: 600;
+    color: var(--color-primary);
+    display: inline;
+}
+
+/* == PART 1 (Continued): Welcome Paragraph == */
+
+.welcome-paragraph {
+    text-align: center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.welcome-paragraph h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.welcome-paragraph p {
+    font-size: 1.2rem;
+    color: var(--color-text-dark);
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+}
+
+.welcome-paragraph p strong {
+    font-weight: 600;
+}
+
+/* == PART 2: Your Needs, Our Services == */
+
+.services-section {
+    padding-top: 3rem;
+    padding-bottom: 4rem;
+}
+
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.service-card {
+    background-color: #f0f0f0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.service-card.large-card {
+    grid-column: span 2;
+    background: linear-gradient(135deg, #eef3f7, #d8e4ec);
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.service-card.large-card h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+}
+
+.service-card.large-card p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+}
+
+.btn-primary-alt {
+    background-color: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+    padding: 0.7rem 1.8rem;
+    align-self: flex-start;
+    border-radius: 50px;
+    font-weight: 600;
+    font-family: var(--font-primary);
+    transition: all 0.3s ease;
+}
+
+.btn-primary-alt:hover {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+}
+
+.service-card.small-card {
+    background: linear-gradient(135deg, #f7f3ee, #ece4d8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 200px;
+}
+
+.service-icon-placeholder {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 1rem;
+}
+
+.service-card.small-card p {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #444;
+}
+
+/* == NEW SECTION: Latest Blog / Events == */
+.blog-event-section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+
+.latest-blog-intro {
+    max-width: 700px;
+    margin: 0 auto 3rem;
+    text-align: center;
+}
+
+.latest-title {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 3.5rem;
+    font-weight: normal;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+}
+
+.latest-blog-intro p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.7;
+}
+
+.text-link {
+    color: var(--color-highlight);
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.text-link:hover {
+    color: var(--color-primary);
+}
+
+/* --- Event Showcase --- */
+.event-showcase {
+    text-align: center;
+}
+
+.event-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 2.5rem;
+}
+
+.event-cards-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.event-card {
+    background-color: var(--color-bg-light);
+    border-radius: 16px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.07);
+    overflow: hidden;
+    text-align: left;
+    padding-bottom: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.event-image-placeholder {
+    width: 100%;
+    height: 200px;
+    background-color: #e0e0e0;
+    margin-bottom: 1rem;
+}
+
+.event-card h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+    padding: 0 1.5rem;
+}
+
+.event-card p {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.6;
+    padding: 0 1.5rem;
+}
+
+.see-more-wrapper {
+    margin-top: 3rem;
+}
+
+.btn-see-more {
+    background-color: var(--color-highlight);
+    color: var(--color-text-light);
+    border-radius: 50px;
+    padding: 0.9rem 2.25rem;
+    font-weight: 600;
+    border: 2px solid var(--color-highlight);
+    transition: all 0.3s ease;
+}
+
+.btn-see-more:hover {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    transform: scale(1.05);
+}
+
+/* == MOBILE RESPONSIVE for Home Page == */
+
+@media (max-width: 900px) {
+
+    /* --- Logged-in Header Mobile --- */
+    .desktop-nav.logged-in-nav {
+        display: none;
+        /* Hide desktop version */
+    }
+
+    /* Styles for the mobile logged-in menu (you might need to adjust based on main.js) */
+    .mobile-nav {
+        /* Keep existing styles from style-v2.css */
+        background-color: var(--color-bg-light);
+        /* Make background light for consistency */
+    }
+
+    .mobile-nav ul {
+        /* Keep existing styles from style-v2.css */
+        gap: 1.5rem;
+        /* Adjust gap */
+        margin-bottom: 1.5rem;
+    }
+
+    .mobile-nav a {
+        font-size: 1.3rem;
+        /* Adjust size */
+        color: var(--color-text-dark);
+    }
+
+    /* Style logout link like a button */
+    .mobile-nav a[href="#logout"] {
+        /* If you make logout an <a> */
+        display: inline-block;
+        padding: 0.8rem 1.8rem;
+        background-color: var(--color-primary);
+        color: var(--color-text-light);
+        border-radius: 6px;
+        margin-top: 1rem;
+    }
+
+
+    /* --- Welcome Paragraph Mobile --- */
+    .welcome-paragraph h2 {
+        font-size: 2rem;
+    }
+
+    .welcome-paragraph p {
+        font-size: 1.1rem;
+    }
+
+    /* --- Services Section Mobile --- */
+    .services-grid {
+        grid-template-columns: 1fr;
+        /* Stack all cards vertically */
+    }
+
+    .service-card.large-card {
+        grid-column: span 1;
+        /* Reset span */
+        text-align: center;
+    }
+
+    .latest-title {
+        font-size: 2.8rem;
+    }
+
+    .event-cards-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}

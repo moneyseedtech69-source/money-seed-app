@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        .delete-btn {
+            color: red;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="logout-button" style="float: right;">Logout</button>
+
+    <h1>Welcome to the Admin Dashboard!</h1>
+    <p>You are logged in.</p>
+
+    <a href="create-member.html" id="create-member-link">Create New Team Member</a>
+    <br>
+    <a href="edit-profile.html">Edit My Profile / Change Password</a>
+
+    <hr>
+    <h2>User Management</h2>
+    <table id="user-list-table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Department</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="user-list-body">
+        </tbody>
+    </table>
+
+    <script src="js/admin-dashboard-script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+
+    <script>
+        const token = localStorage.getItem('userToken');
+        if (!token) {
+            window.location.href = 'internal-login.html';
+        }
+    </script>
+    <link rel="stylesheet" href="css/internal-style.css">
+</head>
+
+<body>
+    <div class="login-box" style="width: 400px;">
+        <h2>Edit My Profile</h2>
+        <form id="edit-profile-form">
+            <div class="form-group">
+                <label for="username-input">Username</label>
+                <input type="text" id="username-input" placeholder="Leave blank to keep the same">
+            </div>
+            <div class="form-group">
+                <label for="email-input">Email</label>
+                <input type="email" id="email-input" placeholder="Leave blank to keep the same">
+            </div>
+            <div class="form-group">
+                <label for="password-input">New Password</label>
+                <input type="password" id="password-input" placeholder="Leave blank to keep the same">
+            </div>
+
+            <button type="submit">Update My Profile</button>
+        </form>
+        <p id="message"></p>
+    </div>
+
+    <script src="js/edit-profile-script.js" defer></script>
+</body>
+
+</html>

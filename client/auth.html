@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login/Signup</title>
+    <link rel="stylesheet" href="css/auth-style.css?v=13">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <a href="index.html" class="home-btn-corner">Home</a>
+
+    <div class="branding-header">
+        <div class="logo-title">
+            <img src="images/money_seed_logo-v2.png" alt="Money Seed Logo" class="header-logo">
+            <h1>MONEY SEED</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="form-box login">
+            <form id="login-form">
+                <h1>Login</h1>
+                <div class="input-box">
+                    <input type="text" id="login-username" placeholder="Username" required />
+                    <i class="bx bxs-user"></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" id="login-password" placeholder="Password" required />
+                    <i class="bx bxs-lock-alt"></i>
+                </div>
+                <div class="forgot-link">
+                    <a href="#">Forgot Password?</a>
+                </div>
+                <p class="error-msg" id="login-error"></p>
+                <button type="submit" class="btn">
+                    <span class="btn-text">Login</span>
+                    <div class="btn-loader"></div>
+                </button>
+                <p>or login with social platforms</p>
+                <div class="social-icons">
+                    <a href="#"><i class="bx bxl-google"></i></a>
+                    <a href="#"><i class="bx bxl-facebook"></i></a>
+                    <a href="#"><i class="bx bxl-github"></i></a>
+                    <a href="#"><i class="bx bxl-linkedin"></i></a>
+                </div>
+            </form>
+        </div>
+
+        <div class="form-box register">
+            <form id="register-form">
+                <h1>Registration</h1>
+                <div class="input-box">
+                    <input type="text" id="register-username" placeholder="Username" required />
+                    <i class="bx bxs-user"></i>
+                </div>
+                <div class="input-box">
+                    <input type="email" id="register-email" placeholder="Email" required />
+                    <i class="bx bxs-envelope"></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" id="register-password" placeholder="Password" required />
+                    <i class="bx bxs-lock-alt"></i>
+                </div>
+                <p class="error-msg" id="register-error"></p>
+                <button type="submit" class="btn">
+                    <span class="btn-text">Register</span>
+                    <div class="btn-loader"></div>
+                </button>
+                <p>or register with social platforms</p>
+                <div class="social-icons">
+                    <a href="#"><i class="bx bxl-google"></i></a>
+                    <a href="#"><i class="bx bxl-facebook"></i></a>
+                    <a href="#"><i class="bx bxl-github"></i></a>
+                    <a href="#"><i class="bx bxl-linkedin"></i></a>
+                </div>
+            </form>
+        </div>
+
+        <div class="toggle-box">
+            <div class="toggle-panel toggle-left">
+                <h1>Hello, Welcome!</h1>
+                <p>Don't have an account?</p>
+                <button class="btn register-btn">
+                    <span class="btn-text">Register</span>
+                </button>
+            </div>
+
+            <div class="toggle-panel toggle-right">
+                <h1>Welcome Back!</h1>
+                <p>Already have an account?</p>
+                <button class="btn login-btn">
+                    <span class="btn-text">Login</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="branding-footer">
+        <p>“Your Business Growth Partner”</p>
+    </div>
+
+    <script src="js/auth-script.js?v=3"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

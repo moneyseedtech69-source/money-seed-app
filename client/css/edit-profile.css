@@ -1,0 +1,374 @@
+/* == 1. The Full-Screen Overlay == */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 1000;
+    padding: 1rem;
+}
+
+/* == 2. The Modal Container == */
+.modal-container {
+    width: 100%;
+    max-width: 800px;
+    height: 85vh;
+    max-height: 650px;
+
+    background-color: #2f2f2f;
+    color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    overflow: hidden;
+}
+
+/* == 3. Modal Sidebar == */
+.modal-sidebar {
+    background-color: #262626;
+    padding: 1.5rem 1rem;
+    overflow: auto;
+}
+
+.modal-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.modal-link {
+    display: block;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #a0a0a0;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.modal-link:hover {
+    background-color: #3a3a3a;
+    color: #FFFFFF;
+}
+
+.modal-link.active {
+    background-color: #3f3f3f;
+    color: #FFFFFF;
+    font-weight: 600;
+}
+
+/* == 4. Modal Content Area == */
+.modal-content {
+    padding: 2rem 2.5rem;
+    overflow-y: auto;
+    position: relative;
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #777;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s ease;
+}
+
+.modal-close-btn:hover {
+    color: #FFFFFF;
+}
+
+.modal-section {
+    /* JS will toggle display */
+}
+
+.modal-section h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #FFFFFF;
+    margin-bottom: 2rem;
+}
+
+.modal-section h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #FFFFFF;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #444;
+    padding-bottom: 0.5rem;
+}
+
+.form-divider {
+    border: none;
+    border-top: 1px solid #444;
+    margin: 2rem 0;
+}
+
+/* == 5. Form Elements (Dark Mode) == */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #a0a0a0;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="url"] {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+    font-family: var(--font-primary);
+    background-color: #262626;
+    /* Dark input */
+    border: 1px solid #444;
+    color: #FFFFFF;
+    border-radius: 4px;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--color-highlight);
+    box-shadow: 0 0 0 2px rgba(77, 169, 169, 0.3);
+}
+
+.form-group-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #444;
+}
+
+.form-group-row:last-of-type {
+    border-bottom: none;
+}
+
+.form-text label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #FFFFFF;
+    margin-bottom: 0.25rem;
+}
+
+.form-text p {
+    font-size: 0.85rem;
+    color: #a0a0a0;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Modal-specific buttons */
+.btn-secondary-modal {
+    background-color: #3f3f3f;
+    color: #FFFFFF;
+    border: 1px solid #555;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border-radius: 4px;
+    font-family: var(--font-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary-modal:hover {
+    background-color: #4f4f4f;
+}
+
+.avatar-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.modal-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.btn-link {
+    font-size: 0.9rem;
+    color: var(--color-highlight);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.btn-link:hover {
+    text-decoration: underline;
+}
+
+/* Password reset section */
+.password-reset-view {
+    background-color: #262626;
+    padding: 1.5rem;
+    border-radius: 6px;
+    margin-top: 1rem;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+}
+
+.btn-cancel-modal,
+.btn-save-changes-modal {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 4px;
+    font-family: var(--font-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-cancel-modal {
+    background-color: transparent;
+    border: 1px solid #555;
+    color: #a0a0a0;
+}
+
+.btn-cancel-modal:hover {
+    background-color: #3f3f3f;
+}
+
+.btn-save-changes-modal {
+    background-color: var(--color-highlight);
+    color: var(--color-text-light);
+    border: 1px solid var(--color-highlight);
+}
+
+.btn-save-changes-modal:hover {
+    filter: brightness(110%);
+}
+
+/* == 7. THEME TOGGLE SWITCH (Inside Modal) == */
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 2rem 0;
+    padding: 1rem 0;
+    border-top: 1px solid #444;
+    border-bottom: 1px solid #444;
+}
+
+.theme-switch-wrapper label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #f0f0f0;
+}
+
+.theme-switch {
+    display: inline-block;
+    height: 34px;
+    position: relative;
+    width: 60px;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    background-color: #555;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+}
+
+.slider:before {
+    background-color: #fff;
+    bottom: 4px;
+    content: "";
+    height: 26px;
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+    width: 26px;
+}
+
+.input:checked+.slider {
+    background-color: var(--color-highlight);
+}
+
+input:checked+.slider::before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round::before {
+    border-radius: 50%;
+}
+
+/* == 7. Modal Mobile Responsive == */
+@media (max-width: 768px) {
+    .modal-container {
+        /* On mobile, stack sidebar and content */
+        grid-template-columns: 1fr;
+        height: 90vh;
+        /* Taller on mobile */
+        max-height: 90%;
+        width: 100%;
+        max-width: 450px;
+        /* Narrower */
+    }
+
+    .modal-sidebar {
+        /* Hide sidebar, or make it a top-bar (simpler to hide) */
+        display: none;
+        /* We can add a dropdown select for 'Account'/'General' later if needed */
+    }
+
+    .modal-content {
+        padding: 1.5rem;
+    }
+
+    .modal-section h2 {
+        font-size: 1.3rem;
+    }
+
+    .form-group-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+    }
+
+    .btn-secondary-modal {
+        width: 100%;
+        text-align: center;
+    }
+}

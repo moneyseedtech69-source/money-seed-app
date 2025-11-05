@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Create Member</title>
+
+    <script>
+        const token = localStorage.getItem('userToken');
+        if (!token) {
+            window.location.href = 'internal-login.html';
+        }
+    </script>
+    <link rel="stylesheet" href="css/internal-style.css">
+</head>
+
+<body>
+    <div class="login-box" style="width: 400px;">
+        <h2>Create New Team Member</h2>
+        <form id="create-member-form">
+            <div class="form-group">
+                <label for="username-input">Username</label>
+                <input type="text" id="username-input" required>
+            </div>
+            <div class="form-group">
+                <label for="email-input">Email</label>
+                <input type="email" id="email-input" required>
+            </div>
+            <div class="form-group">
+                <label for="password-input">Temporary Password</label>
+                <input type="password" id="password-input" required>
+            </div>
+
+            <div class="form-group">
+                <label for="role-select">Role</label>
+                <select id="role-select" required>
+                    <option value="Member">Member</option>
+                    <option value="Admin" id="admin-role-option">Admin</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="department-select">Department</label>
+                <select id="department-select" required>
+                    <option value="Content">Content</option>
+                    <option value="Tech">Tech</option>
+                </select>
+            </div>
+
+            <button type="submit">Create User</button>
+        </form>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        // This script runs *before* the main script
+        const userDepartment = localStorage.getItem('userDepartment');
+        if (userDepartment && userDepartment !== 'Tech') {
+            // If the user is NOT in the 'Tech' department
+            const adminOption = document.getElementById('admin-role-option');
+            if (adminOption) {
+                adminOption.remove(); // Remove the "Admin" option from the dropdown
+            }
+        }
+    </script>
+
+    <script src="js/create-member-script.js" defer></script>
+</body>
+
+</html>

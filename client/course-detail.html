@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width. initial-scale=1.0">
+    <title>Course: Facebook Clothing Page - Money Seed</title>
+    <link rel="stylesheet" href="css/style-v2.css?v=9">
+    <link rel="stylesheet" href="css/course-detail.css">
+</head>
+
+<body>
+    <!-- == HEADER (Logged-In Version - Copied from home.html) == -->
+    <header class="main-header">
+        <div class="logo">
+            <img src="images/money_seed_logo-v2.png" alt="Money Seed Logo" class="logo-icon">
+            <h1> MONEY SEED</h1>
+        </div>
+        <nav class="desktop-nav logged-in-nav">
+            <ul>
+                <li><button class="icon-btn notification-btn" aria-label="Notifications">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-bell">
+                            <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+                            <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+                        </svg> <!-- Bell Icon -->
+                    </button>
+                    <!-- Notification dropdown structure -->
+                    <div class="notification-dropdown" id="notification-panel" style="display: none;">
+                        <div class="dropdown-header">
+                            Notifications <span class="noti-count">(3)</span>
+                            <button class="close-noti" id="close-noti-btn"
+                                aria-label="Close notification">&times;</button>
+                        </div>
+                        <ul class="noti-list">
+                            <li>
+                                <img src="images/avatar-placeholder.png" alt="User avatar" class="noti-avatar">
+                                <p><strong>Cody Edwards</strong> commented on your latest story.</p>
+                            </li>
+                            <li>
+                                <img src="images/avatar-placeholder.png" alt="User avatar" class="noti-avatar">
+                                <p><strong>Jean Reeves</strong> loved your latest Photo you posted.</p>
+                            </li>
+                            <li>
+                                <img src="images/avatar-placeholder.png" alt="User avatar" class="noti-avatar">
+                                <p><strong>Tyler Warren</strong> loved your latest Story you posted.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li><button class="icon-btn profile-btn" aria-label="Profile">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-circle-user-round">
+                            <path d="M18 20a6 6 0 0 0-12 0" />
+                            <circle cx="12" cy="10" r="4" />
+                            <circle cx="12" cy="12" r="10" />
+                        </svg> <!-- Profile Icon -->
+                    </button></li>
+                <li><button class="btn btn-logout">Log out</button></li>
+            </ul>
+        </nav>
+        <button class="menu-toggle" aria-label="Toggle Navigation">
+            <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </button>
+        <nav class="mobile-nav">
+            <ul>
+                <li><a href="#">Notifications</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Log out</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="course-container container">
+        <!-- Course Title -->
+        <h1 class="course-main-title">Start your Facebook Clothing Page</h1>
+
+        <!-- Two Column Layout: Sidebar + Content -->
+        <div class="course-layout">
+
+            <!-- == Left Sidebar: Course Navigation == -->
+            <aside class="course-sidebar">
+                <h3>Course Material</h3>
+                <nav>
+                    <ul class="module-nav">
+                        <li><a href="#overview" class="module-link active" data-module="overview">Overview</a></li>
+                        <li>
+                            <a href="#module1" class="module-link locked" data-module="module1">
+                                Module 1
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lock-icon">
+                                    <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#module2" class="module-link locked" data-module="module2">
+                                Module 2
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lock-icon">
+                                    <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#module3" class="module-link locked" data-module="module3">
+                                Module 3
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lock-icon">
+                                    <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#module4" class="module-link locked" data-module="module4">
+                                Module 4
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lock-icon">
+                                    <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#module5" class="module-link locked" data-module="module5">
+                                Module 5
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lock-icon">
+                                    <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                </svg>
+                            </a>
+                        </li>
+
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- == Right Content Area == -->
+            <section class="course-content-area">
+
+                <!-- Module Content Div (Initially showing Overview) -->
+                <div class="module-content" id="overview" style="display: block;">
+                    <h2>Course overview</h2>
+                    <hr class="content-divider">
+
+                    <h3>Welcome Message!</h3>
+                    <p class="welcome-text">🎉 Congratulations and Welcome! 🎉</p>
+                    <p>"By taking the first step, the journey to success begins."</p>
+                    <p class="burmese-text">“ပထမဆုံးခြေလှမ်းကိုလှမ်းခြင်းဖြင့် အောင်မြင်မှုခရီးစတင်ပါပြီ။”</p>
+
+                    <h3>Course Overview</h3>
+                    <p class="burmese-text course-description">
+                        ဒီ Course သည် Facebook Clothing Business စတင်လိုသူများအတွက် ရည်ရွယ်ပါသည်။
+                        Money Seed မှနေ၍ စနစ်တကျ လေ့လာသင်ယူလိုသူ၊ အထူးသဖြင့် Grade 12 အောင်မြင်ပြီးသား (သို့) University
+                        students များ
+                        ဖြစ်ရပါမည်။
+                        ဒါ့အပြင် အွန်လိုင်းမှ background ရှိသည်ဖြစ်စေ မရှိသည်ဖြစ်စေ အလွယ်တကူ အခြေခံမှ အစပြု၍
+                        အသေးစိတ်လေ့လာနိုင်မှာ ဖြစ်ပါသည်။ Advanced ဖြစ်တဲ့ Terms တွေ ထည့်သွင်း သင်ကြားပေးထားပါတယ်။
+                        ဒီ Course အတွက် Contents အကြောင်း စုံစုံလင်လင်နဲ့ အခမဲ့ လေ့လာရမှာပါ။ AI ကို တစ်ဆင့်ခံ မှီခို မှာ
+                        မဟုတ်ဘဲ ကိုယ်ပိုင် အယူအဆဖြင့် ကြိုးစားချင်စိတ် ရှိဖို့ လိုပါတယ်။
+                        ဒီ Course ကို တတ်မြောက်တဲ့အခါ မိမိရဲ့ အားသာချက် အားနည်းချက်များကို သိရှိလာမှာ ဖြစ်ပြီး
+                        ပေါ့ပေါ့ပါးပါးနဲ့ အချိန်တိုအတွင်း ဝင်ငွေ ရှာဖွေနိုင်မှာ ဖြစ်ပါတယ်။
+                    </p>
+                    <!-- Navigation Buttons for this module -->
+                    <div class="module-navigation">
+                        <button class="btn btn-course-nav btn-back" style="visibility: hidden;">Back</button>
+                        <button class="btn btn-course-nav btn-next">Next</button>
+                        <button class="btn btn-course-nav btn-finish" style="display: none;">Finish</button>
+                    </div>
+                </div>
+
+                <!-- Module 1 Content (Hidden Initially) -->
+                <div class="module-content" id="module1" style="display: none;">
+                    <h2>Module 1</h2>
+                    <hr class="content-divider">
+                    <p>Content for Module 1 goes here...</p>
+                    <div class="module-navigation">
+                        <button class="btn btn-course-nav btn-back">Back</button>
+                        <button class="btn btn-course-nav btn-next">Next</button>
+                        <button class="btn btn-course-nav btn-finish" style="display: none;">Finish</button>
+                    </div>
+                </div>
+
+                <!-- Module 2 Content (Hidden Initially) -->
+                <div class="module-content" id="module2" style="display: none;">
+                    <h2>Module 2</h2>
+                    <hr class="content-divider">
+                    <p>Content for Module 2 goes here...</p>
+                    <!-- Navigation Buttons -->
+                    <div class="module-navigation">
+                        <button class="btn btn-course-nav btn-back">Back</button>
+                        <button class="btn btn-course-nav btn-next">Next</button>
+                        <button class="btn btn-course-nav btn-finish" style="display: none;">Finish</button>
+                    </div>
+                </div>
+
+                <!-- Module 3 Content (Hidden Initially) -->
+                <div class="module-content" id="module3" style="display: none;">
+                    <h2>Module 3</h2>
+                    <hr class="content-divider">
+                    <p>Content for Module 3 goes here...</p>
+                    <!-- Navigation Buttons -->
+                    <div class="module-navigation">
+                        <button class="btn btn-course-nav btn-back">Back</button>
+                        <button class="btn btn-course-nav btn-next">Next</button>
+                        <button class="btn btn-course-nav btn-finish" style="display: none;">Finish</button>
+                    </div>
+                </div>
+
+                <!-- Module 4 Content (Hidden Initially) -->
+                <div class="module-content" id="module4" style="display: none;">
+                    <h2>Module 4</h2>
+                    <hr class="content-divider">
+                    <p>Content for Module 4 goes here...</p>
+                    <!-- Navigation Buttons -->
+                    <div class="module-navigation">
+                        <button class="btn btn-course-nav btn-back">Back</button>
+                        <button class="btn btn-course-nav btn-next">Next</button>
+                        <button class="btn btn-course-nav btn-finish" style="display: none;">Finish</button>
+                    </div>
+                </div>
+
+                <!-- Module 5 Content (Hidden Initially) -->
+                <div class="module-content" id="module5" style="display: none;">
+                    <h2>Module 5</h2>
+                    <hr class="content-divider">
+                    <p>Content for Module 5 goes here...</p>
+                    <!-- Navigation Buttons (Finish instead of Next) -->
+                    <div class="module-navigation">
+                        <button class="btn btn-course-nav btn-back">Back</button>
+                        <button class="btn btn-course-nav btn-next" style="display: none;">Next</button>
+                        <button class="btn btn-course-nav btn-finish">Finish</button>
+
+                    </div>
+                </div>
+
+                <!-- Congratulations Message (Hidden Initially) -->
+                <div class="congrats-message" id="congrats" style="display: none;">
+                    <h2>🎉 Congratulations! 🎉</h2>
+                    <p>You have successfully completed the "Start your Facebook Clothing Page" course!</p>
+
+                    <a href="course-blog.html" class="btn btn-primary-alt">Back to Home</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- == FOOTER (Copied from home.html) == -->
+    <footer class="main-footer">
+        <div class="footer-grid container">
+            <!-- Col 1: Contact -->
+            <div class="footer-col">
+                <p>info@Moneyseed.com</p>
+                <p>123-456-7890</p>
+            </div>
+            <!-- Col 2: Links -->
+            <div class="footer-col"> <a href="#">Home</a> <a href="#">About Us</a> <a href="#">Contact</a> </div>
+            <!-- Col 3: Links -->
+            <div class="footer-col"> <a href="#">Privacy Policy</a> <a href="#">Terms of Service</a> </div>
+            <!-- Col 4: Social Media -->
+            <div class="footer-col social-media">
+                <a href="https://www.facebook.com" target="_blank" aria-label="Facebook"><svg>...</svg></a>
+                <a href="https://www.tiktok.com" target="_blank" aria-label="TikTok"><svg>...</svg></a>
+                <a href="https://www.viber.com" target="_blank" aria-label="Viber"><svg>...</svg></a>
+                <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn"><svg>...</svg></a>
+            </div>
+        </div>
+        <p class="copyright-text">© 2025 Money Seed. All rights reserved.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/course-detail.js"></script>
+
+</body>
+
+</html>
