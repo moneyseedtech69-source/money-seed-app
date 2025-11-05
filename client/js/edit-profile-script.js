@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             // Call the NEW protected API endpoint
-            const response = await fetch('https://money-seed-project-api-123.onrender.com', {
+            const response = await fetch('https://money-seed-project-api-123.onrender.com/api/users/profile', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const fetchUsers = async () => {
         try {
-            const response = await fetch('https://money-seed-project-api-123.onrender.com', {
+            const response = await fetch('https://money-seed-project-api-123.onrender.com/api/users', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             try {
-                const response = await fetch(`https://money-seed-project-api-123.onrender.com${userId}`, {
+                const response = await fetch(`https://money-seed-project-api-123.onrender.com/api/users${userId}`, {
                     method: 'DELETE',
                     headers: {
                         'Authorization': `Bearer ${token}` // Send token to prove we're Admin
