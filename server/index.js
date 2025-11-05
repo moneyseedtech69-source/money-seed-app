@@ -15,11 +15,23 @@ connectDB();
 const app = express();
 
 // --- Middleware ---
-// Allows client and server to talk
+
+// Whitelist for your Netlify site
+const whitelist = ['https.netlify.app']; // Trusts all Netlify app subdomains
+
 const corsOptions = {
-    origin: 'https://musical-daifuku-523502.netlify.app' // Your live Netlify URL
+    origin: (origin, callback) => {
+        // Check if the origin (the URL of the frontend) ends with .netlify.app
+        // !origin allows requests from tools like Postman/Thunder Client (which have no origin)
+        if (!origin || whitelist.some(url => origin.endsWith(url))) {
+            callback(null, true); // Allow the request
+        } else {
+            callback(new Error('Not allowed by CORS')); // Block the request
+        }
+    }
 };
-app.use(cors(corsOptions));
+app.use(cors(corsOptions)); // Use the new, smarter CORS options
+
 // Allows server to read JSON from requests
 app.use(express.json());
 
