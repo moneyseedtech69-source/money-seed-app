@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 
-// Load environment variables (for database password, etc.)
+// Load environment variables
 dotenv.config({ path: './config/.env' });
 
 // --- Connect to Database ---
@@ -16,21 +16,16 @@ const app = express();
 
 // --- Middleware ---
 
-// Whitelist for your Netlify site
-const whitelist = ['https.netlify.app']; // Trusts all Netlify app subdomains
-
+// This is the new, bulletproof CORS setting.
+// It uses a Regular Expression (Regex) to trust *ANY* subdomain
+// that ends with "netlify.app". This will work.
 const corsOptions = {
-    origin: (origin, callback) => {
-        // Check if the origin (the URL of the frontend) ends with .netlify.app
-        // !origin allows requests from tools like Postman/Thunder Client (which have no origin)
-        if (!origin || whitelist.some(url => origin.endsWith(url))) {
-            callback(null, true); // Allow the request
-        } else {
-            callback(new Error('Not allowed by CORS')); // Block the request
-        }
-    }
+    origin: [/\.netlify\.app$/, 'http://localhost:3000'] // Allows Netlify and your local machine
 };
-app.use(cors(corsOptions)); // Use the new, smarter CORS options
+app.use(cors(corsOptions));
+
+// This is required for preflight requests to work
+app.options('*', cors(corsOptions));
 
 // Allows server to read JSON from requests
 app.use(express.json());
@@ -40,7 +35,7 @@ app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
 
 // --- Start Server ---
-const PORT = process.env.PORT || 5000; // Use port 5000 for backend
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
