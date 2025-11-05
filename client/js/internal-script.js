@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = document.getElementById('password-input').value;
 
         try {
-            const response = await fetch('https://money-seed-project-api-123.onrender.com/api/auth/login', {
+            const response = await fetch('https://money-seed-project-api-9458.onrender.com', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username: username, password: password })

@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            const response = await fetch('https://money-seed-project-api-123.onrender.com/api/auth/login', {
+            const response = await fetch('https://money-seed-project-api-9458.onrender.com', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
