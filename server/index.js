@@ -17,10 +17,13 @@ const app = express();
 // --- Middleware ---
 
 // This is the new, bulletproof CORS setting.
-// It uses a Regular Expression (Regex) to trust *ANY* subdomain
-// that ends with "netlify.app". This will work.
+// It now trusts Netlify AND Vercel.
 const corsOptions = {
-    origin: [/\.netlify\.app$/, 'http://localhost:3000'] // Allows Netlify and your local machine
+    origin: [
+        /\.netlify\.app$/,  // Trusts all Netlify subdomains
+        /\.vercel\.app$/,   // <-- THE FIX: Trusts all Vercel subdomains
+        'http://localhost:3000' // Trusts your local machine
+    ]
 };
 app.use(cors(corsOptions));
 
