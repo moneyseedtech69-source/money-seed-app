@@ -16,7 +16,10 @@ const app = express();
 
 // --- Middleware ---
 // Allows client and server to talk
-app.use(cors());
+const corsOptions = {
+    origin: 'https://musical-daifuku-523502.netlify.app' // Your live Netlify URL
+};
+app.use(cors(corsOptions));
 // Allows server to read JSON from requests
 app.use(express.json());
 
