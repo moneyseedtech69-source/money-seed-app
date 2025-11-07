@@ -1,41 +1,58 @@
 document.addEventListener('DOMContentLoaded', () => {
-    /* --- 1. LOG OUT BUTTON --- */
-    const logoutButton = document.querySelector('.btn-logout');
+    /* --- 1. LOG OUT BUTTON (v3) --- */
+    // The new 3D logout button
+    const newLogoutButton = document.getElementById('new-logout-btn');
 
-    if (logoutButton) {
-        logoutButton.addEventListener('click', () => {
+    if (newLogoutButton) {
+        newLogoutButton.addEventListener('click', (e) => {
+            e.preventDefault();
             window.location.href = 'index.html';
         });
     }
 
-    /* --- 2. NOTIFICATION DROPDOWN --- */
-    const notificationBtn = document.querySelector('.notification-btn');
-    const notificationPanel = document.getElementById('notification-panel');
-    const closeNotiBtn = document.getElementById('close-noti-btn');
+    /* --- 2. LOAD USER DATA --- */
+    const profileUsername = document.getElementById('profile-btn-username');
+    const profileAvatar = document.getElementById('profile-btn-avatar');
 
-    if (notificationBtn && notificationPanel && closeNotiBtn) {
-        // --- Show/Hide on Bell Icon Click ---
-        notificationBtn.addEventListener('click', (event) => {
-            event.stopPropagation();
-            const isHidden = notificationPanel.style.display === 'none';
-            notificationPanel.style.display = isHidden ? 'block' : 'none';
+    // Get username from localStorage (from signup)
+    // Try to find "newUser_username" first, then "tempUsername"
+    const savedUsername = localStorage.getItem('newUser_username') || localStorage.getItem('tempUsername');
+
+    // Get avatar from localStorage (from profile)
+    const savedAvatar = localStorage.getItem('userAvatar');
+
+    if (savedUsername && profileUsername) {
+        profileUsername.textContent = savedUsername;
+    }
+
+    if (savedAvatar && profileAvatar) {
+        profileAvatar.src = savedAvatar;
+    }
+
+    /* --- 3. NOTIFICATION MODAL (NEW) --- */
+    const notificationBtn = document.getElementById('new-noti-btn');
+    const notificationModal = document.getElementById('notification-modal');
+    const closeModalBtn = document.getElementById('noti-modal-close-btn');
+
+    if (notificationBtn && notificationModal && closeModalBtn) {
+
+        // --- Show modal on bell click ---
+        notificationBtn.addEventListener('click', () => {
+            notificationModal.style.display = 'flex';
         });
 
-        // --- Hide on Close Button (X) Click ---
-        closeNotiBtn.addEventListener('click', () => {
-            notificationPanel.style.display = 'none';
+        // --- Hide modal on 'X' click ---
+        closeModalBtn.addEventListener('click', () => {
+            notificationModal.style.display = 'none';
         });
 
-        // --- Hide when clicking outside the panel ---
-        document.addEventListener('click', (event) => {
-            if (!notificationBtn.contains(event.target) && !notificationPanel.contains(event.target)) {
-                notificationPanel.style.display = 'none';
+        // --- Hide modal when clicking overlay ---
+        notificationModal.addEventListener('click', (event) => {
+            // If the user clicked on the dark overlay (the modal-overlay)
+            // and NOT the white container (.noti-modal-container)
+            if (event.target === notificationModal) {
+                notificationModal.style.display = 'none';
             }
-        });
-
-        // --- Stop clicks *inside* the panel from closing it ---
-        notificationPanel.addEventListener('click', (event) => {
-            event.stopPropagation();
         });
     }
 

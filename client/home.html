@@ -17,49 +17,30 @@
         </div>
 
         <nav class="desktop-nav logged-in-nav">
-            <ul>
-                <li><button class="icon-btn notification-btn" aria-label="Notifications">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-bell">
-                            <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
-                            <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
-                        </svg>
-                    </button>
-                    <div class="notification-dropdown" id="notification-panel" style="display: none;">
-                        <div class="dropdown-header">
-                            Notifications <span class="noti-count">(3)</span>
-                            <button class="close-noti" id="close-noti-btn"
-                                aria-label="Close notification">&times;</button>
-                        </div>
-                        <ul class="noti-list">
-                            <li>
-                                <img src="images/avatar-placeholder.png" alt="User avatar" class="noti-avatar">
-                                <p><strong>Cody Edwards</strong> commented on your latest story.</p>
-                            </li>
-                            <li>
-                                <img src="images/avatar-placeholder.png" alt="User avatar" class="noti-avatar">
-                                <p><strong>Jean Reeves</strong> loved your latest Photo you posted.</p>
-                            </li>
-                            <li>
-                                <img src="images/avatar-placeholder.png" alt="User avatar" class="noti-avatar">
-                                <p><strong>Tyler Warren</strong> loved your latest Story you posted.</p>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
 
-                <li><button class="icon-btn profile-btn" aria-label="Profile">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-circle-user-round">
-                            <path d="M18 20a6 6 0 0 0-12 0" />
-                            <circle cx="12" cy="10" r="4" />
-                            <circle cx="12" cy="12" r="10" />
-                        </svg>
-                    </button></li>
-                <li><button class="btn btn-logout">Log out</button></li>
-            </ul>
+            <button type="button" class="noti-icon-btn" id="new-noti-btn" aria-label="Notifications">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" class="noti-svg" width="20" height="20">
+
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0">
+                    </path>
+                </svg>
+                <div class="noti-dot">
+                    <div class="noti-dot-ping"></div>
+                </div>
+            </button>
+            <a href="profile.html" class="profile-icon-btn" aria-label="View Profile">
+                <svg viewBox="0 0 24 24" fill="currentColor" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12 2c2.757 0 5 2.243 5 5.001 0 2.756-2.243 5-5 5s-5-2.244-5-5c0-2.758 2.243-5.001 5-5.001zm0-2c-3.866 0-7 3.134-7 7.001 0 3.865 3.134 7 7 7s7-3.135 7-7c0-3.867-3.134-7.001-7-7.001zm6.369 13.353c-.497.498-1.057.931-1.658 1.302 2.872 1.874 4.378 5.083 4.972 7.346h-19.387c.572-2.29 2.058-5.503 4.973-7.358-.603-.374-1.162-.811-1.658-1.312-4.258 3.072-5.611 8.506-5.611 10.669h24c0-2.142-1.44-7.557-5.631-10.647z">
+                    </path>
+                </svg>
+            </a>
+            <button class="btn-3d-logout" id="new-logout-btn">
+                <span>Log out</span>
+            </button>
+
         </nav>
 
         <button class="menu-toggle" aria-label="Toggle Navigation">
@@ -93,71 +74,166 @@
                     <h3>Your Needs, Our Services</h3>
                     <p>This is the space to introduce the Services section. Briefly describe the types of services
                         offered and highlight any special benefits or features.</p>
-                    <a href="course-blog.html#courses" class="btn btn-primary-alt" class="btn btn-primary-alt">See All
-                        Courses</a>
+                    <a href="course-blog.html#courses" class="learn-more">
+                        <span class="circle" aria-hidden="true">
+                            <span class="icon arrow"></span>
+                        </span>
+                        <span class="button-text">See All Courses</span>
+                    </a>
                 </div>
                 <div class="service-card small-card">
-                    <div class="service-icon-placeholder"></div>
-                    <p>01. Service Name</p>
+                    <div class="card-text-content">
+                        <h4>Add a subheading</h4>
+                        <p>Add a little bit of body text</p>
+                    </div>
+
+                    <a href="#" class="btn-slide-arrow">
+                        Learn More
+                        <div class="icon">
+                            <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 0h24v24H0z" fill="none"></path>
+                                <path
+                                    d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                                    fill="currentColor"></path>
+                            </svg>
+                        </div>
+                    </a>
                 </div>
                 <div class="service-card small-card">
-                    <div class="service-icon-placeholder"></div>
-                    <p>02. Service Name</p>
+                    <div class="card-text-content">
+                        <h4>Add a subheading</h4>
+                        <p>Add a little bit of body text</p>
+                    </div>
+
+                    <a href="#" class="btn-slide-arrow">
+                        Learn More
+                        <div class="icon">
+                            <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 0h24v24H0z" fill="none"></path>
+                                <path
+                                    d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                                    fill="currentColor"></path>
+                            </svg>
+                        </div>
+                    </a>
+                </div>
+                <div class="service-card small-card">
+                    <div class="card-text-content">
+                        <h4>Add a subheading</h4>
+                        <p>Add a little bit of body text</p>
+                    </div>
+
+                    <a href="#" class="btn-slide-arrow">
+                        Learn More
+                        <div class="icon">
+                            <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 0h24v24H0z" fill="none"></path>
+                                <path
+                                    d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                                    fill="currentColor"></path>
+                            </svg>
+                        </div>
+                    </a>
                 </div>
             </div>
         </section>
 
         <section class="blog-event-section container">
-            <div class="latest-blog-intro">
-                <h2 class="latest-title">Blog Part</h2>
-                <p>This is the space to introduce the Blogs Section. Check out our latest <a href="#"
-                        class="text-link">Blogs</a> where we discuss entrepreneurial stories and latest trends about
-                    Burmese
-                    startup community.</p>
-            </div>
 
             <div class="event-showcase">
-                <h3 class="event-title">Blog</h3>
+                <div class="blog-header">
+                    <h2 class="blog-main-title">Our <span class="highlight">Blog</span></h2>
+                    <p class="blog-subtitle">Stay informed with the latest insights, stories, and updates from our team.
+                    </p>
+                </div>
+
                 <div class="event-cards-container">
-                    <div class="event-card">
-                        <div class="event-image-placeholder"></div>
-                        <h4>Image Title</h4>
-                        <p>Describe your image here</p>
+
+                    <div class="blog-card">
+                        <div class="card-image">
+                            <img src="images/blog-placeholder.jpg" alt="Blog Post Image" />
+                        </div>
+                        <div class="card-content">
+                            <h5 class="card-title">Blog Title 1</h5>
+                            <p class="card-description">
+                                This is the space for the blog description. Add a little bit of body text.
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="card-button">
+                                Read More
+                            </a>
+                        </div>
                     </div>
-                    <div class="event-card">
-                        <div class="event-image-placeholder"></div>
-                        <h4>Image Title</h4>
-                        <p>Describe your image here</p>
+
+                    <div class="blog-card">
+                        <div class="card-image">
+                            <img src="images/blog-placeholder.jpg" alt="Blog Post Image" />
+                        </div>
+                        <div class="card-content">
+                            <h5 class="card-title">Blog Title 2</h5>
+                            <p class="card-description">
+                                This is the space for the blog description. Add a little bit of body text.
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="card-button">
+                                Read More
+                            </a>
+                        </div>
                     </div>
-                    <div class="event-card">
-                        <div class="event-image-placeholder"></div>
-                        <h4>Image Title</h4>
-                        <p>Describe your image here</p>
+
+                    <div class="blog-card">
+                        <div class="card-image">
+                            <img src="images/blog-placeholder.jpg" alt="Blog Post Image" />
+                        </div>
+                        <div class="card-content">
+                            <h5 class="card-title">Blog Title 3</h5>
+                            <p class="card-description">
+                                This is the space for the blog description. Add a little bit of body text.
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="card-button">
+                                Read More
+                            </a>
+                        </div>
                     </div>
+
                 </div>
                 <div class="see-more-wrapper">
-                    <a href="course-blog.html#blog" class="btn btn-see-more">see more</a>
+                    <a href="course-blog.html#blog" class="btn btn-see-more">Check Out on our Blog Site</a>
                 </div>
             </div>
         </section>
 
         <section class="post-course-section container">
             <h2 class="section-title">How We can help you <span class="highlight">After</span> The Course</h2>
-            <video autoplay muted loop class="support-video">
-                <source src="images/hero-video.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <p class="myanmar-text">
-                ကိုယ်ပိုင်လုပ်ငန်း လုပ်ချင်ပေမယ့် ဘယ်ကစရမလဲမသိတဲ့ Money Seed မှ အခမဲ့သင်ကြားပေးသွားမည်။
-            </p>
-            <a href="https://calendly.com/moneyseed-mm25/30min?month=2025-10" target="_blank"
-                class="btn btn-contact">Contact Us</a>
+
+            <div class="support-grid">
+
+                <div class="support-video-wrapper">
+                    <video autoplay muted loop class="support-video">
+                        <source src="images/hero-video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <div class="support-text-content">
+                    <p class="myanmar-text">
+                        ကိုယ်ပိုင်လုပ်ငန်း လုပ်ချင်ပေမယ့် ဘယ်ကစရမလဲမသိတဲ့ Money Seed မှ အခမဲ့သင်ကြားပေးသွားမည်။
+                    </p>
+                    <a href="https://calendly.com/moneyseed-mm25/30min?month=2025-10" target="_blank"
+                        class="btn btn-contact">Contact Us</a>
+                </div>
+
+            </div>
         </section>
 
         <section class="value-prop-section container">
-            <h2 class="section-title">What is <span class="highlight">Money Seed</span>?</h2>
+            <h2 class="section-title">Upcoming <span class="highlight">Events</span></h2>
             <div class="carousel-wrapper">
-                <button class="nav-arrow left-arrow">←</button>
+                <button class="nav-arrow left-arrow">⬅</button>
                 <div class="carousel-container">
                     <div class="carousel-track">
                         <div class="carousel-slide">
@@ -195,12 +271,55 @@
                             </div>
                         </div>
                     </div>
-                </div> <button class="nav-arrow right-arrow">→</button>
+                </div> <button class="nav-arrow right-arrow">➡</button>
             </div>
         </section>
     </main>
 
     <footer class="main-footer">
+
+        <div class="modal-overlay" id="notification-modal" style="display: none;">
+            <div class="noti-modal-container">
+
+                <div class="noti-modal-header">
+                    <h3>Notifications</h3>
+                    <button class="noti-modal-close-btn" id="noti-modal-close-btn"
+                        aria-label="Close notifications">&times;</button>
+                </div>
+
+                <ul class="noti-list-modal">
+                    <li>
+                        <img src="images/avatar-placeholder.png" alt="User avatar" class="noti-avatar">
+                        <div class="noti-content">
+                            <p class="noti-text"><strong>John Doe</strong> reacted to your post</p>
+                            <span class="noti-time">10 mins ago</span>
+                        </div>
+                        <img src="images/post-thumb-1.png" alt="Post thumbnail" class="noti-thumbnail">
+                    </li>
+                    <li>
+                        <img src="images/avatar-placeholder.png" alt="User avatar" class="noti-avatar">
+                        <div class="noti-content">
+                            <p class="noti-text"><strong>Richard Miles</strong> commented on your post</p>
+                            <span class="noti-time">1 day ago</span>
+                        </div>
+                        <img src="images/post-thumb-2.png" alt="Post thumbnail" class="noti-thumbnail">
+                    </li>
+                    <li>
+                        <img src="images/avatar-placeholder.png" alt="User avatar" class="noti-avatar">
+                        <div class="noti-content">
+                            <p class="noti-text"><strong>Brian Cumin</strong> liked your photo</p>
+                            <span class="noti-time">1 day ago</span>
+                        </div>
+                        <img src="images/post-thumb-3.png" alt="Post thumbnail" class="noti-thumbnail">
+                    </li>
+                </ul>
+
+                <div class="noti-modal-footer">
+                    <a href="#" class="btn-view-all">View All Notifications</a>
+                </div>
+
+            </div>
+        </div>
         <div class="footer-grid container">
             <div class="footer-col">
                 <p>moneyseed.mm25@gmail.com</p>

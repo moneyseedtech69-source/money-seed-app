@@ -198,16 +198,106 @@ h2 {
     opacity: 0.9;
 }
 
-.desktop-nav .btn-primary {
+/* --- 1b. Animated "Join for Free" Button --- */
+
+/* 1. The main button container (the <a> tag) */
+.btn-animated-join {
+    position: relative;
+    /* For the 'before' pseudo-element */
+    z-index: 10;
+    overflow: hidden;
+    /* Clips the 'before' element */
+
+    /* Flex styles (to put text and arrow side-by-side) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+
+    /* Sizing and Look */
+    background-color: #f9fafb;
+    /* Light gray background */
     font-size: 1.1rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    /* Clean border */
+    border-radius: 9999px;
+    /* (rounded-full) */
 }
 
-/* Adds a hover effect to the nav links */
-.desktop-nav ul a:hover,
-.desktop-nav ul a:focus {
-    color: var(--color-text-light);
-    opacity: 1;
-    text-decoration: underline;
+/* 2. The button text */
+.btn-animated-join .btn-text {
+    color: #333;
+    /* Default text color */
+    transition: color 0.7s ease;
+}
+
+/* 3. The expanding circle (the fill effect) */
+.btn-animated-join::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+
+    /* HERE'S OUR TEAL COLOR! */
+    background-color: var(--color-highlight);
+
+    /* Size and position */
+    width: 100%;
+    aspect-ratio: 1/1;
+    /* Makes it a square */
+    border-radius: 9999px;
+    /* Makes it a circle */
+
+    /* Start position (off-screen to the left) */
+    left: -100%;
+
+    /* Animation */
+    transition: all 700ms ease;
+}
+
+/* 4. The SVG arrow icon */
+.btn-animated-join .btn-arrow {
+    width: 2rem;
+    height: 2rem;
+    padding: 0.5rem;
+    border: 1px solid #374151;
+    /* Dark gray border */
+    border-radius: 9999px;
+    transform: rotate(45deg);
+    /* Start rotated */
+    transition: all 0.3s ease-in-out;
+}
+
+/* 5. The SVG arrow's path (the <path> inside) */
+.btn-animated-join .btn-arrow-path {
+    fill: #1f2937;
+    /* Dark gray fill */
+}
+
+/* --- HOVER STATES --- */
+
+/* 6. Button Hover: Trigger the fill */
+.btn-animated-join:hover::before {
+    left: 0;
+    transform: scale(1.5);
+    /* Fill and grow */
+}
+
+/* 7. Button Hover: Change text to white */
+.btn-animated-join:hover .btn-text {
+    color: #f9fafb;
+    /* White text */
+    transition-delay: 100ms;
+    /* Wait for fill to start */
+}
+
+/* 8. Button Hover: Animate the arrow */
+.btn-animated-join:hover .btn-arrow {
+    transform: rotate(90deg);
+    /* Rotate to 90deg */
+    background-color: #f9fafb;
+    /* White background */
 }
 
 /* Hide the mobile menu button on desktop */
@@ -308,103 +398,6 @@ h2 {
 .btn-logout:hover {
     background-color: var(--color-bg-light);
     color: var(--color-primary);
-}
-
-/* == HEADER - Notification Dropdown == */
-
-.desktop-nav.logged-in-nav ul li {
-    position: relative;
-}
-
-.notification-dropdown {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    margin-top: 10px;
-    width: 320px;
-    background-color: var(--color-bg-light);
-    border-radius: 8px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-    z-index: 110;
-    border: 1px solid #eee;
-}
-
-.dropdown-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.8rem 1rem;
-    border-bottom: 1px solid #eee;
-    font-weight: 600;
-    color: var(--color-primary);
-}
-
-.noti-count {
-    background-color: var(--color-highlight);
-    color: var(--color-text-light);
-    font-size: 0.75rem;
-    padding: 2px 6px;
-    border-radius: 10px;
-    margin-left: 0.5rem;
-}
-
-.close-noti {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: #aaa;
-    cursor: pointer;
-    line-height: 1;
-}
-
-.close-noti:hover {
-    color: var(--color-primary);
-}
-
-.noti-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    max-height: 400px;
-    overflow-y: auto;
-}
-
-.noti-list li {
-    display: flex;
-    align-items: flex-start;
-    padding: 0.8rem 1rem;
-    border-bottom: 1px solid #f0f0f0;
-    gap: 0.8rem;
-    overflow: hidden;
-}
-
-.noti-list li:last-child {
-    border-bottom: none;
-}
-
-.noti-avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    margin-top: 2px;
-    flex-shrink: 0;
-    background-color: #eee;
-}
-
-.noti-list p {
-    font-size: 0.85rem;
-    color: #444;
-    line-height: 1.5;
-    margin: 0;
-    flex-grow: 1;
-    min-width: 0;
-    overflow-wrap: break-word;
-}
-
-.noti-list p strong {
-    font-weight: 600;
-    color: var(--color-primary);
-    display: inline;
 }
 
 /* --- 2. HERO SECTION --- */

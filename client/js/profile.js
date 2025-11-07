@@ -1,3 +1,7 @@
+/*
+ * profile.js (v2)
+ * - ADDED: Logic to save the avatar to localStorage
+*/
 document.addEventListener('DOMContentLoaded', () => {
 
     /* ============================================= */
@@ -7,58 +11,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Check if track exists
     if (track) {
-        // Get the SLIDES (trophy-slide), not the cards
         const slides = Array.from(track.children).filter(child => child.classList.contains('trophy-slide'));
         const nextButton = document.querySelector('.trophy-arrow.next');
         const prevButton = document.querySelector('.trophy-arrow.prev');
 
         if (slides.length > 0 && nextButton && prevButton) {
-
             let currentIndex = 0;
-            const totalSlides = slides.length; // This should be 2
+            const totalSlides = slides.length;
 
-            // Function to update arrow states
             const updateArrows = () => {
                 prevButton.disabled = currentIndex === 0;
                 nextButton.disabled = currentIndex === totalSlides - 1;
             };
 
-            // Function to move the track
             const goToSlide = (slideIndex) => {
-                // Move 50% for slide 1, 0% for slide 0
                 track.style.transform = `translateX(-${slideIndex * 50}%)`;
                 currentIndex = slideIndex;
                 updateArrows();
             };
 
-            // Click next
             nextButton.addEventListener('click', () => {
                 if (currentIndex < totalSlides - 1) {
                     goToSlide(currentIndex + 1);
                 }
             });
 
-            // Click previous
             prevButton.addEventListener('click', () => {
                 if (currentIndex > 0) {
                     goToSlide(currentIndex - 1);
                 }
             });
-
-            // Set initial state
-            goToSlide(0); // Go to first slide
-
-        } else {
-            console.error("Trophy carousel elements (slides/buttons) not found!");
+            goToSlide(0);
         }
-    } else {
-        console.error("Trophy carousel track not found!");
     }
 
     /* ============================================= */
     /* == PART 2: PROFILE BACKGROUND CONTROLS == */
     /* ============================================= */
-    // (This part was correct, leaving it as is)
     const bgContainer = document.getElementById('profile-bg-container');
     const bgImage = document.getElementById('profile-bg-image');
     const changeBgBtn = document.getElementById('btn-change-bg');
@@ -130,7 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ============================================= */
     /* == PART 3: EDIT PROFILE MODAL == */
     /* ============================================= */
-    // (This part was correct, leaving it as is)
     const editProfileBtn = document.querySelector('.btn-edit-profile');
     const modalOverlay = document.getElementById('edit-profile-modal');
     const modalCloseBtn = document.getElementById('modal-close-btn');
@@ -195,6 +183,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (mainProfilePic) {
                             mainProfilePic.src = e.target.result;
                         }
+
+                        // --- THIS IS THE NEW LINE ---
+                        // It saves the new avatar to storage
+                        localStorage.setItem('userAvatar', e.target.result);
+                        // ------------------------------
+
                     };
                     reader.readAsDataURL(file);
                 }
