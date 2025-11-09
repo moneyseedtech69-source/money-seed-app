@@ -56,4 +56,43 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    /* --- 4. HEADER SEARCH BAR --- */
+    const searchInput = document.getElementById('search-input');
+    const searchClearBtn = document.getElementById('search-clear-btn');
+    const searchSubmitBtn = document.getElementById('search-submit-btn');
+
+    if (searchInput && searchClearBtn && searchSubmitBtn) {
+
+        // Show/hide clear button based on input
+        searchInput.addEventListener('input', () => {
+            if (searchInput.value.length > 0) {
+                searchClearBtn.style.display = 'block';
+            } else {
+                searchClearBtn.style.display = 'none';
+            }
+        });
+
+        // Clear button logic
+        searchClearBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            searchClearBtn.style.display = 'none';
+            searchInput.focus();
+        });
+
+        // Submit button logic
+        searchSubmitBtn.addEventListener('click', () => {
+            if (searchInput.value.length > 0) {
+                alert('Searching for: ' + searchInput.value);
+            }
+        });
+
+        // Also submit on Enter key
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault(); // Stop form from submitting
+                searchSubmitBtn.click();
+            }
+        });
+    }
+
 });

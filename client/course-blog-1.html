@@ -4,42 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Courses - Money Seed</title>
+    <title>Courses & Blog - Money Seed</title>
     <link rel="stylesheet" href="css/style-v2.css?v=8">
-    <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/course-blog.css">
+
 </head>
 
 <body>
     <header class="main-header">
         <div class="logo">
             <img src="images/money_seed_logo-v2.png" alt="Money Seed Logo" class="logo-icon">
-            <h1> MONEY SEED</h1>
-        </div>
-
-        <div class="header-search-group">
-            <svg viewBox="0 0 24 24" aria-hidden="true" class="search-icon">
-                <g>
-                    <path
-                        d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z">
-                    </path>
-                </g>
-            </svg>
-            <input id="search-input" class="search-input" type="search" placeholder="Search courses..." />
-            <div class="search-buttons">
-                <button id="search-clear-btn" class="search-action-btn" aria-label="Clear search"
-                    style="display: none;">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                        <path
-                            d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" />
-                    </svg>
-                </button>
-                <button id="search-submit-btn" class="search-action-btn" aria-label="Submit search">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
-                    </svg>
-                </button>
-            </div>
+            <h1>MONEY SEED</h1>
         </div>
 
         <nav class="desktop-nav logged-in-nav">
@@ -55,6 +30,33 @@
                     <div class="noti-dot-ping"></div>
                 </div>
             </button>
+
+            <div class="notification-dropdown" id="notification-panel" style="display: none;">
+                <div class="dropdown-header">
+                    <h3>Notification</h3>
+                </div>
+                <ul class="noti-list">
+                    <li>
+                        <img src="images/avatar-placeholder.png" alt="User avatar" class="noti-avatar">
+                        <div class="noti-content">
+                            <p class="noti-text"><strong>John Doe</strong> reacted to your post</p>
+                            <span class="noti-time">10 mins ago</span>
+                        </div>
+                        <img src="images/post-thumb-1.png" alt="Post thumbnail" class="noti-thumbnail">
+                    </li>
+                    <li>
+                        <img src="images/avatar-placeholder.png" alt="User avatar" class="noti-avatar">
+                        <div class="noti-content">
+                            <p class="noti-text"><strong>Richard Miles</strong> commented on your post</p>
+                            <span class="noti-time">1 day ago</span>
+                        </div>
+                        <img src="images/post-thumb-2.png" alt="Post thumbnail" class="noti-thumbnail">
+                    </li>
+                </ul>
+                <div class="dropdown-footer">
+                    <a href="#" class="btn-view-all">View All</a>
+                </div>
+            </div>
 
             <a href="profile.html" class="profile-icon-btn" aria-label="View Profile">
                 <svg viewBox="0 0 24 24" fill="currentColor" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
@@ -85,132 +87,130 @@
     </header>
 
     <main>
-        <section class="courses-section container" id="courses">
-            <h2 class="page-title">Explore Our Free Business Courses</h2>
-            <p class="page-subtitle">
-                Discover a variety of free, practical courses designed to help you master essential business strategies.
-            </p>
+
+        <section class="blog-section container" id="blog">
+            <h2 class="page-title">Blog</h2>
             <div class="content-grid">
-
-                <article class="course-card-horizontal">
-                    <div class="course-card-image">
-                        <img src="images/background-3.jpg" alt="Course Image">
-                        <span class="course-tag">Course Level</span>
-                    </div>
-
-                    <div class="course-card-content">
-                        <div class="card-text-content">
-                            <h3 class="card-title">Add a heading (Course Title 1)</h3>
-                            <p class="card-description">
-                                Add a little bit of body text. This is the space for the course description.
-                            </p>
-                        </div>
-                        <a href="#" class="btn-enroll-free">Enroll for Free</a>
+                <article class="content-card">
+                    <div class="card-image-placeholder"></div>
+                    <div class="card-text-content">
+                        <h3>Blog Post Title 1</h3>
+                        <p>Describe the service and how customers or clients can benefit from it.</p>
+                        <a href="#" class="card-link" aria-label="Read Blog Post Title 1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-arrow-up-right">
+                                <path d="M7 7h10v10" />
+                                <path d="M7 17 17 7" />
+                            </svg>
+                        </a>
                     </div>
                 </article>
-
-                <article class="course-card-horizontal">
-                    <div class="course-card-image">
-                        <img src="images/blog-placeholder.jpg" alt="Course Image">
-                        <span class="course-tag">Course Level</span>
-                    </div>
-                    <div class="course-card-content">
-                        <div class="card-text-content">
-                            <h3 class="card-title">Add a heading (Course Title 2)</h3>
-                            <p class="card-description">
-                                Add a little bit of body text. This is the space for the course description.
-                            </p>
-                        </div>
-                        <a href="#" class="btn-enroll-free">Enroll for Free</a>
-                    </div>
-                </article>
-
-                <article class="course-card-horizontal">
-                    <div class="course-card-image">
-                        <img src="images/blog-placeholder.jpg" alt="Course Image">
-                        <span class="course-tag">Course Level</span>
-                    </div>
-                    <div class="course-card-content">
-                        <div class="card-text-content">
-                            <h3 class="card-title">Add a heading (Course Title 3)</h3>
-                            <p class="card-description">
-                                Add a little bit of body text. This is the space for the course description.
-                            </p>
-                        </div>
-                        <a href="#" class="btn-enroll-free">Enroll for Free</a>
+                <article class="content-card">
+                    <div class="card-image-placeholder"></div>
+                    <div class="card-text-content">
+                        <h3>Blog Post Title 2</h3>
+                        <p>Describe the service and how customers or clients can benefit from it.</p>
+                        <a href="#" class="card-link" aria-label="Read Blog Post Title 2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-arrow-up-right">
+                                <path d="M7 7h10v10" />
+                                <path d="M7 17 17 7" />
+                            </svg>
+                        </a>
                     </div>
                 </article>
-
-                <article class="course-card-horizontal">
-                    <div class="course-card-image">
-                        <img src="images/blog-placeholder.jpg" alt="Course Image">
-                        <span class="course-tag">Course Level</span>
-                    </div>
-                    <div class="course-card-content">
-                        <div class="card-text-content">
-                            <h3 class="card-title">Add a heading (Course Title 4)</h3>
-                            <p class="card-description">
-                                Add a little bit of body text. This is the space for the course description.
-                            </p>
-                        </div>
-                        <a href="#" class="btn-enroll-free">Enroll for Free</a>
-                    </div>
-                </article>
-
-                <article class="course-card-horizontal">
-                    <div class="course-card-image">
-                        <img src="images/blog-placeholder.jpg" alt="Course Image">
-                        <span class="course-tag">Course Level</span>
-                    </div>
-                    <div class="course-card-content">
-                        <div class="card-text-content">
-                            <h3 class="card-title">Add a heading (Course Title 5)</h3>
-                            <p class="card-description">
-                                Add a little bit of body text. This is the space for the course description.
-                            </p>
-                        </div>
-                        <a href="#" class="btn-enroll-free">Enroll for Free</a>
+                <article class="content-card">
+                    <div class="card-image-placeholder"></div>
+                    <div class="card-text-content">
+                        <h3>Blog Post Title 3</h3>
+                        <p>Describe the service and how customers or clients can benefit from it.</p>
+                        <a href="#" class="card-link" aria-label="Read Blog Post Title 3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-arrow-up-right">
+                                <path d="M7 7h10v10" />
+                                <path d="M7 17 17 7" />
+                            </svg>
+                        </a>
                     </div>
                 </article>
-            </div>
-
-            <div class="pagination-container">
-
-                <a href="#" class="btn-pagination-arrow prev" id="pagination-prev">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
-                    </svg>
-                    <span>Previous</span>
-                </a>
-
-                <div class="pagination-numbers">
-                    <div class="tab-group">
-                        <input checked="" id="tab1" name="tab" value="1" type="radio" />
-                        <label for="tab1">
-                            <span>1</span>
-                        </label>
+                <article class="content-card">
+                    <div class="card-image-placeholder"></div>
+                    <div class="card-text-content">
+                        <h3>Blog Post Title 4</h3>
+                        <p>Describe the service and how customers or clients can benefit from it.</p>
+                        <a href="#" class="card-link" aria-label="Read Blog Post Title 4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-arrow-up-right">
+                                <path d="M7 7h10v10" />
+                                <path d="M7 17 17 7" />
+                            </svg>
+                        </a>
                     </div>
-                    <div class="tab-group">
-                        <input id="tab2" name="tab" value="2" type="radio" />
-                        <label for="tab2">
-                            <span>2</span>
-                        </label>
+                </article>
+                <article class="content-card">
+                    <div class="card-image-placeholder"></div>
+                    <div class="card-text-content">
+                        <h3>Blog Post Title 5</h3>
+                        <p>Describe the service and how customers or clients can benefit from it.</p>
+                        <a href="#" class="card-link" aria-label="Read Blog Post Title 5">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-arrow-up-right">
+                                <path d="M7 7h10v10" />
+                                <path d="M7 17 17 7" />
+                            </svg>
+                        </a>
                     </div>
-                    <div class="tab-group">
-                        <input id="tab3" name="tab" value="3" type="radio" />
-                        <label for="tab3">
-                            <span>3</span>
-                        </label>
+                </article>
+                <article class="content-card">
+                    <div class="card-image-placeholder"></div>
+                    <div class="card-text-content">
+                        <h3>Blog Post Title 6</h3>
+                        <p>Describe the service and how customers or clients can benefit from it.</p>
+                        <a href="#" class="card-link" aria-label="Read Blog Post Title 6">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-arrow-up-right">
+                                <path d="M7 7h10v10" />
+                                <path d="M7 17 17 7" />
+                            </svg>
+                        </a>
                     </div>
-                </div>
-
-                <a href="#" class="btn-pagination-arrow next" id="pagination-next">
-                    <span>Next</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
-                    </svg>
-                </a>
-
+                </article>
+                <article class="content-card">
+                    <div class="card-image-placeholder"></div>
+                    <div class="card-text-content">
+                        <h3>Blog Post Title 7</h3>
+                        <p>Describe the service and how customers or clients can benefit from it.</p>
+                        <a href="#" class="card-link" aria-label="Read Blog Post Title 7">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-arrow-up-right">
+                                <path d="M7 7h10v10" />
+                                <path d="M7 17 17 7" />
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+                <article class="content-card">
+                    <div class="card-image-placeholder"></div>
+                    <div class="card-text-content">
+                        <h3>Blog Post Title 8</h3>
+                        <p>Describe the service and how customers or clients can benefit from it.</p>
+                        <a href="#" class="card-link" aria-label="Read Blog Post Title 8">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-arrow-up-right">
+                                <path d="M7 7h10v10" />
+                                <path d="M7 17 17 7" />
+                            </svg>
+                        </a>
+                    </div>
+                </article>
             </div>
         </section>
 
@@ -319,32 +319,8 @@
         </div>
     </div>
 
-    <div class="modal-overlay" id="notification-modal" style="display: none;">
-        <div class="noti-modal-container">
-            <div class="noti-modal-header">
-                <h3>Notifications</h3>
-                <button class="noti-modal-close-btn" id="noti-modal-close-btn"
-                    aria-label="Close notifications">&times;</button>
-            </div>
-            <ul class="noti-list-modal">
-                <li>
-                    <img src="images/avatar-placeholder.png" alt="User avatar" class="noti-avatar">
-                    <div class="noti-content">
-                        <p class="noti-text"><strong>John Doe</strong> reacted to your post</p>
-                        <span class="noti-time">10 mins ago</span>
-                    </div>
-                    <img src="images/post-thumb-1.png" alt="Post thumbnail" class="noti-thumbnail">
-                </li>
-            </ul>
-            <div class="noti-modal-footer">
-                <a href="#" class="btn-view-all">View All Notifications</a>
-            </div>
-        </div>
-    </div>
-
     <script src="js/main.js"></script>
     <script src="js/home.js"></script>
-    <script src="js/course-blog.js"></script>
 
 </body>
 

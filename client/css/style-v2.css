@@ -344,60 +344,8 @@ h2 {
 
 /* == PART 1: HEADER (Logged-In Version) == */
 
-/* Adjust spacing for the logged-in nav items */
-.desktop-nav.logged-in-nav {
-    margin-left: auto;
-}
-
 .mobile-nav {
     display: none;
-}
-
-.desktop-nav.logged-in-nav ul {
-    gap: 0.5rem;
-    align-items: center;
-}
-
-/* Style for icon buttons (Bell, Profile) */
-.icon-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.icon-btn svg {
-    stroke: var(--color-primary);
-    transition: stroke 0.3s ease;
-    width: 28px;
-    height: 28px;
-}
-
-.icon-btn:hover svg {
-    stroke: var(--color-text-light);
-}
-
-/* Style for the logout button */
-.btn-logout {
-    background-color: var(--color-primary);
-    color: var(--color-text-light);
-    border: 2px solid var(--color-primary);
-    padding: 0.5rem 1.25rem;
-    font-size: 1rem;
-    border-radius: 4px;
-    margin-left: 0.5rem;
-    cursor: pointer;
-    font-family: var(--font-primary);
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
-
-.btn-logout:hover {
-    background-color: var(--color-bg-light);
-    color: var(--color-primary);
 }
 
 /* --- 2. HERO SECTION --- */
