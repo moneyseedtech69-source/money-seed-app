@@ -9,6 +9,15 @@
     padding-top: 1.5rem;
 }
 
+.course-page .blog-section.container {
+    padding-top: 1rem;
+    margin-top: 0;
+}
+
+.course-page .page-title {
+    margin-top: 0;
+}
+
 .page-title {
     text-align: center;
     font-size: 3.25rem;
@@ -32,6 +41,12 @@
 .content-grid {
     display: grid;
     grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.course-page .content-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
 }
 
@@ -408,6 +423,183 @@
     transform: translateX(3px);
 }
 
+/* == PART 12: NEW BLOG CARD STYLES (v2) == */
+
+/* 1. The main card container */
+.blog-card-v2 {
+    background-color: var(--color-bg-light);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #eee;
+}
+
+.blog-card-v2:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* 2. The Image */
+.blog-card-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+}
+
+.blog-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 3. The Content (Title/Description) */
+.blog-card-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    /* This makes all cards the same height */
+}
+
+.blog-card-content .card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+}
+
+.blog-card-content .card-description {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* 4. The Footer (Placeholder/Button) */
+.blog-card-footer {
+    display: flex;
+    justify-content: space-between;
+    /* Pushes items to ends */
+    align-items: center;
+    padding: 0 1.5rem 1.5rem;
+}
+
+/* 5. The "Social Feed" placeholder */
+.social-feed-placeholder {
+    width: 120px;
+    /* Placeholder width */
+    height: 40px;
+    background-color: #f0f0f0;
+    border: 1px dashed #ccc;
+    border-radius: 8px;
+}
+
+/* 6. The "Read More" button */
+.btn-read-more {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #333;
+    text-decoration: none;
+    border: 1px solid #ccc;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-read-more:hover {
+    border-color: var(--color-highlight);
+    color: var(--color-highlight);
+
+    transform: translateY(-4px) translateX(-2px);
+    box-shadow: 2px 5px 0 0 var(--color-highlight);
+}
+
+.btn-read-more:active {
+    transform: translateY(2px) translateX(1px);
+    box-shadow: 0 0 0 0 var(--color-highlight);
+}
+
+/* --- DARK MODE --- */
+body.dark-mode .blog-card-v2 {
+    background-color: #2a2a2a;
+    border-color: #444;
+}
+
+body.dark-mode .blog-card-content .card-description {
+    color: #aaa;
+}
+
+body.dark-mode .social-feed-placeholder {
+    background-color: #333;
+    border-color: #555;
+}
+
+body.dark-mode .btn-read-more {
+    color: #ccc;
+    border-color: #555;
+}
+
+body.dark-mode .btn-read-more:hover {
+    background-color: var(--color-highlight);
+    border-color: var(--color-highlight);
+    color: #fff;
+
+    /* Add the 3D effect (using a black shadow) */
+    transform: translateY(-4px) translateX(-2px);
+    box-shadow: 2px 5px 0 0 var(--color-primary);
+}
+
+/* This makes the button "press down" when clicked */
+body.dark-mode .btn-read-more:active {
+    transform: translateY(2px) translateX(1px);
+    box-shadow: 0 0 0 0 var(--color-primary);
+}
+
+.course-page .container {
+    max-width: 1400px;
+}
+
+/* --- NEW: Social Feed Stats Bar (from testing.html) --- */
+
+/* The Main Container */
+.post-stats-bar {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+    /* Space between the stat items */
+    color: #555555;
+    /* Set the static color for all items */
+}
+
+/* Each Stat Item (Icon + Number) */
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    /* Space between icon and number */
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* ICON STYLES */
+.stat-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    fill: none;
+    stroke: currentColor;
+    /* Inherits the color from parent */
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    display: block;
+}
+
+/* --- ADDED: Dark Mode Support --- */
+body.dark-mode .post-stats-bar {
+    color: #aaa;
+    /* Lighter color for dark background */
+}
 
 /* == MOBILE RESPONSIVE for Course Page == */
 @media (max-width: 900px) {
