@@ -142,8 +142,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
-    // --- 7. Initial Setup ---
+    // --- Event Listener for "Back to Start" Button ---
+    const restartButton = document.getElementById('btn-restart-course');
+    if (restartButton) {
+        restartButton.addEventListener('click', () => {
+            showModule(0);
+        });
+    }
+    // --- 8. Initial Setup ---
     // Ensure only the first module link is unlocked initially (Overview)
     // (HTML already sets only Overview as unlocked, JS respects this)
     // Show the first module (Overview) on page load

@@ -1,7 +1,14 @@
 /* == Main Container & Layout == */
+.main-header {
+    z-index: 1000;
+    position: relative;
+}
+
 .blog-container {
     padding-top: 3rem;
     padding-bottom: 4rem;
+    max-width: 1600px;
+    margin: 0 auto;
 }
 
 .blog-layout {
@@ -60,19 +67,30 @@
     padding: 2.5rem 3rem;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    position: relative;
 }
 
 .blog-header {
     margin-bottom: 2rem;
     padding-bottom: 1.5rem;
     border-bottom: 1px solid #eee;
+    /* Let's add this back for separation */
+
+    /* --- NEW FLEXBOX LAYOUT --- */
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
 }
 
 .author-info {
     display: flex;
+    flex-direction: row;
     align-items: center;
     gap: 0.8rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
+    white-space: nowrap;
+    flex-shrink: 0;
+    /* <-- This STOPS it from squishing */
 }
 
 .author-avatar {
@@ -85,6 +103,7 @@
 .author-info div {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
 }
 
 .author-name {
@@ -103,10 +122,11 @@
     font-weight: 700;
     color: var(--color-primary);
     line-height: 1.3;
-    margin: 0;
+    margin: 1rem 0 2rem;
+    text-align: center;
+    flex-grow: 1;
+    /* <-- This tells it to take all extra space */
 }
-
-.blog-body {}
 
 .blog-body h2 {
     font-size: 1.6rem;
@@ -165,55 +185,93 @@ figcaption {
     align-items: center;
 }
 
-.btn-like,
-.btn-comment-action {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background-color: #f0f0f0;
-    color: var(--color-text-dark);
-    border: none;
-    padding: 0.6rem 1.2rem;
-    font-size: 0.9rem;
-    font-weight: 500;
-    font-family: var(--font-primary);
-    border-radius: 6px;
+/* ADD ALL THIS NEW CSS */
+#heart {
+    display: none;
+}
+
+.like-button {
+    position: relative;
     cursor: pointer;
-    transition: all 0.3s ease;
+    display: flex;
+    height: 48px;
+    width: 136px;
+    border-radius: 16px;
+    border: none;
+    background-color: #1d1d1d;
+    overflow: hidden;
+    box-shadow:
+        inset -2px -2px 5px rgba(255, 255, 255, 0.2),
+        inset 2px 2px 5px rgba(0, 0, 0, 0.1),
+        4px 4px 10px rgba(0, 0, 0, 0.4),
+        -2px -2px 8px rgba(255, 255, 255, 0.1);
+
+    /* This pushes the "Feedback" button to the right */
+    margin-right: auto;
 }
 
-.btn-like svg,
-.btn-comment-action svg {
-    stroke: #555;
-    transition: all 0.3s ease;
+.like {
+    width: 70%;
+    height: 100%;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
-.btn-like:hover,
-.btn-comment-action:hover {
-    background-color: #ddd;
+.like-icon {
+    fill: #505050;
+    height: 28px;
+    width: 28px;
 }
 
-.btn-like:hover svg,
-.btn-comment-action:hover svg {
-    stroke: var(--color-primary);
-}
-
-.btn-like.active {
-    background-color: var(--color-highlight);
-    color: var(--color-text-light);
-}
-
-.btn-like.active svg {
-    stroke: var(--color-text-light);
-    fill: var(--color-text-light);
+.like-text {
+    color: #fcfcfc;
+    font-size: 16px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .like-count {
-    font-size: 0.9rem;
-    color: #555;
-    font-weight: 500;
-    margin-left: -0.5rem;
-    margin-right: auto;
+    position: absolute;
+    right: 0;
+    width: 30%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #717170;
+    font-size: 16px;
+    border-left: 2px solid #4e4e4e;
+    transition: all 0.5s ease-out;
+}
+
+.like-count.two {
+    transform: translateY(40px);
+}
+
+.on:checked~.like .like-icon {
+    fill: #fc4e4e;
+    animation: enlarge 0.2s ease-out 1;
+    transition: all 0.2s ease-out;
+}
+
+.on:checked~.like-count.two {
+    transform: translateX(0);
+    color: #fcfcfc;
+}
+
+.on:checked~.like-count.one {
+    transform: translateY(-40px);
+}
+
+@keyframes enlarge {
+    0% {
+        transform: scale(0.5);
+    }
+
+    100% {
+        transform: scale(1.2);
+    }
 }
 
 .btn-feedback {
@@ -441,60 +499,201 @@ figcaption {
 }
 
 /* == Feedback Popup == */
+/* 1. Main Popup Container */
 .feedback-popup {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    width: 300px;
+    position: relative;
+    width: 400px;
     background-color: var(--color-bg-light);
-    border-radius: 8px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    padding: 2rem;
     z-index: 120;
     border: 1px solid #eee;
 }
 
-.feedback-popup h4 {
-    font-size: 1.1rem;
+/* 2. Text Content */
+.feedback-popup h2 {
+    font-size: 1.4rem;
     font-weight: 600;
     color: var(--color-primary);
-    margin: 0 0 1.5rem 0;
+    margin: 0 0 0.5rem 0;
     text-align: center;
 }
 
-.feedback-option {
-    display: flex;
-    align-items: center;
-    margin-bottom: 0.8rem;
-    background-color: #f9f9f9;
-    padding: 0.6rem 1rem;
-    border-radius: 4px;
-    border: 1px solid #eee;
-}
-
-.feedback-option input[type="radio"] {
-    margin-right: 0.8rem;
-    accent-color: var(--color-highlight);
-}
-
-.feedback-option label {
+.feedback-popup p {
     font-size: 0.95rem;
-    color: #333;
-    font-weight: 500;
-    cursor: pointer;
-    flex-grow: 1;
+    color: #555;
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
 }
 
+/* --- NEW: Star Rating Styles --- */
+.radio {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-direction: row-reverse;
+    margin-bottom: 1.5rem;
+    /* Added this to keep spacing */
+}
+
+.radio>input {
+    position: absolute;
+    appearance: none;
+}
+
+.radio>label {
+    cursor: pointer;
+    font-size: 30px;
+    position: relative;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.radio>label>svg {
+    fill: #666;
+    transition: fill 0.3s ease;
+}
+
+.radio>label::before,
+.radio>label::after {
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background-color: #ff9e0b;
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(0);
+    transition:
+        transform 0.4s ease,
+        opacity 0.4s ease;
+    animation: particle-explosion 1s ease-out;
+}
+
+.radio>label::before {
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+}
+
+.radio>label::after {
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+}
+
+.radio>label:hover::before,
+.radio>label:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.5);
+}
+
+.radio>label:hover {
+    transform: scale(1.2);
+    animation: pulse 0.6s infinite alternate;
+}
+
+.radio>label:hover>svg,
+.radio>label:hover~label>svg {
+    fill: #ff9e0b;
+    filter: drop-shadow(0 0 15px rgba(255, 158, 11, 0.9));
+    animation: shimmer 1s ease infinite alternate;
+}
+
+.radio>input:checked+label>svg,
+.radio>input:checked+label~label>svg {
+    fill: #ff9e0b;
+    filter: drop-shadow(0 0 15px rgba(255, 158, 11, 0.9));
+    animation: pulse 0.8s infinite alternate;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes particle-explosion {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        filter: drop-shadow(0 0 10px rgba(255, 158, 11, 0.5));
+    }
+
+    100% {
+        filter: drop-shadow(0 0 20px rgba(255, 158, 11, 1));
+    }
+}
+
+.radio>input:checked+label:hover>svg,
+.radio>input:checked+label:hover~label>svg {
+    fill: #e58e09;
+}
+
+.radio>label:hover>svg,
+.radio>label:hover~label>svg {
+    fill: #ff9e0b;
+}
+
+.radio input:checked~label svg {
+    fill: #ffa723;
+}
+
+/* 4. New Text Area */
+#feedback-text {
+    width: 100%;
+    box-sizing: border-box;
+    /* Important */
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+    font-family: var(--font-primary);
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    resize: none;
+    min-height: 80px;
+    margin-bottom: 1rem;
+}
+
+#feedback-text:focus {
+    outline: none;
+    border-color: var(--color-highlight);
+    box-shadow: 0 0 0 3px rgba(77, 169, 169, 0.2);
+}
+
+/* 5. New Submit Button */
 .btn-submit-feedback {
     width: 100%;
-    margin-top: 1rem;
-    padding: 0.7rem;
-    font-size: 0.95rem;
     background-color: var(--color-highlight);
     color: var(--color-text-light);
     border: 2px solid var(--color-highlight);
-    font-weight: 500;
+    padding: 0.8rem;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: var(--font-primary);
     border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .btn-submit-feedback:hover {
@@ -502,21 +701,61 @@ figcaption {
     border-color: var(--color-primary);
 }
 
+/* 6. Close Button (re-styled) */
 .btn-close-feedback {
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
-    background: none;
+    background: #f0f0f0;
     border: none;
-    font-size: 1.8rem;
-    color: #aaa;
+    border-radius: 50%;
+    font-size: 1.25rem;
+    color: #888;
     cursor: pointer;
     line-height: 1;
-    padding: 0.2rem;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn-close-feedback:hover {
+    background: #e0e0e0;
     color: var(--color-primary);
+}
+
+/* 7. "Thank You" Message (styles for when it's visible) */
+#feedback-thanks {
+    text-align: center;
+}
+
+#feedback-thanks h2 {
+    color: var(--color-highlight);
+    /* Make the "thanks" title teal */
+}
+
+.feedback-loading-text {
+    font-size: 0.9rem;
+    color: #888;
+    font-style: italic;
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+/* --- NEW: Modal Overlay Style --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
 }
 
 .replies-container {
@@ -586,6 +825,46 @@ figcaption {
 
 .view-replies-btn.open svg {
     transform: rotate(180deg);
+}
+
+/* --- NEW: Bookmark Button Styles --- */
+
+.btn-bookmark {
+    position: absolute;
+    top: 2.5rem;
+    right: 3rem;
+
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.btn-bookmark svg {
+    width: 24px;
+    height: 24px;
+    stroke: #777;
+    /* Default grey icon */
+    fill: none;
+    transition: all 0.2s ease;
+}
+
+.btn-bookmark:hover {
+    background-color: #f0f0f0;
+    /* Light grey hover */
+}
+
+/* This class will be toggled with JavaScript */
+.btn-bookmark.saved svg {
+    stroke: var(--color-highlight);
+    /* Teal color */
+    fill: var(--color-highlight);
+    /* Teal color */
 }
 
 /* == MOBILE RESPONSIVE for Blog Detail Page == */

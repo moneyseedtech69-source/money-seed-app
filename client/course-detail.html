@@ -7,68 +7,49 @@
     <title>Course: Facebook Clothing Page - Money Seed</title>
     <link rel="stylesheet" href="css/style-v2.css?v=9">
     <link rel="stylesheet" href="css/course-detail.css">
+    <link rel="stylesheet" href="css/home.css">
 </head>
 
-<body>
-    <!-- == HEADER (Logged-In Version - Copied from home.html) == -->
+<body class="course-detail-page">
     <header class="main-header">
         <div class="logo">
             <img src="images/money_seed_logo-v2.png" alt="Money Seed Logo" class="logo-icon">
             <h1> MONEY SEED</h1>
         </div>
-        <nav class="desktop-nav logged-in-nav">
-            <ul>
-                <li><button class="icon-btn notification-btn" aria-label="Notifications">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-bell">
-                            <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
-                            <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
-                        </svg> <!-- Bell Icon -->
-                    </button>
-                    <!-- Notification dropdown structure -->
-                    <div class="notification-dropdown" id="notification-panel" style="display: none;">
-                        <div class="dropdown-header">
-                            Notifications <span class="noti-count">(3)</span>
-                            <button class="close-noti" id="close-noti-btn"
-                                aria-label="Close notification">&times;</button>
-                        </div>
-                        <ul class="noti-list">
-                            <li>
-                                <img src="images/avatar-placeholder.png" alt="User avatar" class="noti-avatar">
-                                <p><strong>Cody Edwards</strong> commented on your latest story.</p>
-                            </li>
-                            <li>
-                                <img src="images/avatar-placeholder.png" alt="User avatar" class="noti-avatar">
-                                <p><strong>Jean Reeves</strong> loved your latest Photo you posted.</p>
-                            </li>
-                            <li>
-                                <img src="images/avatar-placeholder.png" alt="User avatar" class="noti-avatar">
-                                <p><strong>Tyler Warren</strong> loved your latest Story you posted.</p>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li><button class="icon-btn profile-btn" aria-label="Profile">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-circle-user-round">
-                            <path d="M18 20a6 6 0 0 0-12 0" />
-                            <circle cx="12" cy="10" r="4" />
-                            <circle cx="12" cy="12" r="10" />
-                        </svg> <!-- Profile Icon -->
-                    </button></li>
-                <li><button class="btn btn-logout">Log out</button></li>
-            </ul>
+
+        <nav class="desktop-nav logged-in-nav" style="margin-left: auto;">
+            <button type="button" class="noti-icon-btn" id="new-noti-btn" aria-label="Notifications">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" class="noti-svg" width="20" height="20">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0">
+                    </path>
+                </svg>
+                <div class="noti-dot">
+                    <div class="noti-dot-ping"></div>
+                </div>
+            </button>
+            <a href="profile.html" class="profile-icon-btn" aria-label="View Profile">
+                <svg viewBox="0 0 24 24" fill="currentColor" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12 2c2.757 0 5 2.243 5 5.001 0 2.756-2.243 5-5 5s-5-2.244-5-5c0-2.758 2.243-5.001 5-5.001zm0-2c-3.866 0-7 3.134-7 7.001 0 3.865 3.134 7 7 7s7-3.135 7-7c0-3.867-3.134-7.001-7-7.001zm6.369 13.353c-.497.498-1.057.931-1.658 1.302 2.872 1.874 4.378 5.083 4.972 7.346h-19.387c.572-2.29 2.058-5.503 4.973-7.358-.603-.374-1.162-.811-1.658-1.312-4.258 3.072-5.611 8.506-5.611 10.669h24c0-2.142-1.44-7.557-5.631-10.647z">
+                    </path>
+                </svg>
+            </a>
+            <button class="btn-3d-logout" id="new-logout-btn">
+                <span>Log out</span>
+            </button>
         </nav>
         <button class="menu-toggle" aria-label="Toggle Navigation">
-            <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
         </button>
         <nav class="mobile-nav">
             <ul>
-                <li><a href="#">Notifications</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Log out</a></li>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="index.html">Log out</a></li>
             </ul>
         </nav>
     </header>
@@ -152,15 +133,16 @@
 
                 <!-- Module Content Div (Initially showing Overview) -->
                 <div class="module-content" id="overview" style="display: block;">
-                    <h2>Course overview</h2>
-                    <hr class="content-divider">
 
-                    <h3>Welcome Message!</h3>
-                    <p class="welcome-text">🎉 Congratulations and Welcome! 🎉</p>
-                    <p>"By taking the first step, the journey to success begins."</p>
-                    <p class="burmese-text">“ပထမဆုံးခြေလှမ်းကိုလှမ်းခြင်းဖြင့် အောင်မြင်မှုခရီးစတင်ပါပြီ။”</p>
+                    <div class="overview-welcome-section">
+                        <hr class="content-divider">
+                        <h2>Welcome Message!</h2>
+                        <p class="welcome-text">🎉 Congratulations and Welcome! 🎉</p>
+                        <p>"By taking the first step, the journey to success begins."</p>
+                        <p class="burmese-text">“ပထမဆုံးခြေလှမ်းကိုလှမ်းခြင်းဖြင့် အောင်မြင်မှုခရီးစတင်ပါပြီ။”</p>
+                    </div>
 
-                    <h3>Course Overview</h3>
+                    <h2>Course Overview</h2>
                     <p class="burmese-text course-description">
                         ဒီ Course သည် Facebook Clothing Business စတင်လိုသူများအတွက် ရည်ရွယ်ပါသည်။
                         Money Seed မှနေ၍ စနစ်တကျ လေ့လာသင်ယူလိုသူ၊ အထူးသဖြင့် Grade 12 အောင်မြင်ပြီးသား (သို့) University
@@ -248,10 +230,26 @@
 
                 <!-- Congratulations Message (Hidden Initially) -->
                 <div class="congrats-message" id="congrats" style="display: none;">
+
+                    <div class="congrats-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-1.04 15.243l-4.2-4.2 1.414-1.414 2.786 2.786 6.364-6.364 1.414 1.414-7.778 7.778z" />
+                        </svg>
+                    </div>
+
                     <h2>🎉 Congratulations! 🎉</h2>
                     <p>You have successfully completed the "Start your Facebook Clothing Page" course!</p>
 
-                    <a href="course-blog.html" class="btn btn-primary-alt">Back to Home</a>
+                    <div class="congrats-buttons">
+                        <button type="button" class="btn-congrats btn-secondary" id="btn-restart-course">
+                            Back to the Start
+                        </button>
+                        <a href="course-blog.html" class="btn-congrats btn-primary">
+                            Back to Home
+                        </a>
+                    </div>
+
                 </div>
             </section>
         </div>
@@ -259,22 +257,123 @@
 
     <!-- == FOOTER (Copied from home.html) == -->
     <footer class="main-footer">
+
+        <div class="modal-overlay" id="notification-modal" style="display: none;">
+            <div class="noti-modal-container">
+
+                <div class="noti-modal-header">
+                    <h3>Notifications</h3>
+                    <button class="noti-modal-close-btn" id="noti-modal-close-btn"
+                        aria-label="Close notifications">&times;</button>
+                </div>
+
+                <ul class="noti-list-modal">
+                    <li>
+                        <img src="images/avatar-placeholder.png" alt="User avatar" class="noti-avatar">
+                        <div class="noti-content">
+                            <p class="noti-text"><strong>John Doe</strong> reacted to your post</p>
+                            <span class="noti-time">10 mins ago</span>
+                        </div>
+                        <img src="images/post-thumb-1.png" alt="Post thumbnail" class="noti-thumbnail">
+                    </li>
+                    <li>
+                        <img src="images/avatar-placeholder.png" alt="User avatar" class="noti-avatar">
+                        <div class="noti-content">
+                            <p class="noti-text"><strong>Richard Miles</strong> commented on your post</p>
+                            <span class="noti-time">1 day ago</span>
+                        </div>
+                        <img src="images/post-thumb-2.png" alt="Post thumbnail" class="noti-thumbnail">
+                    </li>
+                    <li>
+                        <img src="images/avatar-placeholder.png" alt="User avatar" class="noti-avatar">
+                        <div class="noti-content">
+                            <p class="noti-text"><strong>Brian Cumin</strong> liked your photo</p>
+                            <span class="noti-time">1 day ago</span>
+                        </div>
+                        <img src="images/post-thumb-3.png" alt="Post thumbnail" class="noti-thumbnail">
+                    </li>
+                </ul>
+
+                <div class="noti-modal-footer">
+                    <a href="#" class="btn-view-all">View All Notifications</a>
+                </div>
+
+            </div>
+        </div>
         <div class="footer-grid container">
-            <!-- Col 1: Contact -->
             <div class="footer-col">
                 <p>info@Moneyseed.com</p>
                 <p>123-456-7890</p>
             </div>
-            <!-- Col 2: Links -->
-            <div class="footer-col"> <a href="#">Home</a> <a href="#">About Us</a> <a href="#">Contact</a> </div>
-            <!-- Col 3: Links -->
-            <div class="footer-col"> <a href="#">Privacy Policy</a> <a href="#">Terms of Service</a> </div>
-            <!-- Col 4: Social Media -->
+            <div class="footer-col">
+                <a href="#">Home</a>
+                <a href="#">About Us</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-col">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
             <div class="footer-col social-media">
-                <a href="https://www.facebook.com" target="_blank" aria-label="Facebook"><svg>...</svg></a>
-                <a href="https://www.tiktok.com" target="_blank" aria-label="TikTok"><svg>...</svg></a>
-                <a href="https://www.viber.com" target="_blank" aria-label="Viber"><svg>...</svg></a>
-                <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn"><svg>...</svg></a>
+                <ul class="footer-social-icons">
+                    <li class="icon-content">
+                        <a href="https.www.facebook.com" target="_blank" aria-label="Facebook" data-social="facebook">
+                            <div class="filled"></div>
+                            <svg viewBox="0 0 16 16" xml:space="preserve" fill="currentColor">
+                                <path
+                                    d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z">
+                                </path>
+                            </svg>
+                        </a>
+                        <div class="tooltip">Facebook</div>
+                    </li>
+                    <li class="icon-content">
+                        <a href="https://www.tiktok.com" target="_blank" aria-label="TikTok" data-social="tiktok">
+                            <div class="filled"></div>
+                            <svg viewBox="0 0 24 24" xml:space="preserve" fill="currentColor">
+                                <path
+                                    d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-2.43.05-4.86-.95-6.69-2.81-1.75-1.76-2.92-4.04-2.92-6.36 0-2.52 1.25-4.94 3.38-6.46 1.34-1.01 2.94-1.52 4.54-1.56v4.03c-.41.01-.82.11-1.22.28-1.07.45-2.02 1.22-2.73 2.19-.71.97-1.11 2.16-1.11 3.39 0 1.29.39 2.52 1.14 3.52.81 1.07 1.92 1.74 3.16 1.74 1.24 0 2.35-.67 3.16-1.74.75-1 .93-2.22.93-3.46.01-2.73-.01-5.46-.01-8.19z">
+                                    </M12>
+                            </svg>
+                        </a>
+                        <div class="tooltip">TikTok</div>
+                    </li>
+                    <li class="icon-content">
+                        <a href="#" aria-label="Viber" data-social="viber">
+                            <div class="filled"></div>
+                            <svg viewBox="0 0 24 24" xml:space="preserve" fill="currentColor">
+                                <path
+                                    d="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z">
+                                </path>
+                            </svg>
+                        </a>
+                        <div class="tooltip">Viber</div>
+                    </li>
+                    <li class="icon-content">
+                        <a href="https://linkedin.com/" target="_blank" aria-label="LinkedIn" data-social="linkedin">
+                            <div class="filled"></div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-linkedin" viewBox="0 0 16 16" xml:space="preserve">
+                                <path
+                                    d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"
+                                    fill="currentColor"></path>
+                            </svg>
+                        </a>
+                        <div class="tooltip">LinkedIn</div>
+                    </li>
+                    <li class="icon-content">
+                        <a href="https://youtube.com/" target="_blank" aria-label="Youtube" data-social="youtube">
+                            <div class="filled"></div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-youtube" viewBox="0 0 16 16" xml:space="preserve">
+                                <path
+                                    d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"
+                                    fill="currentColor"></path>
+                            </svg>
+                        </a>
+                        <div class="tooltip">Youtube</div>
+                    </li>
+                </ul>
             </div>
         </div>
         <p class="copyright-text">© 2025 Money Seed. All rights reserved.</p>
@@ -282,6 +381,7 @@
 
     <script src="js/main.js"></script>
     <script src="js/course-detail.js"></script>
+    <script src="js/home.js"></script>
 
 </body>
 

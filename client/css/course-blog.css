@@ -1,9 +1,3 @@
-/*
- * course-blog.css (v5 - FINAL, ALIGNED)
- * - THE BUG IS FIXED: Removed line-height: 1.6 from .tab-group label
- * - ADDED line-height: 1 to both buttons for perfect alignment
-*/
-
 /* == Page Title Styling == */
 .courses-section.container {
     padding-top: 1.5rem;

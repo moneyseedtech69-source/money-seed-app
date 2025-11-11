@@ -7,74 +7,55 @@
     <title>Blog: How to use Canva - Money Seed</title>
     <link rel="stylesheet" href="css/style-v2.css">
     <link rel="stylesheet" href="css/blog-detail.css">
+    <link rel="stylesheet" href="css/home.css">
 </head>
 
 <body>
-    <!-- == HEADER (Logged-In Version - Copied from home.html) == -->
     <header class="main-header">
         <div class="logo">
             <img src="images/money_seed_logo-v2.png" alt="Money Seed Logo" class="logo-icon">
             <h1> MONEY SEED</h1>
         </div>
-        <nav class="desktop-nav logged-in-nav">
-            <ul>
-                <li><button class="icon-btn notification-btn" aria-label="Notifications">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-bell">
-                            <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
-                            <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
-                        </svg> <!-- Bell Icon -->
-                    </button>
-                    <!-- Notification dropdown structure -->
-                    <div class="notification-dropdown" id="notification-panel" style="display: none;">
-                        <div class="dropdown-header">
-                            Notifications <span class="noti-count">(3)</span>
-                            <button class="close-noti" id="close-noti-btn"
-                                aria-label="Close notification">&times;</button>
-                        </div>
-                        <ul class="noti-list">
-                            <li>
-                                <img src="images/avatar-placeholder.png" alt="User avatar" class="noti-avatar">
-                                <p><strong>Cody Edwards</strong> commented on your latest story.</p>
-                            </li>
-                            <li>
-                                <img src="images/avatar-placeholder.png" alt="User avatar" class="noti-avatar">
-                                <p><strong>Jean Reeves</strong> loved your latest Photo you posted.</p>
-                            </li>
-                            <li>
-                                <img src="images/avatar-placeholder.png" alt="User avatar" class="noti-avatar">
-                                <p><strong>Tyler Warren</strong> loved your latest Story you posted.</p>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li><button class="icon-btn profile-btn" aria-label="Profile">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-circle-user-round">
-                            <path d="M18 20a6 6 0 0 0-12 0" />
-                            <circle cx="12" cy="10" r="4" />
-                            <circle cx="12" cy="12" r="10" />
-                        </svg> <!-- Profile Icon -->
-                    </button></li>
-                <li><button class="btn btn-logout">Log out</button></li>
-            </ul>
+
+        <nav class="desktop-nav logged-in-nav" style="margin-left: auto;">
+            <button type="button" class="noti-icon-btn" id="new-noti-btn" aria-label="Notifications">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    stroke="currentColor" class="noti-svg" width="20" height="20">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0">
+                    </path>
+                </svg>
+                <div class="noti-dot">
+                    <div class="noti-dot-ping"></div>
+                </div>
+            </button>
+            <a href="profile.html" class="profile-icon-btn" aria-label="View Profile">
+                <svg viewBox="0 0 24 24" fill="currentColor" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12 2c2.757 0 5 2.243 5 5.001 0 2.756-2.243 5-5 5s-5-2.244-5-5c0-2.758 2.243-5.001 5-5.001zm0-2c-3.866 0-7 3.134-7 7.001 0 3.865 3.134 7 7 7s7-3.135 7-7c0-3.867-3.134-7.001-7-7.001zm6.369 13.353c-.497.498-1.057.931-1.658 1.302 2.872 1.874 4.378 5.083 4.972 7.346h-19.387c.572-2.29 2.058-5.503 4.973-7.358-.603-.374-1.162-.811-1.658-1.312-4.258 3.072-5.611 8.506-5.611 10.669h24c0-2.142-1.44-7.557-5.631-10.647z">
+                    </path>
+                </svg>
+            </a>
+            <button class="btn-3d-logout" id="new-logout-btn">
+                <span>Log out</span>
+            </button>
         </nav>
         <button class="menu-toggle" aria-label="Toggle Navigation">
-            <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
         </button>
         <nav class="mobile-nav">
             <ul>
-                <li><a href="#">Notifications</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Log out</a></li>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="index.html">Log out</a></li>
             </ul>
         </nav>
     </header>
 
     <!-- MAIN CONTENT -->
-    <main class="blog-container container">
+    <main class="blog-container">
         <div class="blog-layout">
             <!-- == Left Sidebar: Blog Navigation (Headings) == -->
             <aside class="blog-sidebar">
@@ -92,17 +73,21 @@
 
             <!-- == Right Content Area == -->
             <article class="blog-content-area">
-                <header class="blog-header">
-                    <div class="author-info">
-                        <img src="images/avatar-profile-1.png" alt="Author Avatar" class="author-avatar">
-                        <div>
-                            <span class="author-name">By Saw Nyan Htoo</span>
-                            <span class="publish-date">on January 1,2026</span>
-                        </div>
+                <div class="author-info">
+                    <img src="images/avatar-profile-1.png" alt="Author Avatar" class="author-avatar">
+                    <div>
+                        <span class="author-name">By Saw Nyan Htoo</span>
+                        <span class="publish-date" id="publish-date">on January 1,2026</span>
                     </div>
+                </div>
 
-                    <h1 class="blog-title">How to use Canva</h1>
-                </header>
+                <h1 class="blog-title">How to use Canva</h1>
+                <button class="btn-bookmark" id="bookmark-btn" aria-label="Save this post">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z" />
+                    </svg>
+                </button>
 
                 <!-- == Blog Content == -->
                 <section class="blog-body">
@@ -127,17 +112,21 @@
 
                 <!-- == Blog Actions (Like/Comment Buttons) == -->
                 <section class="blog-actions">
-                    <button class="btn-like" id="like-btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M7 10v12" />
-                            <path
-                                d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z" />
-                        </svg>
-                        Like
-                    </button>
-                    <span class="like-count" id="like-count">0 likes</span> <button class="btn-feedback"
-                        id="feedback-btn">Feedback</button>
+                    <div class="like-button" id="like-btn">
+                        <input class="on" id="heart" type="checkbox" />
+                        <label class="like" for="heart">
+                            <svg class="like-icon" fill-rule="nonzero" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z">
+                                </path>
+                            </svg>
+                            <span class="like-text">Likes</span>
+                        </label>
+                        <span class="like-count one" id="like-count">15</span>
+                        <span class="like-count two">16</span>
+                    </div>
+                    <button class="btn-feedback" id="feedback-btn">Feedback</button>
                 </section>
 
                 <!-- == Comment Section == -->
@@ -187,32 +176,72 @@
                     </ul>
                 </section>
 
-                <div class="feedback-popup" id="feedback-popup" style="display: none;">
-                    <h4>Your Feedback is Important to Us!</h4>
-                    <form id="feedback-form">
-                        <div class="feedback-option">
-                            <input type="radio" id="excellent" name="feedback" value="excellent">
-                            <label for="excellent">Excellent</label>
+                <div class="modal-overlay" id="feedback-modal-overlay" style="display: none;">
+
+                    <div class="feedback-popup" id="feedback-popup">
+                        <div id="feedback-form-content">
+                            <button type="button" class="btn-close-feedback" id="close-feedback-btn">&times;</button>
+                            <h2>Share your thoughts</h2>
+                            <p>Your feedback helps us improve this post!</p>
+                            <form id="feedback-form">
+                                <div class="radio">
+                                    <input id="rating-5" type="radio" name="rating" value="5" />
+                                    <label for="rating-5" title="5 stars">
+                                        <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z">
+                                            </path>
+                                        </svg>
+                                    </label>
+
+                                    <input id="rating-4" type="radio" name="rating" value="4" />
+                                    <label for="rating-4" title="4 stars">
+                                        <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z">
+                                            </path>
+                                        </svg>
+                                    </label>
+
+                                    <input id="rating-3" type="radio" name="rating" value="3" />
+                                    <label for="rating-3" title="3 stars">
+                                        <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z">
+                                            </path>
+                                        </svg>
+                                    </label>
+
+                                    <input id="rating-2" type="radio" name="rating" value="2" />
+                                    <label for="rating-2" title="2 stars">
+                                        <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z">
+                                            </path>
+                                        </svg>
+                                    </label>
+
+                                    <input id="rating-1" type="radio" name="rating" value="1" />
+                                    <label for="rating-1" title="1 star">
+                                        <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z">
+                                            </path>
+                                        </svg>
+                                    </label>
+                                </div>
+                                <textarea id="feedback-text" name="feedback-text"
+                                    placeholder="Tell us what you think..." rows="4" maxlength="300"></textarea>
+                                <button type-="submit" class="btn-submit-feedback">Send Feedback</button>
+                            </form>
                         </div>
-                        <div class="feedback-option">
-                            <input type="radio" id="verygood" name="feedback" value="verygood">
-                            <label for="verygood">Very Good</label>
+                        <div id="feedback-thanks" style="display: none;">
+                            <h2>Thanks for your feedback!</h2>
+                            <p>We appreciate you taking the time to help us improve.</p>
+
+                            <p class="feedback-loading-text">Going back to Blog...</p>
                         </div>
-                        <div class="feedback-option">
-                            <input type="radio" id="good" name="feedback" value="good">
-                            <label for="good">Good</label>
-                        </div>
-                        <div class="feedback-option">
-                            <input type="radio" id="fair" name="feedback" value="fair">
-                            <label for="fair">Fair</label>
-                        </div>
-                        <div class="feedback-option">
-                            <input type="radio" id="poor" name="feedback" value="poor">
-                            <label for="poor">Poor</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary-alt btn-submit-feedback">Submit</button>
-                        <button type="button" class="btn-close-feedback" id="close-feedback-btn">&times;</button>
-                    </form>
+                    </div>
                 </div>
             </article>
         </div>
@@ -220,6 +249,49 @@
 
     <!-- == FOOTER (Copied from home.html) == -->
     <footer class="main-footer">
+
+        <div class="modal-overlay" id="notification-modal" style="display: none;">
+            <div class="noti-modal-container">
+
+                <div class="noti-modal-header">
+                    <h3>Notifications</h3>
+                    <button class="noti-modal-close-btn" id="noti-modal-close-btn"
+                        aria-label="Close notifications">&times;</button>
+                </div>
+
+                <ul class="noti-list-modal">
+                    <li>
+                        <img src="images/avatar-placeholder.png" alt="User avatar" class="noti-avatar">
+                        <div class="noti-content">
+                            <p class="noti-text"><strong>John Doe</strong> reacted to your post</p>
+                            <span class="noti-time">10 mins ago</span>
+                        </div>
+                        <img src="images/post-thumb-1.png" alt="Post thumbnail" class="noti-thumbnail">
+                    </li>
+                    <li>
+                        <img src="images/avatar-placeholder.png" alt="User avatar" class="noti-avatar">
+                        <div class="noti-content">
+                            <p class="noti-text"><strong>Richard Miles</strong> commented on your post</p>
+                            <span class="noti-time">1 day ago</span>
+                        </div>
+                        <img src="images/post-thumb-2.png" alt="Post thumbnail" class="noti-thumbnail">
+                    </li>
+                    <li>
+                        <img src="images/avatar-placeholder.png" alt="User avatar" class="noti-avatar">
+                        <div class="noti-content">
+                            <p class="noti-text"><strong>Brian Cumin</strong> liked your photo</p>
+                            <span class="noti-time">1 day ago</span>
+                        </div>
+                        <img src="images/post-thumb-3.png" alt="Post thumbnail" class="noti-thumbnail">
+                    </li>
+                </ul>
+
+                <div class="noti-modal-footer">
+                    <a href="#" class="btn-view-all">View All Notifications</a>
+                </div>
+
+            </div>
+        </div>
         <div class="footer-grid container">
             <div class="footer-col">
                 <p>info@Moneyseed.com</p>
@@ -235,26 +307,65 @@
                 <a href="#">Terms of Service</a>
             </div>
             <div class="footer-col social-media">
-                <a href="https://www.facebook.com" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"
-                        fill="currentColor" width="24" height="24">
-                        <path
-                            d="M22.675 0h-21.35C.589 0 0 .589 0 1.325v21.351C0 23.411.589 24 1.325 24H12.82V14.706H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.736 0 1.325-.589 1.325-1.325V1.325C24 .589 23.411 0 22.675 0z" />
-                    </svg></a>
-                <a href="https://www.tiktok.com" target="_blank" aria-label="TikTok"><svg viewBox="0 0 24 24"
-                        fill="currentColor" width="24" height="24">
-                        <path
-                            d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-2.43.05-4.86-.95-6.69-2.81-1.75-1.76-2.92-4.04-2.92-6.36 0-2.52 1.25-4.94 3.38-6.46 1.34-1.01 2.94-1.52 4.54-1.56v4.03c-.41.01-.82.11-1.22. ২৮-1.07.45-2.02 1.22-2.73 2.19-.71.97-1.11 2.16-1.11 3.39 0 1.29.39 2.52 1.14 3.52.81 1.07 1.92 1.74 3.16 1.74 1.24 0 2.35-.67 3.16-1.74.75-1 .93-2.22.93-3.46.01-2.73-.01-5.46-.01-8.19z" />
-                    </svg></a>
-                <a href="https://www.viber.com" target="_blank" aria-label="Viber"><svg class="viber-icon"
-                        viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-                        <path
-                            d="M19.01 20.35c-1.5 0-2.65-.45-3.8-1.05l-.16-.09c-1.4-1.1-2.45-2.6-2.9-4.35-.16-.6-.16-1.2-.16-1.8 0-1.1.22-2.1.6-3.05.54-1.4 1.4-2.6 2.5-3.5C16.31 5.6 17.61 5 19.01 5c.08 0 .15 0 .23.01.07.01.14.02.2.03 1.3.15 2.5.7 3.5 1.7 1 1 1.6 2.2 1.7 3.5.01.06.02.13.03.2.01.08.01.15.01.23 0 1.4-.6 2.7-1.4 3.8-1.1 1.3-2.6 2.3-4.3 2.8-.6.1-1.2.1-1.8.1zm-1.1-13.8c-.8.1-1.5.3-2.2.8-.8.6-1.4 1.4-1.8 2.4-.3.7-.5 1.5-.5 2.3 0 .5.08 1 .15 1.5.3 1.2 1 2.3 1.9 3.1.5.5 1 .9 1.6 1.2.6.2 1.3.4 2 .4.5 0 1-.08 1.5-.15 1.2-.3 2.3-1 3.1-1.9.8-1.2 1.2-2.5 1.1-3.9-.1-.8-.3-1.5-.8-2.2-.6-.8-1.4-1.4-2.4-1.8-.7-.3-1.5-.5-2.3-.5a3.1 3.1 0 0 0-.3-.02c-.08 0-.15-.01-.2-.01zM8.31 16.55c-.5.6-.9 1.3-1.2 2-.2.5-.3.9-.3 1.4 0 .3.04.6.1.9.1.5.2 1 .4 1.4.3.4.6.8.9 1.1.5.6 1.2 1.1 1.9 1.4.3.2.7.3 1 .4.2.03.4.06.6.08.1.01.2.02.3.02.4 0 .7-.04.9-.1.5-.1.9-.3 1.4-.5.8-.4 1.5-.9 2.1-1.5.2-.2.4-.4.5-.6l-.1-.08c-1.4-.9-2.6-2.1-3.5-3.5-.7-1.1-1.1-2.4-1.2-3.8-.02-.2-.04-.4-.05-.6 0-.1-.01-.2-.01-.3 0-.4.04-.7.1-.9.1-.5.3-.9.5-1.4.4-.8.9-1.5 1.5-2.1.2-.2.4-.4.6-.5l-.08-.1c-.9-1.4-2.1-2.6-3.5-3.5-1.1-.7-2.4-1.1-3.8-1.2C8.71 0 8.51 0 8.31 0c-.4 0-.7.04-.9.1-.5.1-.9.3-1.4.5-.8.4-1.5.9-2.1 1.5-.6.6-1.1 1.3-1.5 2.1C2 4.7 1.8 5.2 1.7 5.7c-.1.3-.2.7-.2 1 0 .2.01.4.02.6.01.1.02.2.02.3.05 1.7.6 3.4 1.5 4.9.7 1.1 1.7 2.1 2.8 2.8.3.2.7.4 1 .5.2.03.4.06.6.08.1.01.2.02.3.02.4 0 .7-.04.9-.1.5-.1.9-.3 1.4-.5.8-.4 1.5-.9 2.1-1.5.2-.2.4-.4.5-.6l-.1-.05z" />
-                    </svg></a>
-                <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn"><svg viewBox="0 0 24 24"
-                        fill="currentColor" width="24" height="24">
-                        <path
-                            d="M20.5 0h-17A3.5 3.5 0 000 3.5v17A3.5 3.5 0 003.5 24h17a3.5 3.5 0 003.5-3.5v-17A3.5 3.5 0 0020.5 0zM8 19H5V8h3zM6.5 6.732a1.732 1.732 0 110-3.464 1.732 1.732 0 010 3.464zM20 19h-3v-5.6c0-1.33-.027-3.037-1.85-3.037-1.853 0-2.136 1.445-2.136 2.94V19h-3V8h2.88v1.32h.04c.4-.76 1.37-1.55 2.84-1.55 3.04 0 3.6 2.002 3.6 4.6v5.31h-.01z" />
-                    </svg></a>
+                <ul class="footer-social-icons">
+                    <li class="icon-content">
+                        <a href="https.www.facebook.com" target="_blank" aria-label="Facebook" data-social="facebook">
+                            <div class="filled"></div>
+                            <svg viewBox="0 0 16 16" xml:space="preserve" fill="currentColor">
+                                <path
+                                    d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z">
+                                </path>
+                            </svg>
+                        </a>
+                        <div class="tooltip">Facebook</div>
+                    </li>
+                    <li class="icon-content">
+                        <a href="https://www.tiktok.com" target="_blank" aria-label="TikTok" data-social="tiktok">
+                            <div class="filled"></div>
+                            <svg viewBox="0 0 24 24" xml:space="preserve" fill="currentColor">
+                                <path
+                                    d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-2.43.05-4.86-.95-6.69-2.81-1.75-1.76-2.92-4.04-2.92-6.36 0-2.52 1.25-4.94 3.38-6.46 1.34-1.01 2.94-1.52 4.54-1.56v4.03c-.41.01-.82.11-1.22.28-1.07.45-2.02 1.22-2.73 2.19-.71.97-1.11 2.16-1.11 3.39 0 1.29.39 2.52 1.14 3.52.81 1.07 1.92 1.74 3.16 1.74 1.24 0 2.35-.67 3.16-1.74.75-1 .93-2.22.93-3.46.01-2.73-.01-5.46-.01-8.19z">
+                                    </M12>
+                            </svg>
+                        </a>
+                        <div class="tooltip">TikTok</div>
+                    </li>
+                    <li class="icon-content">
+                        <a href="#" aria-label="Viber" data-social="viber">
+                            <div class="filled"></div>
+                            <svg viewBox="0 0 24 24" xml:space="preserve" fill="currentColor">
+                                <path
+                                    d="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z">
+                                </path>
+                            </svg>
+                        </a>
+                        <div class="tooltip">Viber</div>
+                    </li>
+                    <li class="icon-content">
+                        <a href="https://linkedin.com/" target="_blank" aria-label="LinkedIn" data-social="linkedin">
+                            <div class="filled"></div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-linkedin" viewBox="0 0 16 16" xml:space="preserve">
+                                <path
+                                    d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"
+                                    fill="currentColor"></path>
+                            </svg>
+                        </a>
+                        <div class="tooltip">LinkedIn</div>
+                    </li>
+                    <li class="icon-content">
+                        <a href="https://youtube.com/" target="_blank" aria-label="Youtube" data-social="youtube">
+                            <div class="filled"></div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-youtube" viewBox="0 0 16 16" xml:space="preserve">
+                                <path
+                                    d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"
+                                    fill="currentColor"></path>
+                            </svg>
+                        </a>
+                        <div class="tooltip">Youtube</div>
+                    </li>
+                </ul>
             </div>
         </div>
         <p class="copyright-text">© 2025 Money Seed. All rights reserved.</p>
@@ -262,6 +373,7 @@
 
     <script src="js/main.js"></script>
     <script src="js/blog-detail.js"></script>
+    <script src="js/home.js"></script>
 
 </body>
 

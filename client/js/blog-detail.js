@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- 1. GET ELEMENTS ---
-    const likeButton = document.getElementById('like-btn');
-    const likeCountSpan = document.getElementById('like-count');
+    const bookmarkButton = document.getElementById('bookmark-btn');
     const feedbackButton = document.getElementById('feedback-btn');
     const feedbackPopup = document.getElementById('feedback-popup');
     const closeFeedbackButton = document.getElementById('close-feedback-btn');
     const feedbackForm = document.getElementById('feedback-form');
+    const feedbackModalOverlay = document.getElementById('feedback-modal-overlay');
     const newCommentTextarea = document.querySelector('.new-comment textarea');
     const postCommentButton = document.querySelector('.new-comment button');
     const commentList = document.querySelector('.comment-list');
@@ -14,50 +14,52 @@ document.addEventListener('DOMContentLoaded', () => {
     const blogHeadings = document.querySelectorAll('.blog-body h3'); // Assuming h3 are section starts
 
     // Basic checks
-    if (!likeButton || !likeCountSpan || !feedbackButton || !feedbackPopup || !closeFeedbackButton || !feedbackForm || !newCommentTextarea || !postCommentButton || !commentList) {
+    if (!feedbackButton || !feedbackPopup || !closeFeedbackButton || !feedbackForm || !newCommentTextarea || !postCommentButton || !commentList) {
         console.error("Blog detail script could not find all required elements!");
         return;
     }
 
     // --- 2. LIKE BUTTON FUNCTIONALITY ---
-    let likeCount = 15; // Starting count from your HTML example
-    let liked = false; // Track if user has liked
-
-    likeCountSpan.textContent = `${likeCount} Likes`; // Initial display
-
-    likeButton.addEventListener('click', () => {
-        if (!liked) {
-            likeCount++;
-            likeButton.classList.add('active'); // Add active style (optional)
-            liked = true;
-        } else {
-            likeCount--;
-            likeButton.classList.remove('active'); // Remove active style
-            liked = false;
-        }
-        likeCountSpan.textContent = `${likeCount} Likes`; // Update display
-    });
 
     // --- 3. FEEDBACK POPUP FUNCTIONALITY ---
     feedbackButton.addEventListener('click', () => {
-        feedbackPopup.style.display = 'block'; // Show popup
+        feedbackModalOverlay.style.display = 'flex';
     });
 
     closeFeedbackButton.addEventListener('click', () => {
-        feedbackPopup.style.display = 'none'; // Hide popup
+        feedbackModalOverlay.style.display = 'none';
     });
 
     feedbackForm.addEventListener('submit', (event) => {
-        event.preventDefault(); // Stop form submission
-        const selectedFeedback = feedbackForm.querySelector('input[name="feedback"]:checked');
-        if (selectedFeedback) {
-            console.log("Feedback submitted:", selectedFeedback.value); // Log selected value
-            // In a real app, you'd send this to the server
-        } else {
-            console.log("No feedback selected.");
-        }
-        feedbackPopup.style.display = 'none'; // Hide popup after submission
-        feedbackForm.reset(); // Clear selection
+        event.preventDefault();
+
+        // 1. Get the new values
+        const selectedRating = feedbackForm.querySelector('input[name="rating"]:checked');
+        const feedbackText = document.getElementById('feedback-text').value;
+
+        // 2. Log them (you can send to a server later)
+        console.log("Feedback submitted:");
+        console.log("Rating:", selectedRating ? selectedRating.value : "No rating");
+        console.log("Text:", feedbackText);
+
+        // 3. Show the "Thank You" message
+        document.getElementById('feedback-form-content').style.display = 'none';
+        document.getElementById('feedback-thanks').style.display = 'block';
+
+        // 4. Reset the form for next time
+        feedbackForm.reset();
+        document.getElementById('feedback-text').value = '';
+
+        // 5. Automatically close the popup after 3 seconds
+        setTimeout(() => {
+            // --- THIS IS THE FIXED LINE ---
+            feedbackModalOverlay.style.display = 'none'; // <-- Hide the OVERLAY, not the popup
+            // --- END OF FIX ---
+
+            // Reset to show the form again, not the thanks message
+            document.getElementById('feedback-form-content').style.display = 'block';
+            document.getElementById('feedback-thanks').style.display = 'none';
+        }, 3000);
     });
 
     // --- 4. ADD NEW COMMENT FUNCTIONALITY ---
@@ -309,5 +311,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // --- 8. BOOKMARK BUTTON FUNCTIONALITY ---
+    if (bookmarkButton) {
+        bookmarkButton.addEventListener('click', () => {
+            bookmarkButton.classList.toggle('saved');
+
+            if (bookmarkButton.classList.contains('saved')) {
+                console.log('Blog post saved to bookmarks');
+            } else {
+                console.log('Blog post removed from bookmarks');
+            }
+        });
+    }
 
 }); 
