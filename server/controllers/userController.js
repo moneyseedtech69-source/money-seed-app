@@ -4,19 +4,25 @@ const User = require('../models/UserModel');
 // @route   POST /api/users/create
 // @access  Private/Admin
 exports.createUserByAdmin = async (req, res) => {
-    const { username, email, password, role, department } = req.body;
+    // Get the admin who is making the request
+    const requestingAdmin = req.user;
 
-    // --- NEW PERMISSION CHECK ---
-    // 'req.user' is the admin making the request (from the token)
-    // 'role' is the role they are TRYING to create
+    // Get the details for the new user
+    let { username, email, password, role, department } = req.body;
 
-    if (role === 'Admin' && req.user.department !== 'Tech') {
-        // If a non-Tech-Admin tries to create an Admin, block them.
-        return res.status(403).json({
-            message: 'Access Denied: Only Tech Admins can create new Admin accounts.'
-        });
+    // --- PERMISSION CHECK ---
+    if (requestingAdmin.title !== 'Technical Co-Founder') {
+        // If you are a Standard Admin...
+
+        // 1. You cannot create other Admins
+        if (role === 'Admin') {
+            return res.status(403).json({ message: 'Only the Technical Co-Founder can create new Admin accounts.' });
+        }
+
+        // 2. You can only create users in your own department
+        department = requestingAdmin.department; // Force department
     }
-    // --- END NEW CHECK ---
+    // If you ARE the Technical Co-Founder, these checks are skipped.
 
     try {
         const userExists = await User.findOne({ email });
@@ -24,6 +30,7 @@ exports.createUserByAdmin = async (req, res) => {
             return res.status(400).json({ message: 'User already exists' });
         }
 
+        // Create the user with the (potentially) modified department
         const user = await User.create({
             username,
             email,
@@ -39,6 +46,8 @@ exports.createUserByAdmin = async (req, res) => {
                 email: user.email,
                 role: user.role,
                 department: user.department,
+                title: user.title,
+                profilePictureUrl: user.profilePictureUrl
             });
         } else {
             res.status(400).json({ message: 'Invalid user data' });
@@ -87,63 +96,75 @@ exports.updateUserProfile = async (req, res) => {
 exports.getAllUsers = async (req, res) => {
     try {
         let users;
+        const groupedUsers = {}; // Start with an empty object, e.g., { Tech: [], Content: [] }
 
         // 'req.user' is the admin making the request (from the token)
-        if (req.user.department === 'Tech') {
-            // === TECH ADMIN (YOU) ===
-            // You are 'Tech', so you get to see everyone.
+        if (req.user.title === 'Technical Co-Founder') {
+            // === You are Super Admin ===
+            // You get to see everyone.
             users = await User.find({}).select('-password');
 
+            // Group all users by their department
+            users.forEach(user => {
+                const dept = user.department;
+                if (!groupedUsers[dept]) {
+                    groupedUsers[dept] = []; // Create the array if it doesn't exist
+                }
+                groupedUsers[dept].push(user);
+            });
+
         } else {
-            // === OTHER ADMINS (Ares, MK) ===
-            // They are not 'Tech', so they ONLY see Members in their own department.
+            // === You are a Standard Admin ===
+            // You ONLY see Members in your own department.
             users = await User.find({
-                department: req.user.department, // 1. Must be in their department
-                role: 'Member'                   // 2. Must have the role 'Member'
+                department: req.user.department,
+                role: 'Member'
             }).select('-password');
+
+            // Only add their *own* department to the object
+            groupedUsers[req.user.department] = users;
         }
 
-        res.json(users);
+        res.json(groupedUsers); // Send the grouped object
 
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
     }
 };
 
+// @desc    Delete a user (by an Admin)
+// @route   DELETE /api/users/:id
+// @access  Private/Admin
 exports.deleteUser = async (req, res) => {
     try {
-        // Find the user to be deleted
         const targetUser = await User.findById(req.params.id);
 
         if (!targetUser) {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        if (targetUser.title === 'CEO') {
-            return res.status(403).json({
-                message: 'Action Forbidden: The CEO account cannot be deleted.'
-            });
+        // --- BULLETPROOF CHECK ---
+        if (targetUser.title === 'Technical Co-Founder') {
+            return res.status(403).json({ message: 'Action Forbidden: The Technical Co-Founder account cannot be deleted.' });
         }
 
         // --- PERMISSION CHECK ---
-        const adminUser = req.user; // This is the admin making the request
+        const requestingAdmin = req.user;
+        if (requestingAdmin.title !== 'Technical Co-Founder') {
+            // If you are a Standard Admin...
 
-        if (adminUser.department !== 'Tech') {
-            // If the admin is NOT Tech (e.g., Content Admin)
-
+            // 1. You cannot delete other Admins
             if (targetUser.role === 'Admin') {
-                // 1. Block attempt to delete ANY Admin
-                return res.status(403).json({ message: 'You cannot delete Admin accounts.' });
+                return res.status(403).json({ message: 'You are not authorized to delete other Admins.' });
             }
-            if (targetUser.department !== adminUser.department) {
-                // 2. Block attempt to delete a Member from another department
-                return res.status(403).json({ message: 'You can only delete members of your own department.' });
+
+            // 2. You cannot delete users from other departments
+            if (targetUser.department !== requestingAdmin.department) {
+                return res.status(403).json({ message: 'You can only delete members in your own department.' });
             }
         }
 
-        // --- Tech Admin (You) OR a permitted Admin ---
-        // If we get here, the deletion is allowed.
-
+        // If you pass all checks (or are the Tech Co-Founder), you can delete.
         await User.findByIdAndDelete(req.params.id);
         res.json({ message: 'User removed successfully.' });
 

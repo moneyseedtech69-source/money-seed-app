@@ -22,7 +22,8 @@ const corsOptions = {
     origin: [
         /\.netlify\.app$/,  // Trusts all Netlify subdomains
         /\.vercel\.app$/,   // <-- THE FIX: Trusts all Vercel subdomains
-        'http://localhost:3000' // Trusts your local machine
+        'http://localhost:3000',
+        'http://127.0.0.1:5500'
     ]
 };
 app.use(cors(corsOptions));

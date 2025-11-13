@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = document.getElementById('password-input').value;
 
         try {
-            const response = await fetch('https://money-seed-project-api-123.onrender.com/api/auth/login', {
+            const response = await fetch('http://localhost:5000/api/auth/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username: username, password: password })
@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Go to Admin Dashboard
                     localStorage.setItem('userToken', data.token);
                     localStorage.setItem('userDepartment', data.department);
+                    localStorage.setItem('userTitle', data.title);
                     window.location.href = 'admin-dashboard.html';
                 } else if (data.role === 'Member') {
                     // It's my team! Go to Member Dashboard

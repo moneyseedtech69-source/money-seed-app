@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User Management</title>
+
+    <script>
+        const token = localStorage.getItem('userToken');
+        if (!token) {
+            window.location.href = 'internal-login.html';
+        }
+    </script>
+
+    <link rel="stylesheet" href="css/admin-area.css">
+    <style>
+        /* Add some space between the tables */
+        .department-table {
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="logout-button" style="float: right;">Logout</button>
+
+    <h2>User Management</h2>
+
+    <a href="create-member.html" id="create-member-link" style="display: none;">Create New Team Member</a>
+    <br>
+    <a href="admin-dashboard.html" style="margin-top: 10px; display: inline-block;">&larr; Back to Dashboard</a>
+
+    <hr>
+
+    <div id="user-management-container">
+        <p>Loading user tables...</p>
+    </div>
+
+    <script src="js/user-management-script.js"></script>
+</body>
+
+</html>

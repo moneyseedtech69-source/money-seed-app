@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 2. LIKE BUTTON FUNCTIONALITY ---
 
+
     // --- 3. FEEDBACK POPUP FUNCTIONALITY ---
     feedbackButton.addEventListener('click', () => {
         feedbackModalOverlay.style.display = 'flex';
@@ -121,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         replyTextarea.rows = 2;
         const postReplyBtn = document.createElement('button');
         postReplyBtn.classList.add('btn', 'btn-primary-alt', 'btn-post-reply');
-        postReplyBtn.textContent = 'Post Reply';
+        postReplyBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>';
         replyAreaDiv.appendChild(replyTextarea);
         replyAreaDiv.appendChild(postReplyBtn);
 
@@ -324,5 +325,60 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // --- 9. "SEE MORE" COMMENTS FUNCTIONALITY ---
+    const seeMoreButton = document.getElementById('see-more-comments');
+    const commentsPerLoad = 4; // How many comments to show at a time
+
+    function updateSeeMoreButton() {
+        // Find all hidden comments
+        const hiddenComments = commentList.querySelectorAll('.comment-item:not(.is-visible)');
+
+        if (hiddenComments.length > 0) {
+            seeMoreButton.style.display = 'block'; // Show the button
+        } else {
+            seeMoreButton.style.display = 'none'; // Hide the button
+        }
+    }
+
+    function showNextComments() {
+        // Find all comments that are currently hidden
+        const hiddenComments = commentList.querySelectorAll('.comment-item:not(.is-visible)');
+
+        // Loop through the *next 4* (or fewer)
+        for (let i = 0; i < commentsPerLoad && i < hiddenComments.length; i++) {
+            hiddenComments[i].classList.add('is-visible'); // Add our "visible" class
+            hiddenComments[i].style.display = 'flex'; // Force it to show
+        }
+
+        // Check again if the button should still be visible
+        updateSeeMoreButton();
+    }
+
+    // --- On Page Load ---
+    // 1. Get ALL comments
+    const allComments = commentList.querySelectorAll('.comment-item');
+
+    // 2. Show the first 4 immediately
+    for (let i = 0; i < commentsPerLoad && i < allComments.length; i++) {
+        allComments[i].classList.add('is-visible');
+        allComments[i].style.display = 'flex'; // Force them to show (overrides the CSS)
+    }
+
+    // 3. Check if the "See More" button is needed
+    updateSeeMoreButton();
+
+    // 4. Add the click event
+    if (seeMoreButton) {
+        seeMoreButton.addEventListener('click', showNextComments);
+    }
+
+    // --- Fix for New Comments ---
+    // Make sure new comments are also counted
+    postCommentButton.addEventListener('click', () => {
+        // After posting a comment (from your existing code)
+        // We need to re-check the button
+        updateSeeMoreButton();
+    });
 
 }); 

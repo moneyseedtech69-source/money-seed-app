@@ -11,7 +11,7 @@
             window.location.href = 'internal-login.html';
         }
     </script>
-    <link rel="stylesheet" href="css/internal-style.css">
+    <link rel="stylesheet" href="css/admin-area.css">
 </head>
 
 <body>
@@ -44,6 +44,7 @@
                 <select id="department-select" required>
                     <option value="Content">Content</option>
                     <option value="Tech">Tech</option>
+                    <option value="Finance">Finance</option>
                 </select>
             </div>
 
@@ -61,6 +62,12 @@
             if (adminOption) {
                 adminOption.remove(); // Remove the "Admin" option from the dropdown
             }
+        }
+
+        const userTitle = localStorage.getItem('userTitle');
+        if (userTitle !== 'Technical Co-Founder') {
+            // If you are NOT the Super Admin, hide the department dropdown
+            document.getElementById('department-select-group').style.display = 'none';
         }
     </script>
 

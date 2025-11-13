@@ -72,6 +72,7 @@ exports.loginUser = async (req, res) => {
                 role: user.role,
                 profilePictureUrl: user.profilePictureUrl,
                 department: user.department,
+                title: user.title,
                 token: generateToken(user._id),
             });
         } else {
