@@ -7,6 +7,9 @@
     <title>Admin Dashboard - Money Seed</title>
     <link rel="stylesheet" href="css/admin-area.css">
 
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
     <script>
         const token = localStorage.getItem('userToken');
         if (!token) {
@@ -27,10 +30,8 @@
             <ul>
                 <li class="nav-item active">
                     <a href="admin-dashboard.html">
-                        <svg class="nav-icon" viewBox="0 0 24 24">
-                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                        </svg>
+                        <span class="material-symbols-outlined nav-icon"> dashboard
+                        </span>
                         <span>DashBoard</span>
                     </a>
                 </li>
@@ -38,57 +39,49 @@
                 <li class="nav-category">
                     Management
                 </li>
+
                 <li class="nav-item">
-                    <a href="#">
-                        <svg class="nav-icon" viewBox="0 0 24 24">
-                            <path
-                                d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h4v18Z">
-                            </path>
-                            <path d="M15 2v5l-3-1.5L9 7V2"></path>
-                        </svg>
+                    <a href="admin-blog.html">
+                        <span class="material-symbols-outlined nav-icon">
+                            post
+                        </span>
                         <span>Blog</span>
                     </a>
                 </li>
+
                 <li class="nav-item">
-                    <a href="#">
-                        <svg class="nav-icon" viewBox="0 0 24 24">
-                            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
-                        </svg>
+                    <a href="admin-course.html">
+                        <span class="material-symbols-outlined nav-icon">
+                            book
+                        </span>
                         <span>Course</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#">
-                        <svg class="nav-icon" viewBox="0 0 24 24">
-                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-                        </svg>
-                        <span>Business Guideline</span>
+                    <a href="admin-site-setting.html">
+                        <span class="material-symbols-outlined nav-icon">
+                            inbox_customize
+                        </span>
+                        <span>Site Setting</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#">
-                        <svg class="nav-icon" viewBox="0 0 24 24">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="9" cy="7" r="4"></circle>
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                        </svg>
+                    <a href="main-user-management.html">
+                        <span class="material-symbols-outlined nav-icon">
+                            manage_accounts
+                        </span>
                         <span>User Management</span>
                     </a>
                 </li>
 
                 <li class="nav-category">
-                    Connection
+                    Database
                 </li>
                 <li class="nav-item">
-                    <a href="#">
-                        <svg class="nav-icon" viewBox="0 0 24 24">
-                            <path d="M3 3v18h18"></path>
-                            <path d="M18.7 8a6 6 0 0 0-9.8 0"></path>
-                            <path d="M14.3 12.4a3 3 0 0 0-4.6 0"></path>
-                            <path d="M12 17a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1a1 1 0 0 0-1-1z"></path>
-                        </svg>
+                    <a href="admin-analytics.html">
+                        <span class="material-symbols-outlined nav-icon">
+                            bar_chart_4_bars
+                        </span>
                         <span>Analytics</span>
                     </a>
                 </li>
@@ -108,13 +101,10 @@
                     System
                 </li>
                 <li class="nav-item">
-                    <a href="#">
-                        <svg class="nav-icon" viewBox="0 0 24 24">
-                            <path
-                                d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.08a2 2 0 0 1 0 2l-.15.08a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.38a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1 0-2l.15-.08a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z">
-                            </path>
-                            <circle cx="12" cy="12" r="3"></circle>
-                        </svg>
+                    <a href="system-setting.html">
+                        <span class="material-symbols-outlined nav-icon">
+                            settings_heart
+                        </span>
                         <span>Setting</span>
                     </a>
                 </li>
@@ -137,14 +127,19 @@
         <header class="admin-header">
             <div class="header-date" id="header-date"></div>
             <div class="header-actions">
-                <button class="header-icon-btn">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                        <polyline points="22 6 -12 13 2 6"></polyline>
-                    </svg>
+
+                <div class="header-message-wrapper">
+                    <button class="Btn-messages">
+                        <svg class="svgIcon" viewBox="0 0 512 512" height="1.2em">
+                            <path
+                                d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z">
+                            </path>
+                        </svg>
+                        Messages
+                    </button>
                     <span class="notification-dot"></span>
-                </button>
-                <a href="#" class="btn-header-profile">Profile</a>
+                </div>
+                <a href="#" class="btn-header-profile">PROFILE</a>
             </div>
         </header>
 
@@ -152,57 +147,51 @@
 
             <section class="stat-boxes">
                 <div class="stat-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
-                            </svg>
-                        </div>
-                        <div class="card-graph" style="--percent: 30;">
-                            <span class="graph-text">30%</span>
-                        </div>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+                        </svg>
                     </div>
-                    <div class="card-body">
-                        <p>Total Courses</p>
-                        <h3>12</h3>
+                    <div class="card-content">
+                        <span class="card-title">Total Courses</span>
+                        <span class="card-value">12</span>
+                    </div>
+                    <div class="progress-circle" data-value="15">
+                        <span class="progress-value">0%</span>
                     </div>
                 </div>
                 <div class="stat-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h4v18Z">
-                                </path>
-                                <path d="M15 2v5l-3-1.5L9 7V2"></path>
-                            </svg>
-                        </div>
-                        <div class="card-graph" style="--percent: 65;">
-                            <span class="graph-text">65%</span>
-                        </div>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h4v18Z">
+                            </path>
+                            <path d="M15 2v5l-3-1.5L9 7V2"></path>
+                        </svg>
                     </div>
-                    <div class="card-body">
-                        <p>Total Blogs</p>
-                        <h3>45</h3>
+                    <div class="card-content">
+                        <span class="card-title">Total Blogs</span>
+                        <span class="card-value">45</span>
+                    </div>
+                    <div class="progress-circle" data-value="65">
+                        <span class="progress-value">0%</span>
                     </div>
                 </div>
                 <div class="stat-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="9" cy="7" r="4"></circle>
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                            </svg>
-                        </div>
-                        <div class="card-graph" style="--percent: 81;">
-                            <span class="graph-text">81%</span>
-                        </div>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
                     </div>
-                    <div class="card-body">
-                        <p>Total Users</p>
-                        <h3>1,204</h3>
+                    <div class="card-content">
+                        <span class="card-title">Total Users</span>
+                        <span class="card-value">1,204</span>
+                    </div>
+                    <div class="progress-circle" data-value="81">
+                        <span class="progress-value">0%</span>
                     </div>
                 </div>
             </section>
@@ -280,9 +269,6 @@
                 </div>
                 <div class="update-item">
                     <p><strong>You</strong> changed "Kyaw Gyi" role to 'Member'.</p><span>3d ago</span>
-                </div>
-                <div class="update-item">
-                    <p><strong>You</strong> added "Advanced Marketing".</p><span>4d ago</span>
                 </div>
             </div>
 

@@ -21,6 +21,48 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'internal-login.html';
     });
 
-    // All the fetchUsers and deleteUser logic has been MOVED
-    // to user-management-script.js
+    // --- 3. Progress Chart Setting ---
+    // 1. Find ALL progress circles
+    const allProgressCircles = document.querySelectorAll(".progress-circle");
+
+    // === SET VALUES ===
+    // Get colors from the CSS :root (or hardcode them)
+    // Using the purple you requested from the test example
+    const progressColor = "#6200EA";
+    // Using a track color from your dark theme
+    const trackColor = "#374151"; // This is var(--bg-tertiary)
+    const speed = 20; // Time in ms, lower is faster
+    // ====================
+
+    // 2. Loop through each one
+    allProgressCircles.forEach(progressBar => {
+        // Find the elements for *this* circle
+        const progressValueEl = progressBar.querySelector(".progress-value");
+
+        // Get the end value from the HTML data-value attribute
+        const endValue = parseInt(progressBar.dataset.value) || 0;
+
+        // Run the animation for *this* circle
+        let progressStartValue = 0;
+        let progress = setInterval(() => {
+
+            // 1. UPDATE text and graphics with the CURRENT value
+            progressValueEl.textContent = `${progressStartValue}%`;
+            progressValueEl.style.color = progressColor;
+            progressBar.style.background = `conic-gradient(
+                ${progressColor} ${progressStartValue * 3.6}deg,
+                ${trackColor} ${progressStartValue * 3.6}deg
+            )`;
+
+            // 2. CHECK if this is the end value
+            if (progressStartValue === endValue) {
+                clearInterval(progress);
+            }
+
+            // 3. INCREMENT the value for the *next* loop
+            progressStartValue++;
+
+        }, speed);
+    });
+
 });
