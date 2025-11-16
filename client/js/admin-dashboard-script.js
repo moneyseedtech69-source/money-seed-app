@@ -1,8 +1,3 @@
-// client/js/admin-dashboard-script.js
-
-// This file is now very simple!
-// It just handles the Auth Guard and Logout button for the main hub page.
-
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- 1. Auth Guard ---
@@ -64,5 +59,115 @@ document.addEventListener('DOMContentLoaded', () => {
 
         }, speed);
     });
+
+    // --- 4. Speech Bubble Logic ---
+    const introMessage = "Welcome back, keep shining today!";
+    const quotes = [
+        "You’re capable of amazing things.",
+        "Small steps lead to success.",
+        "Stay focused, keep moving forward.",
+        "Believe in yourself every day.",
+        "Your journey starts right here."
+    ];
+
+    // Find the speech bubble element
+    const bubble = document.querySelector('.speech-bubble');
+
+    if (bubble) { // Check if the bubble exists on the page
+        let quoteIndex = 0;
+
+        // This is the function that runs on a loop
+        const startQuoteRotation = () => {
+            // Set an interval to run forever
+            // (4000ms = 4 seconds. 2s is a bit too fast for reading)
+            setInterval(() => {
+                // 1. Fade the bubble out
+                bubble.style.opacity = 0;
+
+                // 2. Wait 500ms (for the CSS transition to finish)
+                setTimeout(() => {
+                    // 3. Change the text & update the index
+                    bubble.textContent = quotes[quoteIndex];
+                    quoteIndex = (quoteIndex + 1) % quotes.length;
+
+                    // 4. Fade the bubble back in
+                    bubble.style.opacity = 1;
+                }, 500); // 500ms must match your CSS transition time
+
+            }, 4000);
+        };
+
+        // --- This is the main startup logic ---
+        const showWelcome = sessionStorage.getItem('showWelcome');
+
+        if (showWelcome === 'true') {
+            // 1. User JUST logged in. Show the intro message.
+            bubble.textContent = introMessage;
+
+            // 2. Set the flag to false so it won't show again
+            sessionStorage.setItem('showWelcome', 'false');
+
+            // 3. Start the regular rotation after the intro message has been read
+            setTimeout(startQuoteRotation, 4000);
+        } else {
+            // User is already in the session.
+            // Show the first quote immediately and start the rotation.
+            bubble.textContent = quotes[0];
+            quoteIndex = 1; // Set the *next* quote to be index 1
+            startQuoteRotation();
+        }
+    }
+    // --- End of Speech Bubble Logic ---
+
+    // --- 5. Digital Clock Logic ---
+
+    // Find the new elements
+    const digitalClockTimeEl = document.querySelector('#clock .time');
+    const digitalClockDateEl = document.querySelector('#clock .date');
+
+    // Logic from your main.js
+    const week = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+
+    function zeroPadding(num, digit) {
+        var zero = '';
+        for (var i = 0; i < digit; i++) {
+            zero += '0';
+        }
+        return (zero + num).slice(-digit);
+    }
+
+    function updateDigitalClock() {
+        var cd = new Date();
+
+        // Format time and date
+        const timeStr = zeroPadding(cd.getHours(), 2) + ':' + zeroPadding(cd.getMinutes(), 2) + ':' + zeroPadding(cd.getSeconds(), 2);
+        const dateStr = zeroPadding(cd.getDate(), 2) + '/' + zeroPadding(cd.getMonth() + 1, 2) + '/' + zeroPadding(cd.getFullYear(), 4).slice(-2) + ' ' + week[cd.getDay()];
+
+        // Update the HTML
+        if (digitalClockTimeEl) digitalClockTimeEl.textContent = timeStr;
+        if (digitalClockDateEl) digitalClockDateEl.textContent = dateStr;
+    }
+
+    // Check if the elements exist on the page
+    if (digitalClockTimeEl && digitalClockDateEl) {
+        // Run it once on load
+        updateDigitalClock();
+        // Set it to update every second
+        setInterval(updateDigitalClock, 1000);
+    }
+
+    // --- 6. "More Updates" Arrow Logic ---
+
+    const updatesList = document.querySelector('.updates-list');
+    const moreArrow = document.getElementById('more-updates-arrow');
+
+    // Check if the elements exist
+    if (updatesList && moreArrow) {
+        // Check if the content is taller than the visible box
+        if (updatesList.scrollHeight > updatesList.clientHeight) {
+            // If yes, show the arrow
+            moreArrow.style.display = 'block';
+        }
+    }
 
 });

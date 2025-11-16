@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     localStorage.setItem('userToken', data.token);
                     localStorage.setItem('userDepartment', data.department);
                     localStorage.setItem('userTitle', data.title);
+                    sessionStorage.setItem('showWelcome', 'true');
                     window.location.href = 'admin-dashboard.html';
                 } else if (data.role === 'Member') {
                     // It's my team! Go to Member Dashboard

@@ -10,6 +10,8 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
     <script>
         const token = localStorage.getItem('userToken');
         if (!token) {
@@ -109,37 +111,42 @@
                     </a>
                 </li>
             </ul>
+
             <div class="sidebar-footer">
-                <button class="nav-item logout-btn" id="logout-button">
-                    <svg class="nav-icon" viewBox="0 0 24 24">
-                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                        <polyline points="16 17 21 12 16 7"></polyline>
-                        <line x1="21" y1="12" x2="9" y2="12"></line>
-                    </svg>
-                    <span>Log out</span>
+                <button class="btn-logout" id="logout-button">
+                    <span class="btn-text-one">
+                        <span class="material-symbols-outlined">
+                            logout
+                        </span>
+                        Log out</span>
+                    <span class="btn-text-two">
+                        Goodbye!
+                        <span class="material-symbols-outlined">waving_hand</span>
+                    </span>
                 </button>
             </div>
+
         </nav>
     </aside>
 
     <div class="main-content-wrapper">
 
         <header class="admin-header">
-            <div class="header-date" id="header-date"></div>
+
             <div class="header-actions">
 
-                <div class="header-message-wrapper">
-                    <button class="Btn-messages">
-                        <svg class="svgIcon" viewBox="0 0 512 512" height="1.2em">
-                            <path
-                                d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z">
-                            </path>
-                        </svg>
-                        Messages
-                    </button>
-                    <span class="notification-dot"></span>
+                <div id="clock">
+                    <p class="date"></p>
+                    <p class="time"></p>
                 </div>
-                <a href="#" class="btn-header-profile">PROFILE</a>
+
+                <div class="header-profile">
+                    <div class="profile-text">
+                        <span class="greeting">Hey, <strong>EdwardKenway</strong></span>
+                        <span class="role">Admin</span>
+                    </div>
+                    <img src="images/admin-profile-1.jpg" alt="Profile Avatar" class="profile-avatar">
+                </div>
             </div>
         </header>
 
@@ -147,47 +154,49 @@
 
             <section class="stat-boxes">
                 <div class="stat-card">
-                    <div class="card-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
-                        </svg>
-                    </div>
                     <div class="card-content">
-                        <span class="card-title">Total Courses</span>
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <span class="material-symbols-outlined">
+                                    post
+                                </span>
+                            </div>
+                            <span class="card-title">Total Courses</span>
+                        </div>
                         <span class="card-value">12</span>
                     </div>
                     <div class="progress-circle" data-value="15">
                         <span class="progress-value">0%</span>
                     </div>
                 </div>
+
                 <div class="stat-card">
-                    <div class="card-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path
-                                d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h4v18Z">
-                            </path>
-                            <path d="M15 2v5l-3-1.5L9 7V2"></path>
-                        </svg>
-                    </div>
                     <div class="card-content">
-                        <span class="card-title">Total Blogs</span>
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <span class="material-symbols-outlined">
+                                    book
+                                </span>
+                            </div>
+                            <span class="card-title">Total Blogs</span>
+                        </div>
                         <span class="card-value">45</span>
                     </div>
                     <div class="progress-circle" data-value="65">
                         <span class="progress-value">0%</span>
                     </div>
                 </div>
+
                 <div class="stat-card">
-                    <div class="card-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="9" cy="7" r="4"></circle>
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                        </svg>
-                    </div>
                     <div class="card-content">
-                        <span class="card-title">Total Users</span>
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <span class="material-symbols-outlined">
+                                    groups
+                                </span>
+                            </div>
+                            <span class="card-title">Total Users</span>
+                        </div>
                         <span class="card-value">1,204</span>
                     </div>
                     <div class="progress-circle" data-value="81">
@@ -197,21 +206,23 @@
             </section>
 
             <section class="quick-actions">
-                <button class="quick-action-btn">
+                <a href="admin-course.html" class="quick-action-btn">
                     <svg viewBox="0 0 24 24">
                         <line x1="12" y1="5" x2="12" y2="19"></line>
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                     </svg>
                     <span>Create New Course</span>
-                </button>
-                <button class="quick-action-btn">
+                </a>
+
+                <a href="admin-blog.html" class="quick-action-btn">
                     <svg viewBox="0 0 24 24">
                         <line x1="12" y1="5" x2="12" y2="19"></line>
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                     </svg>
                     <span>Write New Post</span>
-                </button>
-                <button class="quick-action-btn">
+                </a>
+
+                <a href="main-user-management.html" class="quick-action-btn">
                     <svg viewBox="0 0 24 24">
                         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                         <circle cx="9" cy="7" r="4"></circle>
@@ -219,85 +230,199 @@
                         <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                     </svg>
                     <span>Manage Users</span>
-                </button>
+                </a>
             </section>
 
             <section class="admin-feed">
                 <h2>Recent Activity Feed</h2>
-                <div class="feed-list">
-                    <div class="feed-item"><img src="images/avatar-placeholder.png" alt="avatar" class="feed-avatar">
-                        <div class="feed-content">
-                            <p><strong>Kyaw Gyi</strong> commented on "How to use Canva"</p><span>10m ago</span>
-                        </div>
-                    </div>
-                    <div class="feed-item"><img src="images/avatar-placeholder.png" alt="avatar" class="feed-avatar">
-                        <div class="feed-content">
-                            <p>A new user submitted <strong>5-star feedback</strong></p><span>1h ago</span>
-                        </div>
-                    </div>
-                    <div class="feed-item"><img src="images/avatar-placeholder.png" alt="avatar" class="feed-avatar">
-                        <div class="feed-content">
-                            <p><strong>Saw Nyan Htoo</strong> liked "New Course on Marketing"</p><span>3h ago</span>
-                        </div>
-                    </div>
-                    <div class="feed-item"><img src="images/avatar-placeholder.png" alt="avatar" class="feed-avatar">
-                        <div class="feed-content">
-                            <p><strong>Admin</strong> published a new collaboration "Event with XYZ"</p><span>5h
-                                ago</span>
-                        </div>
-                    </div>
-                    <div class="feed-item"><img src="images/avatar-placeholder.png" alt="avatar" class="feed-avatar">
-                        <div class="feed-content">
-                            <p><strong>User123</strong> completed "Facebook Clothing Page"</p><span>8h ago</span>
-                        </div>
-                    </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Action</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Kyaw Gyi</strong></td>
+                                <td>Commented on "How to use Canva"</td>
+                                <td>10m ago</td>
+                            </tr>
+                            <tr>
+                                <td><strong>A new user</strong></td>
+                                <td>Submitted <strong>5-star feedback</strong></td>
+                                <td>1h ago</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Saw Nyan Htoo</strong></td>
+                                <td>Liked "New Course on Marketing"</td>
+                                <td>3h ago</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Admin</strong></td>
+                                <td>Published a new collaboration "Event with XYZ"</td>
+                                <td>5h ago</td>
+                            </tr>
+                            <tr>
+                                <td><strong>User123</strong></td>
+                                <td>Completed "Facebook Clothing Page"</td>
+                                <td>8h ago</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Admin</strong></td>
+                                <td>Updated site settings</td>
+                                <td>10h ago</td>
+                            </tr>
+                            <tr>
+                                <td><strong>User456</strong></td>
+                                <td>Enrolled in "How to use Canva"</td>
+                                <td>11h ago</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Kyaw Gyi</strong></td>
+                                <td>Published a new blog post "Intro to AI"</td>
+                                <td>13h ago</td>
+                            </tr>
+                            <tr>
+                                <td><strong>User789</strong></td>
+                                <td>Reset their password</td>
+                                <td>14h ago</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Admin</strong></td>
+                                <td>Deleted a comment</td>
+                                <td>15h ago</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
+            </section>
             </section>
         </main>
 
         <aside class="admin-updates-feed">
             <h2>Recent Updates</h2>
-            <div class="updates-list">
-                <div class="update-item">
-                    <p><strong>You</strong> added "Facebook Clothing Page".</p><span>1d ago</span>
+            <div class="update-list-wrapper">
+                <div class="updates-list">
+                    <div class="update-item">
+                        <p><strong>You</strong> added "Facebook Clothing Page".</p><span>1d ago</span>
+                    </div>
+                    <div class="update-item">
+                        <p><strong>You</strong> published "How to use Canva".</p><span>2d ago</span>
+                    </div>
+                    <div class="update-item">
+                        <p><strong>Internal Announcement:</strong> Team meeting on Friday.</p><span>2d ago</span>
+                    </div>
+
+                    <div class="update-item">
+                        <p><strong>You</strong> changed "Kyaw Gyi" role to 'Member'.</p><span>3d ago</span>
+                    </div>
+                    <div class="update-item">
+                        <p><strong>System</strong> ran a scheduled backup.</p><span>3d ago</span>
+                    </div>
                 </div>
-                <div class="update-item">
-                    <p><strong>You</strong> published "How to use Canva".</p><span>2d ago</span>
-                </div>
-                <div class="update-item">
-                    <p><strong>Internal Announcement:</strong> Team meeting on Friday.</p><span>2d ago</span>
-                </div>
-                <div class="update-item">
-                    <p><strong>You</strong> changed "Kyaw Gyi" role to 'Member'.</p><span>3d ago</span>
+
+                <span class="material-symbols-outlined more-updates-arrow" id="more-updates-arrow">
+                    expand_more
+                </span>
+            </div>
+
+
+            <a href="mailto:admin-team@moneyseed.com" class="btn-send-mail">
+                <span class="material-symbols-outlined">
+                    mail
+                </span>
+                <span>Send Mail to Team</span>
+            </a>
+
+            <div class="doggie-widget">
+                <div class="speech-bubble">Welcome</div>
+                <div class="husky">
+                    <div class="mane">
+                        <div class="coat"></div>
+                    </div>
+                    <div class="body">
+                        <div class="head">
+                            <div class="ear"></div>
+                            <div class="ear"></div>
+                            <div class="face">
+                                <div class="eye"></div>
+                                <div class="eye"></div>
+                                <div class="nose"></div>
+                                <div class="mouth">
+                                    <div class="lips"></div>
+                                    <div class="tongue"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="torso"></div>
+                    </div>
+                    <div class="legs">
+                        <div class="front-legs">
+                            <div class="leg"></div>
+                            <div class="leg"></div>
+                        </div>
+                        <div class="hind-leg">
+                        </div>
+                    </div>
+                    <div class="tail">
+                        <div class="tail">
+                            <div class="tail">
+                                <div class="tail">
+                                    <div class="tail">
+                                        <div class="tail">
+                                            <div class="tail"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <a href="mailto:admin-team@moneyseed.com" class="btn-send-mail">
-                <svg viewBox="0 0 24 24">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                    <polyline points="22 6 -12 13 2 6"></polyline>
-                </svg>
-                <span>Send Mail to Team</span>
-            </a>
+            <div class="refresh-widget">
+                <p class="refresh-text">Refresh your mind for a bit</p>
+
+                <a href="https://emupedia.net/beta/emuos/" target="_blank" class="btn-refresh">
+                    Click Me!
+                </a>
+            </div>
+
         </aside>
     </div>
 
     <script src="js/admin-dashboard-script.js"></script>
 
     <script src="https://unpkg.com/lucide-icons"></script>
-    <script>
-        lucide.createIcons();
 
-        // Small script to add the date to the header
-        const dateEl = document.getElementById('header-date');
-        if (dateEl) {
-            dateEl.textContent = new Date().toLocaleDateString('en-US', {
-                month: 'short',
-                day: 'numeric',
-                year: 'numeric'
-            });
-        }
-    </script>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="position:absolute; width:0; height:0;">
+        <defs>
+            <filter id="squiggly-0">
+                <feTurbulence id="turbulence" baseFrequency="0.02" numOctaves="3" result="noise" seed="0" />
+                <feDisplacementMap id="displacement" in="SourceGraphic" in2="noise" scale="2" />
+            </filter>
+            <filter id="squiggly-1">
+                <feTurbulence id="turbulence" baseFrequency="0.02" numOctaves="3" result="noise" seed="1" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" />
+            </filter>
+            <filter id="squiggly-2">
+                <feTurbulence id="turbulence" baseFrequency="0.02" numOctaves="3" result="noise" seed="2" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
+            </filter>
+            <filter id="squiggly-3">
+                <feTurbulence id="turbulence" baseFrequency="0.02" numOctaves="3" result="noise" seed="3" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" />
+            </filter>
+            <filter id="squiggly-4">
+                <feTurbulence id="turbulence" baseFrequency="0.02" numOctaves="3" result="noise" seed="4" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="1" />
+            </filter>
+        </defs>
+    </svg>
 </body>
 
 </html>
