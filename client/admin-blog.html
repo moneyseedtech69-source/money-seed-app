@@ -10,6 +10,8 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
     <script>
         const token = localStorage.getItem('userToken');
         if (!token) {
@@ -108,13 +110,16 @@
                 </li>
             </ul>
             <div class="sidebar-footer">
-                <button class="nav-item logout-btn" id="logout-button">
-                    <svg class="nav-icon" viewBox="0 0 24 24">
-                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                        <polyline points="16 17 21 12 16 7"></polyline>
-                        <line x1="21" y1="12" x2="9" y2="12"></line>
-                    </svg>
-                    <span>Log out</span>
+                <button class="btn-logout" id="logout-button">
+                    <span class="btn-text-one">
+                        <span class="material-symbols-outlined">
+                            logout
+                        </span>
+                        Log out</span>
+                    <span class="btn-text-two">
+                        Goodbye!
+                        <span class="material-symbols-outlined">waving_hand</span>
+                    </span>
                 </button>
             </div>
         </nav>
@@ -123,23 +128,86 @@
     <div class="main-content-wrapper">
 
         <header class="admin-header">
-            <div class="header-date" id="header-date"></div>
+            <div id="clock">
+                <p class="date"></p>
+                <p class="time"></p>
+            </div>
+
             <div class="header-actions">
-                <button class="header-icon-btn">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                        <polyline points="22 6 -12 13 2 6"></polyline>
-                    </svg>
-                    <span class="notification-dot"></span>
-                </button>
-                <a href="#" class="btn-header-profile">Profile</a>
+                <div class="header-profile">
+                    <div class="profile-text">
+                        <span class="greeting">Hey, <strong>EdwardKenway</strong></span>
+                        <span class="role">Admin</span>
+                    </div>
+                    <img src="images/admin-profile-1.jpg" alt="Profile Avatar" class="profile-avatar">
+                </div>
             </div>
         </header>
 
         <main class="admin-main">
 
-            <h1>This is Blog Area</h1>
-            <p>Here you will manage all your blog posts.</p>
+            <div class="blog-editor-container">
+
+                <div class="editor-main">
+
+                    <input type="text" class="post-title-input" placeholder="Enter your blog title here...">
+
+                    <div class="editor-toolbar">
+                        <span class="material-symbols-outlined">format_bold</span>
+                        <span class="material-symbols-outlined">format_italic</span>
+                        <span class="material-symbols-outlined">format_underlined</span>
+                        <span class="separator">|</span>
+                        <span class="material-symbols-outlined">format_list_bulleted</span>
+                        <span class="material-symbols-outlined">format_quote</span>
+                        <span class="separator">|</span>
+                        <span class="material-symbols-outlined">link</span>
+                        <span class="material-symbols-outlined">image</span>
+                    </div>
+
+                    <textarea class="post-content-textarea" placeholder="Tell your story..."></textarea>
+                </div>
+
+                <div class="editor-sidebar">
+
+                    <div class="editor-card">
+                        <h3>Publish</h3>
+                        <div class="editor-card-content">
+                            <p class="status-text">Status: <span class="status-draft">Draft</span></p>
+                            <button class="btn-publish">
+                                <span class="material-symbols-outlined">rocket_launch</span>
+                                Publish Post
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="editor-card">
+                        <h3>Organization</h3>
+                        <div class="editor-card-content">
+                            <label>Category</label>
+                            <select class="editor-select">
+                                <option>Technology</option>
+                                <option>Finance</option>
+                                <option>Lifestyle</option>
+                                <option>Education</option>
+                            </select>
+
+                            <label>Tags (separate with comma)</label>
+                            <input type="text" class="editor-input" placeholder="#money, #investing">
+                        </div>
+                    </div>
+
+                    <div class="editor-card">
+                        <h3>Featured Image</h3>
+                        <div class="editor-card-content">
+                            <div class="image-upload-box">
+                                <span class="material-symbols-outlined">cloud_upload</span>
+                                <p>Click to upload</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
 
         </main>
     </div>
@@ -148,15 +216,6 @@
     <script src="https://unpkg.com/lucide-icons"></script>
     <script>
         lucide.createIcons();
-
-        const dateEl = document.getElementById('header-date');
-        if (dateEl) {
-            dateEl.textContent = new Date().toLocaleDateString('en-US', {
-                month: 'short',
-                day: 'numeric',
-                year: 'numeric'
-            });
-        }
     </script>
 </body>
 
