@@ -176,6 +176,8 @@ svg {
     display: flex;
     align-items: center;
     gap: 1.5rem;
+    min-width: 250px;
+    justify-content: flex-end;
 }
 
 .header-icon-btn {
@@ -2989,98 +2991,856 @@ div:after {
     }
 }
 
-/* --- BLOG EDITOR STYLES --- */
+/* --- BLOG HUB (Word Style) --- */
 
-/* 1. The Grid Layout */
-.blog-editor-container {
-    display: grid;
-    grid-template-columns: 1fr 300px;
-    /* Main area takes space, Sidebar is fixed 300px */
-    gap: 2rem;
-    height: calc(100vh - 140px);
-    /* Fits the screen height nicely */
-}
-
-/* --- LEFT COLUMN: The Canvas --- */
-.editor-main {
+.blog-hub-container {
     display: flex;
     flex-direction: column;
+    gap: 2.5rem;
+    padding: 3rem 2rem;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.hub-greeting {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.section-label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+/* --- NEW SECTION (Cards) --- */
+.templates-grid {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.doc-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    cursor: pointer;
+    width: 140px;
+}
+
+.doc-preview {
+    width: 100%;
+    height: 180px;
+    background-color: white;
+    border-radius: 4px;
+    /* Word uses sharp corners, slightly rounded looks nice */
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+    overflow: hidden;
+    padding: 15px;
+}
+
+.doc-card:hover .doc-preview {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border: 2px solid var(--accent);
+}
+
+.doc-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+/* Visual Paper Styles */
+.blank-preview .line {
+    height: 2px;
+    background-color: #e5e7eb;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.blank-preview .line:first-child {
+    width: 60%;
+}
+
+/* Title line */
+
+.template-preview .image-block {
+    height: 40%;
+    background-color: #93c5fd;
+    margin-bottom: 10px;
+}
+
+.template-preview .line {
+    height: 2px;
+    background-color: #e5e7eb;
+    margin-bottom: 8px;
+}
+
+/* --- RECENT SECTION (List) --- */
+.recent-header {
+    display: flex;
+    gap: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 1rem;
+}
+
+.recent-header .section-label {
+    margin-bottom: 0.8rem;
+    cursor: pointer;
+    color: var(--text-secondary);
+    position: relative;
+}
+
+.recent-header .section-label.active {
+    color: var(--text-primary);
+}
+
+.recent-header .section-label.active::after {
+    content: '';
+    position: absolute;
+    bottom: -0.9rem;
+    /* sits on the line */
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent);
+}
+
+.recent-files-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.file-item {
+    display: grid;
+    grid-template-columns: 50px 1fr 100px 150px 50px;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.file-item:hover {
+    background-color: var(--bg-secondary);
+}
+
+.file-icon-box {
+    width: 35px;
+    height: 35px;
+    background-color: var(--accent-blue);
+    /* Word blue icon */
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.file-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.file-name {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.file-path {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.file-date {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-align: right;
+}
+
+.status-published {
+    color: var(--accent);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status-draft {
+    color: #fbbf24;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.icon-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.icon-btn:hover {
+    color: var(--text-primary);
+}
+
+/* --- EDITOR TWEAKS (To make it fit) --- */
+.btn-back {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.btn-back:hover {
+    color: var(--accent);
+}
+
+.editor-layout {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 1.5rem;
+    height: 100%;
+    overflow: hidden;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- CONTEXT MENU STYLES --- */
+
+.menu-wrapper {
+    position: relative;
+    /* Anchor for the dropdown */
+}
+
+.dropdown-menu {
+    display: none;
+    /* Hidden by default */
+    position: absolute;
+    right: 0;
+    top: 40px;
+    /* Below the dots */
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    width: 160px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    z-index: 50;
+    overflow: hidden;
+}
+
+/* Show menu when active class is added via JS */
+.dropdown-menu.show {
+    display: block;
+    animation: fadeIn 0.2s ease;
+}
+
+.menu-item {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.2s;
+}
+
+.menu-item:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.menu-item span {
+    font-size: 1.1rem;
+}
+
+.menu-item.danger {
+    color: #EF4444;
+    /* Red for delete */
+}
+
+.menu-item.danger:hover {
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+
+/* --- DELETE MODAL STYLES --- */
+
+.modal-overlay {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Dark backdrop */
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-box {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    padding: 2rem;
+    border-radius: 16px;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-icon {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(239, 68, 68, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem auto;
+}
+
+.modal-icon span {
+    color: #EF4444;
+    font-size: 30px;
+}
+
+.modal-box h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.modal-box p {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+}
+
+.modal-actions {
+    display: flex;
     gap: 1rem;
+    justify-content: center;
+}
+
+.btn-cancel {
+    padding: 0.8rem 1.5rem;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.btn-delete-confirm {
+    padding: 0.8rem 1.5rem;
+    background: #EF4444;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.btn-delete-confirm:hover {
+    background: #DC2626;
+}
+
+@keyframes popIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* --- PINNED STATE STYLES --- */
+
+/* By default, hide the small pin icon next to the title */
+.icon-pinned {
+    font-size: 1rem !important;
+    /* Override material icon size */
+    color: var(--text-secondary);
+    transform: rotate(45deg);
+    /* Tilted pin look */
+    margin-left: 0.5rem;
+    display: none;
+    /* Hidden */
+}
+
+/* When the file-item has the class 'pinned', show the icon */
+.file-item.pinned .icon-pinned {
+    display: inline-block;
+    color: var(--accent);
+    /* Make it green/accent color */
+}
+
+/* Optional: Give the whole row a subtle glow when pinned */
+.file-item.pinned {
+    background-color: rgba(16, 185, 129, 0.05);
+    /* Very faint green tint */
+    border-left: 3px solid var(--accent);
+}
+
+/* --- PINNED VIEW TWEAKS --- */
+
+/* When the list has the class 'view-pinned-only', 
+   we remove the green background/border from items.
+   This makes the "Pinned" tab look clean, as you requested.
+*/
+.recent-files-list.view-pinned-only .file-item.pinned {
+    background-color: transparent;
+    border-left: none;
+    padding-left: 1rem;
+    /* Reset padding since border is gone */
+}
+
+/* =================================================================
+   FINAL CONTENT STUDIO STYLES (Clean Slate)
+   ================================================================= */
+
+/* --- 1. STUDIO PAGE LAYOUT OVERRIDES (The "App Mode" Lock) --- */
+
+.main-content-wrapper.studio-mode {
+    height: auto;
+    min-height: 100vh;
+
+    /* Allow scrolling */
+    overflow: visible;
+
+    display: grid;
+    grid-template-rows: 90px 1fr;
+    grid-template-columns: 1fr;
+}
+
+.main-content-wrapper.studio-mode .admin-header {
+    grid-row: 1;
+    height: 90px;
+    min-height: 90px;
+    border-bottom: none;
+    box-sizing: border-box;
+    padding: 0 2rem;
+}
+
+.main-content-wrapper.studio-mode .admin-main {
+    grid-row: 2;
+    height: 100%;
+    /* Fill exactly the remaining space */
+    overflow: hidden;
+    /* Never let the main container scroll */
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- 2. EDITOR CONTAINER --- */
+.blog-editor-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 2rem 1rem 2rem;
+    box-sizing: border-box;
+    padding-bottom: 1rem;
+}
+
+.editor-header-nav {
+    flex-shrink: 0;
+    /* Never shrink */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+/* --- 3. GRID SYSTEM (Left Editor | Right Sidebar) --- */
+.editor-layout {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 1.5rem;
+    flex-grow: 1;
+    /* Fill vertical space */
+    min-height: 0;
+    /* CRITICAL: Allows grid to stop growing and show scrollbars */
+    overflow: hidden;
+}
+
+/* --- 4. LEFT COLUMN: THE WRITING AREA --- */
+.editor-main {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
     background-color: var(--bg-secondary);
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    padding: 2rem;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
 }
 
-/* The Big Title Input */
+/* Toolbar (Stays at top) */
+.word-toolbar {
+    flex-shrink: 0;
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.8rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 20;
+}
+
+/* Canvas (The Paper - SCROLLS HERE) */
+.editor-canvas-wrapper {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+    background-color: var(--bg-secondary);
+    padding: 2rem 1rem 3rem 1rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--bg-tertiary) var(--bg-secondary);
+}
+
+/* --- CUSTOM DARK SCROLLBAR (Chrome, Edge, Safari) --- */
+
+/* 1. Set the width */
+.editor-canvas-wrapper::-webkit-scrollbar {
+    width: 12px;
+    /* Slightly wider to allow for the "floating" look */
+}
+
+/* 2. The Track (Background) - Make it invisible/match bg */
+.editor-canvas-wrapper::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+/* 3. The Thumb (The moving part) */
+.editor-canvas-wrapper::-webkit-scrollbar-thumb {
+    background-color: var(--bg-tertiary);
+    /* Dark Grey */
+    border-radius: 10px;
+    /* Round edges */
+
+    /* This border trick creates the "padding" around the scrollbar */
+    border: 3px solid var(--bg-secondary);
+}
+
+/* 4. Hover State */
+.editor-canvas-wrapper::-webkit-scrollbar-thumb:hover {
+    background-color: var(--border-color);
+    /* Lighter grey when hovering */
+}
+
+/* --- FOOTER ALIGNMENT FIX --- */
+.editor-footer-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    padding: 0.25rem 1.5rem;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--bg-secondary);
+    z-index: 10;
+}
+
+/* 2. The Right Side Group (The Buttons) */
+.footer-right {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 0.5rem;
+}
+
+/* 3. The Left Side Group (Word Count) */
+.footer-left {
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* Button Styling */
+.footer-icon-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: transparent;
+    border: 1px solid transparent;
+    /* Invisible border unless hovered */
+    border-radius: 6px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.footer-icon-btn:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+.footer-icon-btn span {
+    font-size: 1.2rem;
+    /* Icon size */
+}
+
+/* --- 5. RIGHT COLUMN: SIDEBAR --- */
+.editor-sidebar {
+    overflow-y: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-right: 4px;
+
+    scrollbar-width: thin;
+    scrollbar-color: var(--bg-tertiary) transparent;
+}
+
+.editor-sidebar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.editor-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.editor-sidebar::-webkit-scrollbar-thumb {
+    background: var(--bg-tertiary);
+    border-radius: 4px;
+}
+
+/* --- 6. RESTORED COMPONENT STYLES --- */
+/* Toolbar Items */
+.toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.toolbar-separator {
+    width: 1px;
+    height: 24px;
+    background-color: var(--border-color);
+    margin: 0 0.5rem;
+}
+
+.toolbar-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.toolbar-btn:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.toolbar-btn span {
+    font-size: 1.2rem;
+}
+
+.toolbar-select {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.3rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    outline: none;
+    cursor: pointer;
+    height: 32px;
+}
+
+/* Active State for Toolbar Buttons */
+.toolbar-btn.active {
+    background-color: var(--accent);
+    color: #ffffff;
+    border-color: var(--accent);
+}
+
+/* Inputs */
 .post-title-input {
     width: 100%;
     background: transparent;
     border: none;
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 700;
     color: var(--text-primary);
     outline: none;
     font-family: 'Poppins', sans-serif;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px dashed var(--bg-tertiary);
 }
 
 .post-title-input::placeholder {
     color: var(--bg-tertiary);
-    /* Faint placeholder */
 }
 
-/* The Toolbar */
-.editor-toolbar {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid var(--border-color);
-    margin-bottom: 1rem;
-    color: var(--text-secondary);
-}
-
-.editor-toolbar span {
-    cursor: pointer;
-    font-size: 1.2rem;
-}
-
-.editor-toolbar span:hover {
-    color: var(--accent-light);
-}
-
-.editor-toolbar .separator {
-    color: var(--bg-tertiary);
-}
-
-/* The Writing Area */
+/* The Writing Area (Now a Div) */
 .post-content-textarea {
     width: 100%;
-    flex-grow: 1;
-    /* Takes up all remaining height */
+    min-height: 50vh;
+    height: auto;
     background: transparent;
     border: none;
-    resize: none;
-    /* User can't drag it */
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: var(--text-primary);
     outline: none;
+
+    /* Font Settings */
+    font-size: 16px !important;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-primary);
     font-family: 'Poppins', sans-serif;
+
+    /* Keep the cursor white */
+    caret-color: var(--text-primary);
+    display: block;
 }
 
-/* --- RIGHT COLUMN: The Sidebar --- */
-.editor-sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+font[size="1"] {
+    font-size: 10px;
 }
 
+font[size="2"] {
+    font-size: 13px;
+}
+
+font[size="3"] {
+    font-size: 16px;
+}
+
+/* This is "Normal" */
+font[size="4"] {
+    font-size: 18px;
+}
+
+font[size="5"] {
+    font-size: 24px;
+}
+
+font[size="6"] {
+    font-size: 32px;
+}
+
+font[size="7"] {
+    font-size: 48px;
+}
+
+/* Placeholder Trick for Divs */
+.post-content-textarea:empty:before {
+    content: attr(data-placeholder);
+    color: var(--bg-tertiary);
+    pointer-events: none;
+    display: block;
+    /* Ensures it appears */
+}
+
+/* =========================================
+   EDITOR INTERNAL STYLES (Make H1 look like H1)
+   ========================================= */
+
+/* 1. HEADINGS */
+.post-content-textarea h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    color: var(--text-primary);
+}
+
+.post-content-textarea h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-top: 1.2rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.3;
+    color: var(--text-primary);
+}
+
+.post-content-textarea h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+/* 2. LISTS (Bullets need padding to be seen) */
+.post-content-textarea ul,
+.post-content-textarea ol {
+    padding-left: 2rem;
+    /* Push bullets inside */
+    margin-bottom: 1rem;
+}
+
+.post-content-textarea li {
+    margin-bottom: 0.25rem;
+}
+
+/* 3. BLOCKQUOTES */
+.post-content-textarea blockquote {
+    border-left: 4px solid var(--accent);
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    font-style: italic;
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.03);
+    /* Subtle highlight */
+    padding: 1rem;
+    border-radius: 0 8px 8px 0;
+}
+
+/* 4. LINKS */
+.post-content-textarea a {
+    color: var(--accent-blue);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Sidebar Cards & Buttons */
 .editor-card {
     background-color: var(--bg-secondary);
     border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 1.5rem;
+    flex-shrink: 0;
 }
 
 .editor-card h3 {
@@ -3097,24 +3857,49 @@ div:after {
     gap: 1rem;
 }
 
-/* Inputs & Selects in Sidebar */
+.editor-card label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: -0.5rem;
+}
+
 .editor-input,
 .editor-select {
     width: 100%;
     background-color: var(--bg-primary);
     border: 1px solid var(--border-color);
-    color: var(--text-secondary);
+    color: var(--text-primary);
     padding: 0.8rem;
     border-radius: 8px;
     outline: none;
+    font-family: 'Poppins', sans-serif;
 }
 
-.editor-card label {
-    font-size: 0.85rem;
+.editor-input:focus,
+.editor-select:focus {
+    border-color: var(--accent);
+}
+
+.image-upload-box {
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
     color: var(--text-secondary);
+    cursor: pointer;
+    background-color: var(--bg-primary);
+    transition: border-color 0.2s;
 }
 
-/* Publish Button */
+.image-upload-box:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
 .btn-publish {
     display: flex;
     align-items: center;
@@ -3135,34 +3920,214 @@ div:after {
     background-color: var(--accent-hover);
 }
 
-/* Status Text */
-.status-text {
-    font-size: 0.9rem;
+.btn-save-draft {
+    width: 100%;
+    padding: 0.8rem;
+    background: transparent;
+    border: 1px solid var(--border-color);
     color: var(--text-secondary);
-}
-
-.status-draft {
-    color: #fbbf24;
-    /* Amber for Draft */
-    font-weight: 600;
-}
-
-/* Image Upload Box */
-.image-upload-box {
-    border: 2px dashed var(--border-color);
     border-radius: 8px;
-    height: 120px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    color: var(--text-secondary);
     cursor: pointer;
-    transition: border-color 0.2s;
+    font-weight: 500;
 }
 
-.image-upload-box:hover {
+.btn-save-draft:hover {
+    border-color: var(--text-secondary);
+    color: var(--text-primary);
+}
+
+.btn-preview {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+}
+
+.btn-preview:hover {
     border-color: var(--accent);
     color: var(--accent);
+}
+
+/* --- FLOATING LINK TOOLTIP --- */
+.custom-tooltip {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Floats above everything */
+    background-color: #1F2937;
+    /* Dark Grey (VS Code style) */
+    color: #E5E7EB;
+    /* Light Text */
+    padding: 4px 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+    pointer-events: none;
+    /* So it doesn't block your mouse */
+    z-index: 1000;
+    /* On top of everything */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+}
+
+/* --- EDITOR IMAGES --- */
+/* css/admin-area.css - Around Line 1365 */
+.post-content-textarea img {
+    max-width: 100%;
+    height: auto;
+    /* Maintain aspect ratio */
+    display: block;
+    /* Forces image to its own line */
+    margin: 1rem 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+
+    /* CHANGED THIS LINE: */
+    cursor: grab;
+    /* Shows a hand icon so user knows they can drag it */
+    transition: all 0.2s ease;
+    /* Makes movement smoother */
+}
+
+/* OPTIONAL: Adds a visual effect while you are holding the image */
+.post-content-textarea img:active {
+    cursor: grabbing;
+    opacity: 0.8;
+    transform: scale(0.98);
+}
+
+/* Optional: specific styling if selected/highlighted (browser dependent) */
+.post-content-textarea img::selection {
+    background: transparent;
+}
+
+/* --- IMAGE SETTINGS TOOLBAR --- */
+.image-settings-bar {
+    display: none;
+    /* Hidden by default */
+    position: absolute;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    padding: 6px 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.image-settings-bar button {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s;
+}
+
+.image-settings-bar button:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.image-settings-bar .btn-delete-img {
+    border-color: #EF4444;
+    color: #EF4444;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+}
+
+.image-settings-bar .btn-delete-img:hover {
+    background-color: #EF4444;
+    color: white;
+}
+
+.image-settings-bar .btn-delete-img span {
+    font-size: 16px;
+}
+
+/* Make sure images in editor respond to width changes */
+.post-content-textarea img {
+    transition: width 0.3s ease;
+    display: block;
+    /* Ensures it sits on its own line */
+}
+
+/* Hide the image toolbar by default */
+#image-toolbar {
+    display: none;
+    /* Optional: Add this so it floats correctly when it does appear */
+    position: absolute;
+    z-index: 1000;
+}
+
+/* --- Image Alignment Classes (Updated) --- */
+/* We use !important to force these styles over the default image margins */
+
+.post-content-textarea img.img-left {
+    float: left;
+    margin: 0 1.5rem 1rem 0 !important;
+    display: block;
+}
+
+.post-content-textarea img.img-right {
+    float: right;
+    margin: 0 0 1rem 1.5rem !important;
+    display: block;
+}
+
+.post-content-textarea img.img-center {
+    display: block;
+    margin: 1.5rem auto !important;
+    /* This forces the center */
+    float: none;
+}
+
+/* --- Resize Handles (The white squares) --- */
+.resize-handle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border: 1px solid #10B981;
+    /* Green border */
+    z-index: 1010;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Cursor styles for the corners */
+.handle-nw {
+    top: -5px;
+    left: -5px;
+    cursor: nw-resize;
+}
+
+.handle-ne {
+    top: -5px;
+    right: -5px;
+    cursor: ne-resize;
+}
+
+.handle-sw {
+    bottom: -5px;
+    left: -5px;
+    cursor: sw-resize;
+}
+
+.handle-se {
+    bottom: -5px;
+    right: -5px;
+    cursor: se-resize;
 }
