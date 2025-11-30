@@ -2,9 +2,6 @@
 // 1. SETUP CODE (Runs when page loads)
 // ==========================================
 let itemToDelete = null;
-let savedSelection = null; // To store text selection for links
-let selectedImage = null;
-let currentResizer = null;  // Tracks which image we are editing
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -114,20 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- UNDO / REDO BUTTONS (Manual Editor) ---
-    const undoBtn = document.getElementById('btn-undo');
-    const redoBtn = document.getElementById('btn-redo');
-
-    if (undoBtn && redoBtn) {
-        undoBtn.addEventListener('click', () => {
-            document.execCommand('undo', false, null);
-        });
-
-        redoBtn.addEventListener('click', () => {
-            document.execCommand('redo', false, null);
-        });
-    }
-
     // --- DELETE CONFIRM LOGIC ---
     const confirmBtn = document.getElementById('confirm-delete-btn');
     if (confirmBtn) {
@@ -144,57 +127,77 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- LINK CONFIRM LOGIC ---
-    const confirmLinkBtn = document.getElementById('confirm-link-btn');
-    if (confirmLinkBtn) {
-        confirmLinkBtn.addEventListener('click', function () {
-            const urlInput = document.getElementById('link-url-input');
-            const url = urlInput ? urlInput.value : '';
+    // Close menus when clicking outside
+    document.addEventListener('click', (e) => {
+        closeAllMenus();
+    });
 
-            if (url && savedSelection) {
-                const selection = window.getSelection();
-                selection.removeAllRanges();
-                selection.addRange(savedSelection);
-                formatDoc('createLink', url);
+    // ==========================================
+    // 2. TINYMCE EDITOR SETUP (SELF-HOSTED)
+    // ==========================================
+
+    if (document.getElementById('my-pro-editor')) {
+
+        // No API Key or Cloud Script needed!
+        // We assume you loaded <script src="js/tinymce/tinymce.min.js"></script> in HTML
+
+        tinymce.init({
+            selector: '#my-pro-editor',
+
+            license_key: 'gpl',
+
+            // IMPORTANT: Tell TinyMCE where the local files are
+            base_url: 'js/tinymce',
+            suffix: '.min',
+
+            height: '100%',
+            menubar: false,
+            resize: false,
+
+            // Dark Theme Settings
+            skin: 'oxide-dark',
+            content_css: 'dark',
+
+            // Features
+            plugins: 'image link lists media wordcount autoplay fullscreen code table save',
+            toolbar: 'undo redo | blocks | bold italic underline | alignleft aligncenter alignright | bullist numlist | link image media table | removeformat code',
+
+            // Allow Pasting Images
+            paste_data_images: true,
+            images_file_types: 'jpg,svg,png,webp,gif',
+
+            // Professional Image Handling
+            image_caption: true,
+            image_title: true,
+            automatic_uploads: true,
+
+            // Styling the content
+            content_style: `
+                body { font-family: 'Poppins', sans-serif; font-size: 16px; line-height: 1.6; color: #F9FAFB; }
+                img { max-width: 100%; height: auto; border-radius: 8px; }`,
+
+            // Reading Time Calculation
+            setup: function (editor) {
+                editor.on('keyup change', function () {
+                    const text = editor.getContent({ format: 'text' });
+                    const wordCount = text.split(/\s+/).length;
+                    const readingTime = Math.ceil(wordCount / 200);
+
+                    const timeDisplay = document.getElementById('reading-time');
+                    if (timeDisplay) {
+                        timeDisplay.innerText = `${readingTime} min read`;
+                    }
+                });
             }
-            closeLinkModal();
         });
     }
 
-    // Close menus AND Image Tools when clicking outside
-    document.addEventListener('click', (e) => {
-        closeAllMenus();
-
-        // Check if we clicked: 
-        // 1. An Image
-        // 2. The Toolbar
-        // 3. The Resize Handles/Overlay
-        const isImage = e.target.tagName === 'IMG';
-        const isToolbar = e.target.closest('#image-toolbar');
-        const isResizer = e.target.closest('.image-resizer-overlay') || e.target.classList.contains('resize-handle');
-
-        if (!isImage && !isToolbar && !isResizer) {
-            const toolbar = document.getElementById('image-toolbar');
-            if (toolbar) toolbar.style.display = 'none';
-
-            // Remove the resize handles
-            if (typeof removeResizeHandles === "function") {
-                removeResizeHandles();
-            }
-            selectedImage = null;
-        }
-    });
-
-    // --- ACTIVATE FORMATTING TOOLBAR ---
-    setupToolbar();
-
-}); // <--- END OF DOMContentLoaded
+}); // <--- END OF DOMContentLoaded logic
 
 // ==========================================
-// 2. GLOBAL FUNCTIONS (Called by HTML onclick="")
+// 4. GLOBAL HELPER FUNCTIONS
 // ==========================================
 
-// --- Blog Hub Navigation ---
 function switchToEditor(type) {
     const hub = document.getElementById('blog-hub');
     const blogEditor = document.getElementById('blog-editor');
@@ -202,9 +205,15 @@ function switchToEditor(type) {
 
     if (hub) {
         hub.style.display = 'none';
+
         if (type === 'course') {
-            if (courseEditor) courseEditor.style.display = 'flex';
+            if (blogEditor) blogEditor.style.display = 'none';
+            if (courseEditor) {
+                courseEditor.style.display = 'flex'; // Use Flex to match layout
+                initCourseEditor(); // <--- START THE LOGIC HERE
+            }
         } else {
+            if (courseEditor) courseEditor.style.display = 'none';
             if (blogEditor) blogEditor.style.display = 'flex';
         }
     }
@@ -222,7 +231,6 @@ function backToHub() {
     }
 }
 
-// --- Menu & Modal Logic ---
 function toggleMenu(btn, event) {
     event.stopPropagation();
     closeAllMenus();
@@ -250,35 +258,6 @@ function closeDeleteModal() {
     itemToDelete = null;
 }
 
-// --- Link Modal Logic ---
-function openLinkModal() {
-    const selection = window.getSelection();
-    const editor = document.getElementById('editor-text-area');
-
-    if (selection.rangeCount > 0 && editor.contains(selection.anchorNode)) {
-        savedSelection = selection.getRangeAt(0);
-        const modal = document.getElementById('link-modal');
-        if (modal) {
-            modal.style.display = 'flex';
-            setTimeout(() => {
-                const input = document.getElementById('link-url-input');
-                if (input) input.focus();
-            }, 100);
-        }
-    } else {
-        alert("Please select the text inside the editor that you want to link.");
-    }
-}
-
-function closeLinkModal() {
-    const modal = document.getElementById('link-modal');
-    if (modal) modal.style.display = 'none';
-    const input = document.getElementById('link-url-input');
-    if (input) input.value = '';
-    savedSelection = null;
-}
-
-// --- Pin Toggle Logic ---
 function togglePin(menuItem) {
     const fileRow = menuItem.closest('.file-item');
     fileRow.classList.toggle('pinned');
@@ -295,7 +274,6 @@ function togglePin(menuItem) {
     closeAllMenus();
 }
 
-// --- Tab Filtering Logic ---
 function filterFiles(filterType, clickedTab) {
     document.querySelectorAll('.section-label').forEach(tab => {
         tab.classList.remove('active');
@@ -325,335 +303,277 @@ function filterFiles(filterType, clickedTab) {
     });
 }
 
-// --- FORMATTING TOOLS (Manual Editor) ---
-function formatDoc(cmd, value = null) {
-    if (value) {
-        document.execCommand(cmd, false, value);
+// ==========================================
+// 5. PUBLISH LOGIC (Gather Data)
+// ==========================================
+
+const publishBtn = document.querySelector('.btn-publish');
+const saveDraftBtn = document.querySelector('.btn-save-draft');
+
+if (publishBtn) {
+    publishBtn.addEventListener('click', () => {
+        collectAndLogData('Published');
+    });
+}
+
+if (saveDraftBtn) {
+    saveDraftBtn.addEventListener('click', () => {
+        collectAndLogData('Draft');
+    });
+}
+
+function collectAndLogData(status) {
+    // 1. Get Title
+    const title = document.querySelector('.post-title-input').value;
+
+    // 2. Get Content (From TinyMCE)
+    let content = "";
+    if (tinymce.get('my-pro-editor')) {
+        content = tinymce.get('my-pro-editor').getContent();
+    }
+
+    // 3. Get Sidebar Settings
+    const category = document.getElementById('post-category').value;
+    const author = document.getElementById('post-author').value;
+    const tags = document.getElementById('post-tags').value;
+
+    // 4. Bundle it into an Object
+    const postData = {
+        title: title || "Untitled Post",
+        author: author || "Admin",
+        status: status,
+        category: category,
+        tags: tags.split(',').map(tag => tag.trim()),
+        content: content,
+        date: new Date().toISOString()
+    };
+
+    // 5. SIMULATE SENDING TO DATABASE
+    console.log("🚀 READY TO SEND TO DB:", postData);
+
+    // Visual Feedback
+    alert(`Success! Post packaged as '${status}'. Check Console (F12) to see the data.`);
+}
+
+// ==========================================
+// 6. REAL PREVIEW LOGIC (New Window)
+// ==========================================
+const previewBtn = document.getElementById('real-preview-btn');
+
+if (previewBtn) {
+    previewBtn.addEventListener('click', () => {
+        // 1. Get Content
+        let content = "";
+        if (tinymce.get('my-pro-editor')) {
+            content = tinymce.get('my-pro-editor').getContent();
+        }
+        const title = document.querySelector('.post-title-input').value || "Untitled Post";
+        const author = document.getElementById('post-author').value || "Admin";
+
+        // 2. Open New Window
+        const win = window.open('', '_blank');
+
+        // 3. Write the HTML (Simulating your Main Site)
+        win.document.write(`
+            <html>
+            <head>
+                <title>Preview: ${title}</title>
+                <link rel="stylesheet" href="css/style.css"> 
+                <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+                <style>
+                    body { background-color: #111827; color: white; padding: 40px; font-family: 'Poppins', sans-serif; }
+                    .blog-container { max-width: 800px; margin: 0 auto; }
+                    h1 { font-size: 3rem; margin-bottom: 10px; }
+                    .meta { color: #9CA3AF; margin-bottom: 30px; border-bottom: 1px solid #374151; padding-bottom: 20px; }
+                    img { max-width: 100%; height: auto; border-radius: 8px; }
+                </style>
+            </head>
+            <body>
+                <div class="blog-container">
+                    <h1>${title}</h1>
+                    <div class="meta">By ${author} • Preview Mode</div>
+                    <div class="content">
+                        ${content}
+                    </div>
+                </div>
+            </body>
+            </html>
+        `);
+    });
+}
+
+// ==========================================
+// 7. COURSE BUILDER LOGIC
+// ==========================================
+
+// This Object holds ALL the course data in memory
+let courseData = {
+    overview: {
+        title: "Welcome & Overview",
+        content: "<h2>Welcome Message!</h2><p>Congratulations and Welcome!</p><h2>Course Overview</h2><p>Describe the course here...</p>"
+    },
+    modules: [] // We will add {id, title, content} here
+};
+
+let currentSectionId = 'overview'; // Tracks what we are currently editing
+
+// 1. Initialize Course Editor (Call this when opening the Course Editor)
+function initCourseEditor() {
+    // Determine which editor to init. 
+    // We need a SECOND TinyMCE instance for the course to avoid ID conflicts
+    // OR we destroy the old one. For simplicity, let's init a specific ID.
+
+    if (!tinymce.get('course-content-area')) {
+        tinymce.init({
+            selector: '#course-content-area',
+            license_key: 'gpl',
+            base_url: 'js/tinymce',
+            suffix: '.min',
+            height: '100%',
+            menubar: false,
+            resize: false,
+            skin: 'oxide-dark',
+            content_css: 'dark',
+            plugins: 'image link lists media wordcount code table',
+            toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | bullist numlist | link image',
+
+            // Important: update our data variable whenever user types
+            setup: function (editor) {
+                editor.on('change keyup', function () {
+                    saveCurrentSectionToMemory();
+                });
+            }
+        });
+    }
+
+    // Render the Sidebar
+    renderModuleSidebar();
+    // Load the default Overview
+    loadCourseSection('overview');
+}
+
+// 2. Render the Left Sidebar List
+function renderModuleSidebar() {
+    const container = document.getElementById('module-list-container');
+    container.innerHTML = ''; // Clear current list
+
+    courseData.modules.forEach((mod, index) => {
+        const div = document.createElement('div');
+        div.className = `module-item ${currentSectionId === index ? 'active' : ''}`;
+        div.onclick = () => loadCourseSection(index);
+        div.innerHTML = `
+            <span class="material-symbols-outlined">folder</span>
+            <span>${mod.title}</span>
+            <span class="material-symbols-outlined" style="margin-left:auto; font-size:16px; opacity:0.5;" onclick="deleteModule(${index}, event)">delete</span>
+        `;
+        container.appendChild(div);
+    });
+}
+
+// 3. Add New Module
+function addModule() {
+    const count = courseData.modules.length + 1;
+    const newModule = {
+        title: `Module ${count}`,
+        content: `<h2>Module ${count}</h2><p>Start adding content for this module...</p>`
+    };
+    courseData.modules.push(newModule);
+    renderModuleSidebar();
+
+    // Switch to the new module immediately
+    loadCourseSection(courseData.modules.length - 1);
+}
+
+// 4. Switch Tabs (The Logic)
+function loadCourseSection(sectionId) {
+    // First, Save the OLD section before switching
+    saveCurrentSectionToMemory();
+
+    // Update Tracker
+    currentSectionId = sectionId;
+
+    // UI Updates
+    document.querySelectorAll('.structure-sidebar .module-item').forEach(el => el.classList.remove('active'));
+
+    // Load Data
+    let dataToLoad = {};
+
+    if (sectionId === 'overview') {
+        document.getElementById('tab-overview').classList.add('active');
+        dataToLoad = courseData.overview;
+        // Make Title Read-Only for Overview if you want, or editable
+        document.getElementById('course-section-title').value = "Course Overview";
+        document.getElementById('course-section-title').disabled = true;
     } else {
-        document.execCommand(cmd);
-    }
-    const editor = document.getElementById('editor-text-area');
-    if (editor) editor.focus();
-}
+        // It's a module index
+        dataToLoad = courseData.modules[sectionId];
+        // Highlight the module in sidebar
+        const items = document.getElementById('module-list-container').children;
+        if (items[sectionId]) items[sectionId].classList.add('active');
 
-function setupToolbar() {
-    document.execCommand('enableObjectResizing', false, 'false');
-    const editor = document.getElementById('editor-text-area');
-
-    // 1. Map buttons
-    const buttons = [
-        { selector: 'button[title="Bold"]', cmd: 'bold' },
-        { selector: 'button[title="Italic"]', cmd: 'italic' },
-        { selector: 'button[title="Underline"]', cmd: 'underline' },
-        { selector: 'button[title="Align Left"]', cmd: 'justifyLeft' },
-        { selector: 'button[title="Align Center"]', cmd: 'justifyCenter' },
-        { selector: 'button[title="Align Right"]', cmd: 'justifyRight' },
-        { selector: 'button[title="Bullet List"]', cmd: 'insertUnorderedList' },
-        { selector: 'button[title="Numbered List"]', cmd: 'insertOrderedList' },
-    ];
-
-    // 2. Add Click Listeners
-    buttons.forEach(btn => {
-        const element = document.querySelector(btn.selector);
-        if (element) {
-            element.addEventListener('click', (e) => {
-                e.preventDefault();
-                formatDoc(btn.cmd);
-                checkToolbarState(buttons);
-            });
-        }
-    });
-
-    // 3. State Checker
-    function checkToolbarState(btns) {
-        btns.forEach(btn => {
-            const element = document.querySelector(btn.selector);
-            if (element) {
-                const isActive = document.queryCommandState(btn.cmd);
-                if (isActive) {
-                    element.classList.add('active');
-                } else {
-                    element.classList.remove('active');
-                }
-            }
-        });
+        document.getElementById('course-section-title').value = dataToLoad.title;
+        document.getElementById('course-section-title').disabled = false;
     }
 
-    // 4. Run Checker
-    if (editor) {
-        editor.addEventListener('mouseup', () => checkToolbarState(buttons));
-        editor.addEventListener('keyup', () => checkToolbarState(buttons));
-    }
-
-    // 5. Dropdowns
-    const formatSelect = document.getElementById('format-block');
-    if (formatSelect) {
-        formatSelect.addEventListener('change', function () {
-            formatDoc('formatBlock', this.value);
-        });
-    }
-
-    const fontSelect = document.getElementById('font-family');
-    if (fontSelect) {
-        fontSelect.addEventListener('change', function () {
-            formatDoc('fontName', this.value);
-            this.style.fontFamily = this.value;
-        });
-    }
-
-    const sizeSelect = document.getElementById('font-size');
-    if (sizeSelect) {
-        sizeSelect.addEventListener('change', function () {
-            formatDoc('fontSize', this.value);
-        });
-    }
-
-    const textColorSelect = document.getElementById('color-text');
-    if (textColorSelect) {
-        textColorSelect.addEventListener('change', function () {
-            formatDoc('foreColor', this.value);
-            this.style.color = this.value;
-        });
-    }
-
-    const hiliteColorSelect = document.getElementById('color-hilite');
-    if (hiliteColorSelect) {
-        hiliteColorSelect.addEventListener('change', function () {
-            formatDoc('hiliteColor', this.value);
-        });
-    }
-
-    // 6. Checklist
-    const checklistBtn = document.querySelector('button[title="Checklist"]');
-    if (checklistBtn) {
-        checklistBtn.addEventListener('click', function (e) {
-            e.preventDefault();
-            formatDoc('insertHTML', '<input type="checkbox" style="margin-right: 8px;"> ');
-        });
-    }
-
-    // 7. Link
-    const linkBtn = document.querySelector('button[title="Link"]');
-    if (linkBtn) {
-        linkBtn.addEventListener('click', function (e) {
-            e.preventDefault();
-            openLinkModal();
-        });
-    }
-
-    // 9. Enable Ctrl+Click for Links
-    if (editor) {
-        editor.addEventListener('click', function (e) {
-            const link = e.target.closest('a');
-            if (link && (e.ctrlKey || e.metaKey)) {
-                e.preventDefault();
-                window.open(link.href, '_blank');
-            }
-        });
-
-        editor.addEventListener('mousemove', function (e) {
-            const link = e.target.closest('a');
-            if (link && (e.ctrlKey || e.metaKey)) {
-                editor.style.cursor = 'pointer';
-            } else {
-                editor.style.cursor = 'text';
-            }
-        });
-    }
-
-    // 10. Link Tooltip
-    const tooltip = document.getElementById('editor-tooltip');
-    if (editor && tooltip) {
-        editor.addEventListener('mousemove', function (e) {
-            const link = e.target.closest('a');
-            if (link) {
-                tooltip.style.display = 'block';
-                tooltip.style.left = (e.clientX + 15) + 'px';
-                tooltip.style.top = (e.clientY + 15) + 'px';
-            } else {
-                tooltip.style.display = 'none';
-            }
-        });
-        editor.addEventListener('mouseleave', function () {
-            tooltip.style.display = 'none';
-        });
-    }
-
-    // 11. Image Upload (Local File)
-    const imgBtn = document.querySelector('button[title="Image"]');
-    const hiddenInput = document.getElementById('hidden-image-input');
-
-    if (imgBtn && hiddenInput) {
-        imgBtn.addEventListener('click', function (e) {
-            e.preventDefault();
-            hiddenInput.click();
-        });
-
-        hiddenInput.addEventListener('change', function () {
-            const file = this.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    const imgUrl = e.target.result;
-                    const html = `<br><img src="${imgUrl}" class="editor-image"><p><br></p>`;
-                    formatDoc('insertHTML', html);
-                    hiddenInput.value = '';
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-    }
-
-    // 12. Image Click Listener (Show Settings)
-    if (editor) {
-        editor.addEventListener('click', function (e) {
-            if (e.target.tagName === 'IMG') {
-                selectedImage = e.target;
-                showImageToolbar(e.target);
-            } else {
-                document.getElementById('image-toolbar').style.display = 'none';
-                selectedImage = null;
-            }
-        });
+    // Set TinyMCE Content
+    if (tinymce.get('course-content-area')) {
+        tinymce.get('course-content-area').setContent(dataToLoad.content);
     }
 }
 
-// ==========================================
-// 3. IMAGE EDITING FUNCTIONS (Align & Resize)
-// ==========================================
+// 5. Helper: Save Current Editor Content to the JSON Object
+function saveCurrentSectionToMemory() {
+    if (!tinymce.get('course-content-area')) return;
 
-// --- A. SHOW TOOLBAR & HANDLES ---
-function showImageToolbar(img) {
-    const toolbar = document.getElementById('image-toolbar');
+    const currentContent = tinymce.get('course-content-area').getContent();
+    const currentTitle = document.getElementById('course-section-title').value;
 
-    // 1. Position the Toolbar
-    const rect = img.getBoundingClientRect();
-    const scrollTop = window.scrollY || document.documentElement.scrollTop;
-    const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
-
-    // Show toolbar 50px above the image
-    toolbar.style.display = 'flex';
-    toolbar.style.top = `${rect.top + scrollTop - 50}px`;
-    toolbar.style.left = `${rect.left + scrollLeft + (rect.width / 2)}px`;
-
-    // 2. Create the Resize Handles (White corners)
-    createResizeHandles(img);
-}
-
-// --- B. ALIGNMENT LOGIC ---
-function alignImage(direction) {
-    if (!selectedImage) return;
-
-    // Remove old classes
-    selectedImage.classList.remove('img-left', 'img-right', 'img-center');
-
-    // Add new class
-    selectedImage.classList.add(`img-${direction}`);
-
-    // Update position of toolbar/handles since image moved
-    showImageToolbar(selectedImage);
-}
-
-// --- MISSING FUNCTION ADDED HERE ---
-function removeResizeHandles() {
-    if (currentResizer) {
-        currentResizer.remove();
-        currentResizer = null;
-    }
-    const oldOverlay = document.querySelector('.image-resizer-overlay');
-    if (oldOverlay) oldOverlay.remove();
-}
-
-// --- C. RESIZE HANDLE CREATION (FIXED) ---
-function createResizeHandles(img) {
-    removeResizeHandles(); // Clear old ones first
-
-    // Create overlay wrapper
-    const resizerOverlay = document.createElement('div');
-    resizerOverlay.className = 'image-resizer-overlay';
-    resizerOverlay.style.position = 'absolute';
-    resizerOverlay.style.border = '1px solid #10B981'; // Green border visual
-
-    // CRITICAL: This allows clicks to pass through to the image (fixing selection)
-    resizerOverlay.style.pointerEvents = 'none';
-
-    // Match image position exactly
-    const rect = img.getBoundingClientRect();
-    const scrollTop = window.scrollY;
-    const scrollLeft = window.scrollX;
-
-    resizerOverlay.style.top = `${rect.top + scrollTop}px`;
-    resizerOverlay.style.left = `${rect.left + scrollLeft}px`;
-    resizerOverlay.style.width = `${rect.width}px`;
-    resizerOverlay.style.height = `${rect.height}px`;
-    resizerOverlay.style.zIndex = '1000';
-
-    document.body.appendChild(resizerOverlay);
-    currentResizer = resizerOverlay;
-
-    // Add 4 Corner Handles
-    const corners = ['nw', 'ne', 'sw', 'se'];
-    corners.forEach(c => {
-        const handle = document.createElement('div');
-        handle.className = `resize-handle handle-${c}`;
-
-        // CRITICAL: Re-enable clicks JUST for the handles
-        handle.style.pointerEvents = 'auto';
-
-        handle.addEventListener('mousedown', (e) => initDragResize(e, img, c));
-        resizerOverlay.appendChild(handle);
-    });
-}
-
-// --- D. DRAG TO RESIZE CALCULATION ---
-function initDragResize(e, img, corner) {
-    e.preventDefault(); // Prevent text selection while dragging
-    e.stopPropagation(); // Stop other events
-
-    const startX = e.clientX;
-    const startWidth = parseInt(window.getComputedStyle(img).width, 10);
-
-    function doDrag(e) {
-        let newWidth;
-        // Calculate width based on which corner is pulled
-        if (corner === 'se' || corner === 'ne') {
-            // Pulling Right: Width increases
-            newWidth = startWidth + (e.clientX - startX);
-        } else {
-            // Pulling Left: Width increases as mouse moves left (negative delta)
-            newWidth = startWidth - (e.clientX - startX);
-        }
-
-        if (newWidth > 50) { // Minimum width safety
-            img.style.width = `${newWidth}px`;
-            // Force toolbar to follow the resizing image
-            showImageToolbar(img);
+    if (currentSectionId === 'overview') {
+        courseData.overview.content = currentContent;
+        // Overview title is static
+    } else {
+        // It is a module
+        if (courseData.modules[currentSectionId]) {
+            courseData.modules[currentSectionId].content = currentContent;
+            courseData.modules[currentSectionId].title = currentTitle;
         }
     }
-
-    function stopDrag() {
-        document.removeEventListener('mousemove', doDrag);
-        document.removeEventListener('mouseup', stopDrag);
-    }
-
-    document.addEventListener('mousemove', doDrag);
-    document.addEventListener('mouseup', stopDrag);
 }
 
-// --- E. DELETE IMAGE ---
-function deleteImage() {
-    if (selectedImage) {
-        selectedImage.remove();
-        document.getElementById('image-toolbar').style.display = 'none';
-        removeResizeHandles();
-        selectedImage = null;
-    }
+// 6. Save Entire Course (The Final Button)
+function saveCourse() {
+    saveCurrentSectionToMemory(); // Ensure last changes are caught
+
+    const finalCoursePackage = {
+        settings: {
+            level: document.getElementById('course-level').value,
+            price: document.getElementById('course-price').value
+        },
+        structure: courseData
+    };
+
+    console.log("📦 FULL COURSE DATA:", finalCoursePackage);
+    alert("Course saved! Check console for the full object.");
 }
 
-// --- F. PRESERVE OLD RESIZE BUTTONS (Optional support) ---
-function resizeImage(width) {
-    if (selectedImage) {
-        selectedImage.style.width = width;
-        showImageToolbar(selectedImage); // Update handle position
+// 7. Delete Module Function
+function deleteModule(index, event) {
+    event.stopPropagation(); // Stop the click from opening the module
+
+    if (confirm('Are you sure you want to delete this module?')) {
+        // Remove from array
+        courseData.modules.splice(index, 1);
+
+        // If we deleted the active section, switch back to overview
+        if (currentSectionId === index) {
+            loadCourseSection('overview');
+        } else if (currentSectionId > index) {
+            // Adjust index if we deleted something above the current one
+            currentSectionId--;
+        }
+
+        // Re-render list
+        renderModuleSidebar();
+        alert('Module deleted.');
     }
 }
